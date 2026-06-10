@@ -1,0 +1,109 @@
+---
+title: Scan and sweep
+description: Discover owned stealth outputs across chains and move native balances.
+---
+
+Scanning requires the cryptography WASM module. This guide covers unified inbox scanning, balance reads, and sweeping.
+
+## Setup
+
+```ts
+const client = await OpaqueClient.create({
+  chainId: 11155111,
+  rpcUrl,
+  walletSignature,
+  ethereumAddress: address,
+  wasmModuleSpecifier: "/pkg/cryptography.js",
+  solana: { cluster: "devnet" },
+});
+```
+
+## Unified scan
+
+```ts
+const inbox = await client.scan({
+  chains: ["ethereum", "solana"],
+  fromBlock: 5_000_000n,
+  toBlock: undefined,           // chain tip
+  solanaLimit: 1000,            // max signatures on Solana
+  includeCrossChain: true,      // merge UAB (default when configured)
+});
+
+// UnifiedOwnedOutput:
+// { chain, chainId, source: "native" | "uab", stealthAddress, ephemeralPublicKey, ... }
+```
+
+## Filter custom announcement rows
+
+If you have indexer JSON instead of adapters:
+
+```ts
+import type { IndexerAnnouncement } from "@opaquecash/opaque";
+
+const owned = await client.filterOwnedAnnouncements(indexerRows as IndexerAnnouncement[]);
+```
+
+## Cross-chain only
+
+```ts
+const rows = await client.fetchCrossChainAnnouncements({ fromBlock: 5_000_000n });
+const crossOwned = await client.scanCrossChain();
+```
+
+## Balances
+
+Per-output native balances (multichain):
+
+```ts
+const balances = await client.getBalancesForOutputs(inbox);
+// { chain, stealthAddress, address, nativeRaw }
+```
+
+Aggregated ERC-20 + native on Ethereum:
+
+```ts
+const totals = await client.getBalancesFromAnnouncements(indexerRows);
+// { tokenAddress, symbol, decimals, totalRaw }[]
+```
+
+## Sweep
+
+```ts
+const { tx } = await client.sweep({
+  output: inbox[0],
+  chain: inbox[0].chain,
+  destination: "0xFreshAddress..." /* or Solana base58 */,
+});
+```
+
+## Manual key reconstruction
+
+When you need custom signing logic instead of `sweep`:
+
+```ts
+const stealthPrivKey = client.getStealthSignerPrivateKey(inbox[0]);
+
+// From ghost storage (ephemeral private key only):
+const key = client.getStealthSignerPrivateKeyFromEphemeralPrivateKey(ephemeralPrivateKey);
+```
+
+Build a viem `PrivateKeyAccount` from the bytes and sign a transfer from `output.stealthAddress`.
+
+## PSR trait discovery
+
+Scan attestation markers from the same announcement set:
+
+```ts
+const traits = await client.discoverTraits(indexerRows);
+// alias: getReputationTraitsFromAnnouncements
+
+for (const t of traits) {
+  console.log(t.attestationId, t.schemaId, t.fieldValues);
+}
+```
+
+Witness JSON for proof generation:
+
+```ts
+const json = client.announcementsJsonForReputationWitness(indexerRows);
+```

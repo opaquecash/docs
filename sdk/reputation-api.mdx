@@ -1,0 +1,168 @@
+---
+title: Reputation API
+description: Trait discovery, Groth16 proofs, and on-chain verification.
+---
+
+Reputation methods require WASM. On-chain verification uses `OpaqueReputationVerifier` (bundled address per chain).
+
+## Discovery
+
+### `discoverTraits(rows)`
+
+Map owned announcement rows to `DiscoveredTrait` list.
+
+```ts
+const traits = await client.discoverTraits(indexerRows);
+```
+
+---
+
+### `getReputationTraitsFromAnnouncements(rows)`
+
+Alias for `discoverTraits`.
+
+```ts
+const traits = await client.getReputationTraitsFromAnnouncements(rows);
+```
+
+---
+
+### `announcementsJsonForReputationWitness(rows)`
+
+Serialize announcements for the prover witness.
+
+```ts
+const json = client.announcementsJsonForReputationWitness(rows);
+```
+
+---
+
+### `getStealthSignerPrivateKeyForReputationTrait(trait)`
+
+Reconstruct signing key for a discovered trait.
+
+```ts
+const bytes = client.getStealthSignerPrivateKeyForReputationTrait(trait);
+```
+
+---
+
+## Proof generation
+
+### `generateReputationProof(params)`
+
+Generate Groth16 proof bundle (requires `snarkjs`).
+
+```ts
+import { buildActionScope, externalNullifierFromScope } from "@opaquecash/opaque";
+
+const scope = buildActionScope(11155111, "my-dapp", "gate-v1");
+const externalNullifier = externalNullifierFromScope(scope);
+
+const proofData = await client.generateReputationProof({
+  trait,
+  stealthPrivKeyBytes,
+  externalNullifier,
+  attestationsJson: client.announcementsJsonForReputationWitness(rows),
+  artifacts: undefined,   // default hosted circuit paths
+  onProgress: (stage, pct) => console.log(stage, pct),
+});
+```
+
+**Returns:** `ProofData` — `{ proof, nullifier, attestationId, ... }`
+
+---
+
+## Merkle roots
+
+### `fetchLatestValidReputationRoot()`
+
+Latest non-expired root from verifier `rootHistory`.
+
+```ts
+const root = await client.fetchLatestValidReputationRoot();
+```
+
+---
+
+### `isReputationRootValid(root)`
+
+Whether the verifier currently accepts this root.
+
+```ts
+const ok = await client.isReputationRootValid(root);
+```
+
+---
+
+### `fetchReputationRootHistory()`
+
+Full root history with per-entry validity.
+
+```ts
+const history = await client.fetchReputationRootHistory();
+// { index, root, valid }[]
+```
+
+---
+
+## Verification
+
+### `verifyReputationProofView(args)`
+
+Read-only on-chain view — does not consume nullifier.
+
+```ts
+const valid = await client.verifyReputationProofView({
+  proofData,
+  merkleRoot,
+  externalNullifier,
+});
+```
+
+---
+
+### `simulateReputationVerification(wallet, args)`
+
+Simulate `verifyReputation` for gas / revert checks (Ethereum).
+
+```ts
+await client.simulateReputationVerification(walletClient, {
+  proofData,
+  merkleRoot,
+  externalNullifier,
+});
+```
+
+---
+
+### `submitReputationVerification(chain, args)`
+
+Broadcast proof to verifier — **consumes nullifier** on success.
+
+```ts
+const { txHash } = await client.submitReputationVerification("ethereum", {
+  proofData,
+  merkleRoot,
+  externalNullifier,
+});
+```
+
+**Signers:** `ethereumWalletClient` (EVM) or `solanaWallet` (Solana).
+
+---
+
+## Static scope helpers
+
+```ts
+const scope = OpaqueClient.buildReputationActionScope(11155111, "module", "action");
+const nullifier = OpaqueClient.reputationExternalNullifierFromScope(scope);
+```
+
+Equivalent to `buildActionScope` / `externalNullifierFromScope` from `@opaquecash/psr-core`.
+
+---
+
+## Full E2E
+
+See [Generate a reputation proof](/guides/generate-proof).

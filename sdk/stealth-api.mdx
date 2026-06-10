@@ -1,0 +1,220 @@
+---
+title: Stealth API
+description: OpaqueClient methods for meta-addresses, stealth sends, scanning, and sweeping.
+---
+
+## Registry and identity
+
+### `getMetaAddressHex()`
+
+Returns the 66-byte stealth meta-address derived from the wallet signature.
+
+```ts
+const meta = client.getMetaAddressHex();
+```
+
+---
+
+### `resolveRecipientMetaAddress(recipientAddress)`
+
+Look up a recipient's registered meta-address on Ethereum.
+
+```ts
+const res = await client.resolveRecipientMetaAddress("0xRecipient...");
+// { recipientAddress, registered, metaAddressHex? }
+```
+
+---
+
+### `buildRegisterMetaAddressTransaction()`
+
+Encode `registerKeys` calldata without submitting.
+
+```ts
+const req = client.buildRegisterMetaAddressTransaction();
+// { to, data, chainId, metaAddressHex }
+await walletClient.sendTransaction({ to: req.to, data: req.data });
+```
+
+---
+
+### `registerMetaAddress(chain)`
+
+Submit meta-address registration on `"ethereum"` or `"solana"`.
+
+```ts
+const { txHash, metaAddressHex, chain } = await client.registerMetaAddress("ethereum");
+```
+
+**Signers:** `ethereumWalletClient` / `ethereumProvider` (EVM) or `solanaWallet` (Solana).
+
+---
+
+### `isMetaAddressRegistered(chain)`
+
+Check if this wallet's meta-address is registered.
+
+```ts
+const registered = await client.isMetaAddressRegistered("solana");
+```
+
+---
+
+## Send
+
+### `prepareStealthSend(recipientMetaAddressHex)`
+
+Derive one-time stealth material for sending. Pure crypto — no chain call.
+
+```ts
+const send = client.prepareStealthSend(metaAddressHex);
+/*
+  schemeId, stealthAddress, viewTag,
+  ephemeralPublicKey, ephemeralPrivateKey,
+  metadata, stealthPubKey
+*/
+```
+
+---
+
+### `sendStealthPayment(params)`
+
+High-level native send + announce (optional relay).
+
+```ts
+import { parseEther } from "viem";
+
+const result = await client.sendStealthPayment({
+  chain: "ethereum",
+  recipient: "0x...",       // EOA, meta-address, or Solana pubkey
+  amount: parseEther("0.01"),
+  announce: true,
+  relay: false,
+  token: undefined,         // throws if set — not yet supported
+  batchId: undefined,       // Solana Wormhole nonce when relay: true
+});
+```
+
+**Returns:** `SendStealthPaymentResult` — `{ chain, txHash, announceTxHash?, stealthAddress, destination?, ephemeralPublicKey, metaAddressHex }`
+
+---
+
+### `prepareGhostReceive()`
+
+Derive stealth receive material for your own meta-address (no announce yet).
+
+```ts
+const ghost = client.prepareGhostReceive();
+// Store ghost.ephemeralPrivateKey securely
+```
+
+---
+
+### `buildAnnounceTransactionRequest(send)`
+
+Build `StealthAddressAnnouncer.announce` calldata.
+
+```ts
+const req = client.buildAnnounceTransactionRequest(send);
+// { to, data, chainId, summary }
+```
+
+---
+
+### `buildAnnounceTransactionRequestForGhost(ephemeralPrivateKey)`
+
+Rebuild announce calldata from stored ephemeral private key only.
+
+```ts
+const req = client.buildAnnounceTransactionRequestForGhost(storedEphemeralPriv);
+```
+
+---
+
+## Scan and filter
+
+### `filterOwnedAnnouncements(rows)`
+
+WASM scan: filter indexer rows to outputs owned by this wallet.
+
+```ts
+const owned = await client.filterOwnedAnnouncements(indexerRows);
+// OwnedStealthOutput[]
+```
+
+---
+
+### `scan(opts)`
+
+Unified multichain inbox.
+
+```ts
+const inbox = await client.scan({
+  chains: ["ethereum", "solana"],
+  fromBlock: 5_000_000n,
+  toBlock: undefined,
+  solanaLimit: 1000,
+  includeCrossChain: true,
+});
+// UnifiedOwnedOutput[] — tagged with chain, chainId, source
+```
+
+---
+
+## Balances
+
+### `getBalancesFromAnnouncements(rows)`
+
+Filter owned outputs and sum balances per tracked token (EVM RPC).
+
+```ts
+const totals = await client.getBalancesFromAnnouncements(rows);
+// TokenBalanceSummary[]
+```
+
+---
+
+### `getBalancesForOutputs(outputs)`
+
+Native balance per `UnifiedOwnedOutput` (multichain).
+
+```ts
+const balances = await client.getBalancesForOutputs(inbox);
+// OutputBalance[]
+```
+
+---
+
+## Sweep and keys
+
+### `sweep(params)`
+
+Sweep full native balance from a stealth output.
+
+```ts
+const { chain, tx } = await client.sweep({
+  output: inbox[0],
+  chain: "ethereum",
+  destination: "0xFresh...",
+});
+```
+
+---
+
+### `getStealthSignerPrivateKey(output)`
+
+Reconstruct 32-byte secp256k1 private key for an owned output.
+
+```ts
+const priv = client.getStealthSignerPrivateKey({ ephemeralPublicKey: output.ephemeralPublicKey });
+```
+
+---
+
+### `getStealthSignerPrivateKeyFromEphemeralPrivateKey(ephemeralPrivateKey)`
+
+Same reconstruction from ghost-stored ephemeral secret.
+
+```ts
+const priv = client.getStealthSignerPrivateKeyFromEphemeralPrivateKey(ghost.ephemeralPrivateKey);
+```

@@ -1,33 +1,34 @@
-> **First-time setup**: Customize this file for your project. Prompt the user to customize this file for their project.
-> For Mintlify product knowledge (components, configuration, writing standards),
-> install the Mintlify skill: `npx skills add https://mintlify.com/docs`
+# Opaque documentation (Mintlify)
 
-# Documentation project instructions
+## About
 
-## About this project
-
-- This is a documentation site built on [Mintlify](https://mintlify.com)
-- Pages are MDX files with YAML frontmatter
-- Configuration lives in `docs.json`
-- Use the Mintlify MCP server, `https://mcp.mintlify.com`, to edit content and settings via MCP
-- Use the Mintlify docs MCP server, `https://www.mintlify.com/docs/mcp`, to query information about using Mintlify via MCP
+- Mintlify site for Opaque Protocol (`@opaquecash/opaque` SDK)
+- Pages are MDX with YAML frontmatter; config in `docs.json`
+- Remote: `https://github.com/opaquecash/mintlify-docs`
 
 ## Terminology
 
-{/* Add product-specific terms and preferred usage */}
-{/* Example: Use "workspace" not "project", "member" not "user" */}
+- **OpaqueClient** — unified SDK class; document methods, not low-level chain packages unless in utilities
+- **Meta-address** — 66-byte EIP-5564 stealth meta-address
+- **PSR** — Provable Stealth Reputation (schemas, attestations, ZK proofs)
+- **UAB** — Universal Announcement Bus (Wormhole cross-chain)
+- **WASM** — `cryptography.js` from opaque-scanner; required for scan/sweep/prove
 
-## Style preferences
+## Style
 
-{/* Add any project-specific style rules below */}
-
-- Use active voice and second person ("you")
-- Keep sentences concise — one idea per sentence
-- Use sentence case for headings
-- Bold for UI elements: Click **Settings**
-- Code formatting for file names, commands, paths, and code references
+- Active voice, second person
+- Every SDK method: signature, params, return type, signer/WASM requirements, runnable example
+- Link to guides for E2E flows; link to `opaquecash/spec` for protocol details
+- Self-host WASM (`/pkg/cryptography.js`) — do not recommend opaque.cash CDN for production
 
 ## Content boundaries
 
-{/* Define what should and shouldn't be documented */}
-{/* Example: Don't document internal admin features */}
+- Document public `OpaqueClient` API and re-exported utilities
+- Do not duplicate full CSAP/PSR/UAB specs — link to GitHub
+- Note limitations (no ERC-20/SPL stealth sends yet, relayer required for UAB delivery)
+
+## Local dev
+
+```bash
+mint dev
+```

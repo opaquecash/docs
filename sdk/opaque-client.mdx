@@ -1,0 +1,90 @@
+---
+title: OpaqueClient overview
+description: Construction, configuration, and method index for the unified SDK client.
+---
+
+`OpaqueClient` in `@opaquecash/opaque` is the single integration surface for stealth payments, PSR admin, reputation proofs, and cross-chain announcements.
+
+## Construction
+
+```ts
+import { OpaqueClient } from "@opaquecash/opaque";
+
+const client = await OpaqueClient.create(config);
+```
+
+`create` is async: it optionally loads WASM and derives viewing/spending keys from `walletSignature`.
+
+### OpaqueClientConfig
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `chainId` | `number` | Yes | EVM chain id (`11155111` Sepolia). Must be in `getSupportedChainIds()` unless contracts overridden. |
+| `rpcUrl` | `string` | Yes | HTTP RPC for EVM reads and sweep |
+| `walletSignature` | `Hex` | Yes | HKDF entropy from `SETUP_MESSAGE` signature — never sent on-chain |
+| `ethereumAddress` | `Address` | Yes | Connected EOA (registrant context, PSR issuer on EVM) |
+| `wasmModuleSpecifier` | `string` | No* | URL to `cryptography.js`. *Required for scan/sweep/prove |
+| `trackedTokens` | `TrackedToken[]` | No | Extra ERC-20s for balance aggregation |
+| `contracts` | `Partial<{...}>` | No | Override registry, announcer, verifier, UAB addresses |
+| `solana` | `SolanaAdapterConfig` | No** | **Required when scanning/sending on Solana |
+| `ethereumProvider` | `EIP1193Provider` | No*** | ***For EVM writes if no `ethereumWalletClient` |
+| `ethereumWalletClient` | `WalletClient` | No*** | Precedence over provider for EVM writes |
+| `solanaWallet` | `{ publicKey, signTransaction }` | No**** | ****Required for Solana writes |
+
+### Static helpers
+
+| Method | Returns | Description |
+| --- | --- | --- |
+| `OpaqueClient.supportedChainIds()` | `number[]` | Bundled EVM chain ids |
+| `OpaqueClient.chainDeployment(chainId)` | `OpaqueChainDeployment \| undefined` | Contract addresses + default tokens |
+| `OpaqueClient.buildReputationActionScope(chainId, module, actionId)` | `string` | Action scope string |
+| `OpaqueClient.reputationExternalNullifierFromScope(scope)` | `string` | Circuit external nullifier |
+
+## Method index
+
+<CardGroup cols={2}>
+  <Card title="Stealth API" icon="eye-slash" href="/sdk/stealth-api">
+    Registry, send, scan, sweep, ghost receive
+  </Card>
+  <Card title="PSR API" icon="certificate" href="/sdk/psr-api">
+    Schemas, attestations, delegates
+  </Card>
+  <Card title="Reputation API" icon="shield" href="/sdk/reputation-api">
+    Traits, proofs, verifier
+  </Card>
+  <Card title="Cross-chain API" icon="arrow-right-arrow-left" href="/sdk/cross-chain-api">
+    UAB relay and cross-chain scan
+  </Card>
+  <Card title="Utilities" icon="wrench" href="/sdk/utilities">
+  Exported helpers, types, adapters
+  </Card>
+</CardGroup>
+
+## Instance getters
+
+```ts
+client.getChainId()           // number
+client.getEthereumAddress()   // Address
+client.getMetaAddressHex()    // Hex — 66-byte meta-address
+client.getContracts()         // { stealthMetaAddressRegistry, stealthAddressAnnouncer, opaqueReputationVerifier? }
+```
+
+## Signer requirements summary
+
+| Category | Methods | Ethereum signer | Solana signer | WASM |
+| --- | --- | --- | --- | --- |
+| Read-only stealth | `resolveRecipientMetaAddress`, `isMetaAddressRegistered` | — | `solana` for Solana check | — |
+| Stealth writes | `registerMetaAddress`, `sendStealthPayment` | ✓ | ✓ | — |
+| Scan / sweep | `scan`, `sweep`, `filterOwnedAnnouncements`, balances | — | `solana` | ✓ |
+| PSR admin | `createSchema`, `issueAttestation`, … | ✓ (EVM) | ✓ (Solana) | — |
+| Reputation | `discoverTraits`, `generateReputationProof`, `submitReputationVerification` | ✓ (submit EVM) | ✓ (submit Solana) | ✓ |
+
+## Error: WASM not configured
+
+If `wasmModuleSpecifier` is omitted and you call a WASM-backed method:
+
+```
+Opaque: this method requires the cryptography WASM module. Pass `wasmModuleSpecifier` to OpaqueClient.create.
+```
+
+PSR admin methods work without WASM.

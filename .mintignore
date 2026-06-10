@@ -5,3 +5,8 @@
 # Draft content
 drafts/
 *.draft.mdx
+
+# Legacy Vite artifacts (pre-Mintlify migration)
+node_modules/
+dist/
+.vite/

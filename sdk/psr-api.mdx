@@ -1,0 +1,179 @@
+---
+title: PSR API
+description: OpaqueClient methods for schema registry and attestation lifecycle.
+---
+
+All PSR admin methods take `chain: "ethereum" | "solana"` as the first argument and return chain-neutral types.
+
+## Types
+
+### `CreateSchemaParams`
+
+```ts
+{
+  name: string;
+  fieldDefinitions: string | FieldDef[];
+  revocable: boolean;
+  resolver?: string;           // EVM address or Solana program pubkey
+  schemaExpiry?: PsrExpiryInput;
+}
+```
+
+### `IssueAttestationParams`
+
+```ts
+{
+  schemaId: string;            // 0x bytes32 hex
+  recipient: string;           // meta-address, stealth address, or hash
+  fieldValues: Record<string, string>;
+  expiration?: PsrExpiryInput;
+  refUid?: string;
+  announce?: boolean;          // default true for meta-address recipients
+}
+```
+
+### `PsrExpiryInput`
+
+```ts
+{ slotOrBlock?: number } | { dateTime?: string }  // ISO datetime
+```
+
+---
+
+## Schema lifecycle
+
+### `createSchema(chain, params)`
+
+Register a new schema. Returns tx hash and derived `schemaId`.
+
+```ts
+const { txHash, schemaId } = await client.createSchema("ethereum", {
+  name: "kyc-v1",
+  fieldDefinitions: "bool passed, u64 score",
+  revocable: true,
+});
+```
+
+**Signers:** EVM wallet or Solana wallet per chain.
+
+---
+
+### `getMySchemas(chain)`
+
+List schemas where this wallet is authority or delegate.
+
+```ts
+const schemas: SchemaV2[] = await client.getMySchemas("ethereum");
+```
+
+Read-only — no signer required beyond RPC / Solana connection.
+
+---
+
+### `deprecateSchema(chain, schemaId)`
+
+Authority-only. Irreversibly blocks new attestations.
+
+```ts
+await client.deprecateSchema("ethereum", schemaId);
+```
+
+---
+
+### `addSchemaDelegate(chain, schemaId, delegate)`
+
+Authorize another address to issue under this schema (max 10).
+
+```ts
+await client.addSchemaDelegate("ethereum", schemaId, delegateAddress);
+```
+
+---
+
+### `removeSchemaDelegate(chain, schemaId, delegate)`
+
+Revoke delegate issuance rights.
+
+```ts
+await client.removeSchemaDelegate("solana", schemaId, delegatePubkey);
+```
+
+---
+
+## Attestations
+
+### `issueAttestation(chain, params)`
+
+Issue a schema-bound attestation to a stealth identity. Resolves recipient, encodes fields, submits `attest`, optionally announces.
+
+```ts
+const { txHash, uid, stealthAddressHash } = await client.issueAttestation("ethereum", {
+  schemaId,
+  recipient: client.getMetaAddressHex(),
+  fieldValues: { passed: "true", score: "100" },
+});
+```
+
+---
+
+### `getMyIssuedAttestations(chain)`
+
+List attestations issued by this wallet.
+
+```ts
+const list: AttestationV2[] = await client.getMyIssuedAttestations("ethereum");
+```
+
+---
+
+## Issuer helpers (announce metadata)
+
+### `encodeReputationMetadata(viewTag, attestationId)`
+
+Encode PSR metadata bytes for `announce`.
+
+```ts
+const metadata = client.encodeReputationMetadata(viewTag, 42n);
+```
+
+---
+
+### `prepareReputationAssignment(recipientMetaAddressHex, attestationId)`
+
+Derive stealth send material with PSR metadata embedded.
+
+```ts
+const prep = client.prepareReputationAssignment(metaHex, attestationId);
+```
+
+---
+
+### `buildAssignReputationTransaction(recipientMetaAddressHex, attestationId)`
+
+Calldata for announce-with-PSR-metadata (no asset transfer).
+
+```ts
+const req = client.buildAssignReputationTransaction(metaHex, attestationId);
+```
+
+---
+
+## Full issuer E2E (Ethereum)
+
+```ts
+const { schemaId } = await client.createSchema("ethereum", {
+  name: `demo-${Date.now()}`,
+  fieldDefinitions: "bool passed, string note",
+  revocable: true,
+});
+
+await client.issueAttestation("ethereum", {
+  schemaId,
+  recipient: client.getMetaAddressHex(),
+  fieldValues: { passed: "true", note: "hello" },
+});
+
+const issued = await client.getMyIssuedAttestations("ethereum");
+```
+
+See [Create a schema](/guides/create-schema) and [Issue an attestation](/guides/issue-attestation) for step-by-step guides.

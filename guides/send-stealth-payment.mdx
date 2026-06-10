@@ -1,0 +1,112 @@
+---
+title: Send a stealth payment
+description: End-to-end flow to pay someone privately on Ethereum or Solana.
+---
+
+## Prerequisites
+
+- Sender wallet funded with native asset (ETH or SOL)
+- Recipient registered on the target chain (or pass their 66-byte meta-address directly)
+- `ethereumWalletClient` / `ethereumProvider` (EVM) or `solanaWallet` (Solana)
+
+## High-level: one method
+
+```ts
+import { parseEther } from "viem";
+
+const result = await client.sendStealthPayment({
+  chain: "ethereum",
+  recipient: "0xRecipientEoa...",   // or meta-address hex, or Solana base58
+  amount: parseEther("0.01"),
+  announce: true,                   // default
+  relay: false,                     // set true for cross-chain UAB
+});
+
+console.log({
+  stealthAddress: result.stealthAddress,
+  txHash: result.txHash,
+  announceTxHash: result.announceTxHash,  // Ethereum only (separate tx)
+  metaAddressHex: result.metaAddressHex,
+});
+```
+
+Solana bundles transfer + announce in **one** transaction. Ethereum submits transfer first, then announce (two tx hashes).
+
+### Cross-chain send
+
+```ts
+await client.sendStealthPayment({
+  chain: "solana",
+  recipient: recipientMetaOrPubkey,
+  amount: 1_000_000n,  // lamports
+  relay: true,
+  batchId: 42,         // optional Wormhole nonce
+});
+```
+
+## Low-level: prepare + submit yourself
+
+Use this when you need custom gas, batching, or UI control.
+
+```ts
+// 1. Resolve recipient
+const { metaAddressHex } = await client.resolveRecipientMetaAddress(recipientEoa);
+if (!metaAddressHex) throw new Error("Not registered");
+
+// 2. Derive stealth material
+const send = client.prepareStealthSend(metaAddressHex);
+/*
+  send.stealthAddress      — fund this address
+  send.ephemeralPublicKey  — goes in announce
+  send.ephemeralPrivateKey — store if you need ghost/relay later
+  send.metadata            — view tag byte (+ PSR extension if applicable)
+*/
+
+// 3. Transfer
+await walletClient.sendTransaction({
+  to: send.stealthAddress,
+  value: parseEther("0.01"),
+  chain: sepolia,
+});
+
+// 4. Announce
+const announce = client.buildAnnounceTransactionRequest(send);
+await walletClient.sendTransaction({
+  to: announce.to,
+  data: announce.data,
+  chain: sepolia,
+});
+```
+
+## Cross-chain relay (manual)
+
+```ts
+const relay = await client.buildAnnounceWithRelay("ethereum", send);
+await walletClient.sendTransaction({
+  to: relay.to,
+  data: relay.data,
+  value: relay.value,
+  chain: sepolia,
+});
+```
+
+On Solana, `buildAnnounceWithRelay` returns instructions + extra signers (Wormhole message keypair):
+
+```ts
+const relay = await client.buildAnnounceWithRelay("solana", send);
+// relay.instructions, relay.signers — co-sign with solanaWallet
+```
+
+## Limitations
+
+<Warning>
+  Token (SPL / ERC-20) stealth sends are **not yet supported**. Pass native amounts only; `token` param throws if set.
+</Warning>
+
+## Recipient resolution
+
+| `recipient` value | Behavior |
+| --- | --- |
+| 66-byte meta-address (`0x` + 132 hex) | Used directly |
+| Ethereum `0x` address | Registry lookup on Ethereum |
+| Solana base58 pubkey | Registry lookup on Solana |

@@ -1,0 +1,125 @@
+---
+title: Installation
+description: Install @opaquecash/opaque, configure WASM, and choose the right signers per operation.
+---
+
+## Install
+
+```bash
+npm install @opaquecash/opaque
+```
+
+Peer dependencies you typically also need:
+
+| Package | When |
+| --- | --- |
+| `viem` | Ethereum reads/writes, wallet clients |
+| `@solana/web3.js` | Solana reads/writes (re-exported transitively) |
+
+## WASM module
+
+Scanning, sweeping, trait discovery, key reconstruction, and Groth16 witness generation run in a Rust→WASM module ([`opaque-scanner`](https://crates.io/crates/opaque-scanner)). Pass the JS glue URL as `wasmModuleSpecifier`:
+
+```ts
+await OpaqueClient.create({
+  // ...
+  wasmModuleSpecifier: "/pkg/cryptography.js",
+});
+```
+
+### Self-hosting (recommended for production)
+
+Build from the scanner crate:
+
+```bash
+wasm-pack build --target web --out-dir pkg --out-name cryptography
+```
+
+Serve `pkg/cryptography.js` and `pkg/cryptography_bg.wasm` from your app's `public/` directory. The glue file loads the `.wasm` sibling automatically.
+
+<Warning>
+  Do not hotlink `https://www.opaque.cash/pkg/cryptography.js` in production — self-host the artifact so deploys are not blocked by CORS or third-party availability.
+</Warning>
+
+### PSR admin without WASM
+
+Schema and attestation management uses pure-JS DKSAP. You can omit `wasmModuleSpecifier` for issuer backends:
+
+```ts
+const issuer = await OpaqueClient.create({
+  chainId: 11155111,
+  rpcUrl,
+  walletSignature,
+  ethereumAddress,
+  ethereumWalletClient,  // backend issuer
+  // no wasmModuleSpecifier
+});
+
+await issuer.createSchema("ethereum", { /* … */ });
+```
+
+Calling `scan`, `sweep`, or `generateReputationProof` without WASM throws a clear error.
+
+## Signer matrix
+
+| Operation | Ethereum | Solana |
+| --- | --- | --- |
+| Reads (`getMySchemas`, `scan`, balances) | `rpcUrl` | `solana: { connection \| rpcUrl \| cluster }` |
+| Writes (`registerMetaAddress`, `sendStealthPayment`, PSR) | `ethereumProvider` or `ethereumWalletClient` | `solanaWallet: { publicKey, signTransaction }` |
+| Scan / sweep / prove | `wasmModuleSpecifier` | `wasmModuleSpecifier` + `solana` config |
+
+## Backend issuer (Ethereum)
+
+```ts
+import { createWalletClient, http } from "viem";
+import { privateKeyToAccount } from "viem/accounts";
+import { sepolia } from "viem/chains";
+
+const account = privateKeyToAccount(process.env.ISSUER_PRIVATE_KEY as `0x${string}`);
+const walletClient = createWalletClient({ account, chain: sepolia, transport: http(rpcUrl) });
+
+const client = await OpaqueClient.create({
+  chainId: sepolia.id,
+  rpcUrl,
+  walletSignature: testEntropySignature,
+  ethereumAddress: account.address,
+  ethereumWalletClient: walletClient,
+});
+```
+
+## Backend issuer (Solana)
+
+```ts
+import { Keypair, Transaction } from "@solana/web3.js";
+
+const keypair = Keypair.fromSecretKey(/* … */);
+
+const client = await OpaqueClient.create({
+  chainId: 11155111,  // EVM chainId required by config; unused on Solana-only path
+  rpcUrl: "https://ethereum-sepolia.publicnode.com",
+  walletSignature,
+  ethereumAddress: "0x0000000000000000000000000000000000000001",
+  solana: { rpcUrl: solanaRpc, cluster: "devnet" },
+  solanaWallet: {
+    publicKey: keypair.publicKey,
+    signTransaction: async (tx: Transaction) => {
+      tx.partialSign(keypair);
+      return tx;
+    },
+  },
+});
+```
+
+## Monorepo / workspace
+
+Link the local package during development:
+
+```json
+{
+  "dependencies": {
+    "@opaquecash/opaque": "workspace:*"
+  }
+}
+```
+
+Build the SDK first: `cd sdk && npm install && npm run build`.

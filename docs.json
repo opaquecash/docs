@@ -1,72 +1,134 @@
 {
   "$schema": "https://mintlify.com/docs.json",
   "theme": "mint",
-  "name": "Mintlify Starter Kit",
+  "name": "Opaque Protocol",
+  "description": "Stealth payments, provable reputation, and cross-chain announcements.",
   "colors": {
-    "primary": "#16A34A",
-    "light": "#07C983",
-    "dark": "#15803D"
+    "primary": "#5eead4",
+    "light": "#5eead4",
+    "dark": "#2dd4bf"
   },
   "favicon": "/favicon.svg",
-  "navigation": {
-    "pages": [
+  "logo": {
+    "light": "/logo/light.svg",
+    "dark": "/logo/dark.svg",
+    "href": "https://www.opaque.cash"
+  },
+  "appearance": {
+    "default": "dark",
+    "strict": true
+  },
+  "fonts": {
+    "heading": {
+      "family": "Syne",
+      "weight": 700
+    },
+    "body": {
+      "family": "DM Sans",
+      "weight": 400
+    }
+  },
+  "background": {
+    "decoration": "grid",
+    "color": {
+      "light": "#f8fafc",
+      "dark": "#07080d"
+    }
+  },
+  "styling": {
+    "codeblocks": "dark"
+  },
+  "navbar": {
+    "links": [
       {
-        "group": "Getting Started",
-        "pages": [
-          "index",
-          "quickstart"
+        "label": "GitHub",
+        "href": "https://github.com/opaquecash/sdk"
+      },
+      {
+        "label": "npm",
+        "href": "https://www.npmjs.com/package/@opaquecash/opaque"
+      }
+    ],
+    "primary": {
+      "type": "button",
+      "label": "Get started",
+      "href": "/quickstart"
+    }
+  },
+  "navigation": {
+    "tabs": [
+      {
+        "tab": "Documentation",
+        "groups": [
+          {
+            "group": "Get started",
+            "pages": [
+              "index",
+              "quickstart",
+              "sdk/installation"
+            ]
+          },
+          {
+            "group": "Concepts",
+            "pages": [
+              "concepts/stealth-payments",
+              "concepts/psr",
+              "concepts/cross-chain"
+            ]
+          },
+          {
+            "group": "Guides",
+            "pages": [
+              "guides/register-and-receive",
+              "guides/send-stealth-payment",
+              "guides/create-schema",
+              "guides/issue-attestation",
+              "guides/scan-and-sweep",
+              "guides/generate-proof"
+            ]
+          },
+          {
+            "group": "SDK reference",
+            "pages": [
+              "sdk/opaque-client",
+              "sdk/stealth-api",
+              "sdk/psr-api",
+              "sdk/reputation-api",
+              "sdk/cross-chain-api",
+              "sdk/utilities"
+            ]
+          },
+          {
+            "group": "Protocol",
+            "pages": [
+              "protocol/overview",
+              "protocol/deployments"
+            ]
+          }
         ]
       }
     ],
     "global": {
       "anchors": [
         {
-          "anchor": "Documentation",
-          "href": "https://mintlify.com/docs",
-          "icon": "book-open-cover"
+          "anchor": "Protocol spec",
+          "href": "https://github.com/opaquecash/spec",
+          "icon": "book"
         },
         {
-          "anchor": "Blog",
-          "href": "https://mintlify.com/blog",
-          "icon": "newspaper"
+          "anchor": "App",
+          "href": "https://www.opaque.cash",
+          "icon": "globe"
         }
       ]
     }
   },
-  "logo": {
-    "light": "/logo/light.svg",
-    "dark": "/logo/dark.svg"
-  },
-  "navbar": {
-    "links": [
-      {
-        "label": "Support",
-        "href": "mailto:hi@mintlify.com"
-      }
-    ],
-    "primary": {
-      "type": "button",
-      "label": "Dashboard",
-      "href": "https://app.mintlify.com"
+  "footer": {
+    "socials": {
+      "github": "https://github.com/opaquecash"
     }
   },
   "contextual": {
-    "options": [
-      "copy",
-      "view",
-      "chatgpt",
-      "claude",
-      "perplexity",
-      "mcp",
-      "cursor",
-      "vscode"
-    ]
-  },
-  "footer": {
-    "socials": {
-      "x": "https://x.com/mintlify",
-      "github": "https://github.com/mintlify",
-      "linkedin": "https://linkedin.com/company/mintlify"
-    }
+    "options": ["copy", "view", "chatgpt", "claude", "cursor"]
   }
 }

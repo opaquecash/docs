@@ -1,0 +1,121 @@
+---
+title: Register and receive
+description: End-to-end flow to register your meta-address and receive stealth payments.
+---
+
+This guide walks through onboarding a new user: derive keys, register on-chain, scan for payments, and sweep funds.
+
+## Step 1 — One-time key setup
+
+```ts
+import { OpaqueClient, SETUP_MESSAGE } from "@opaquecash/opaque";
+
+const walletSignature = await walletClient.signMessage({
+  account: address,
+  message: SETUP_MESSAGE,
+});
+
+const client = await OpaqueClient.create({
+  chainId: 11155111,
+  rpcUrl,
+  walletSignature,
+  ethereumAddress: address,
+  wasmModuleSpecifier: "/pkg/cryptography.js",
+  ethereumProvider: window.ethereum,
+  solana: { cluster: "devnet" },  // optional, for Solana inbox
+});
+```
+
+## Step 2 — Register meta-address
+
+Check registration first:
+
+```ts
+const onEth = await client.isMetaAddressRegistered("ethereum");
+const onSol = await client.isMetaAddressRegistered("solana");
+```
+
+Register on each chain you want to receive on:
+
+```ts
+if (!onEth) {
+  const { txHash, metaAddressHex } = await client.registerMetaAddress("ethereum");
+  console.log("Registered on Ethereum:", txHash, metaAddressHex);
+}
+
+if (!onSol) {
+  const { txHash } = await client.registerMetaAddress("solana");
+  console.log("Registered on Solana:", txHash);
+}
+```
+
+Share `client.getMetaAddressHex()` with senders who already have your meta-address, or let them resolve via registry:
+
+```ts
+const { registered, metaAddressHex } = await client.resolveRecipientMetaAddress(someEoa);
+```
+
+## Step 3 — Scan inbox
+
+```ts
+const inbox = await client.scan({
+  chains: ["ethereum", "solana"],
+  fromBlock: 5_000_000n,       // optional EVM lower bound
+  includeCrossChain: true,      // merge UAB announcements
+});
+
+for (const output of inbox) {
+  console.log(output.chain, output.stealthAddress, output.source);
+}
+```
+
+## Step 4 — Check balances
+
+```ts
+const balances = await client.getBalancesForOutputs(inbox);
+
+for (const b of balances) {
+  console.log(b.chain, b.address, b.nativeRaw.toString());
+}
+```
+
+For ERC-20 aggregation on Ethereum (tracked token set):
+
+```ts
+import { announcementToIndexerRow } from "@opaquecash/opaque";
+
+const adapter = /* fetch announcements from indexer */;
+const rows = announcements.map(announcementToIndexerRow);
+const tokenTotals = await client.getBalancesFromAnnouncements(rows);
+```
+
+## Step 5 — Sweep to a fresh address
+
+```ts
+const fresh = "0xYourNewAddress...";
+
+const { tx } = await client.sweep({
+  output: inbox[0],
+  chain: inbox[0].chain,
+  destination: fresh,
+});
+
+console.log("Swept:", tx);
+```
+
+<Note>
+  `sweep` reconstructs the one-time stealth private key in WASM and signs a transfer **from** the stealth address. Never log or persist reconstructed keys beyond your threat model.
+</Note>
+
+## Ghost receive (optional)
+
+For flows where funds arrive before an announcement:
+
+```ts
+const ghost = client.prepareGhostReceive();
+// Show ghost.stealthAddress to the payer; store ghost.ephemeralPrivateKey securely
+
+// After funds arrive, announce:
+const req = client.buildAnnounceTransactionRequestForGhost(ghost.ephemeralPrivateKey);
+await walletClient.sendTransaction({ to: req.to, data: req.data });
+```

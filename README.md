@@ -1,55 +1,36 @@
-# Mintlify Starter Kit
+# Opaque documentation
 
-Use the starter kit to get your docs deployed and ready to customize.
+Documentation for [Opaque Protocol](https://opaque.cash), built with [Mintlify](https://mintlify.com).
 
-Click the green **Use this template** button at the top of this repo to copy the Mintlify starter kit. The starter kit contains examples with
+**Live site:** Connect this repo (`opaquecash/mintlify-docs`) in the Mintlify dashboard and set custom domain `docs.opaque.cash`.
 
-- Guide pages
-- Navigation
-- Customizations
-- API reference pages
-- Use of popular components
+## Local preview
 
-**[Follow the full quickstart guide](https://starter.mintlify.com/quickstart)**
-
-## AI-assisted writing
-
-Set up your AI coding tool to work with Mintlify:
+Requires Node.js 20.17+.
 
 ```bash
-npx skills add https://mintlify.com/docs
-```
-
-This command installs Mintlify's documentation skill for your configured AI tools like Claude Code, Cursor, Windsurf, and others. The skill includes component reference, writing standards, and workflow guidance.
-
-See the [AI tools guides](/ai-tools) for tool-specific setup.
-
-## Development
-
-Install the [Mintlify CLI](https://www.npmjs.com/package/mint) to preview your documentation changes locally. To install, use the following command:
-
-```
 npm i -g mint
+cd docs && mint dev
 ```
 
-Run the following command at the root of your documentation, where your `docs.json` is located:
+Open [http://localhost:3000](http://localhost:3000).
 
-```
-mint dev
-```
+## Structure
 
-View your local preview at `http://localhost:3000`.
+| Path | Content |
+| --- | --- |
+| `docs.json` | Navigation, branding, navbar |
+| `index.mdx` | Welcome |
+| `quickstart.mdx` | 5-minute integration |
+| `concepts/` | CSAP, PSR, UAB |
+| `guides/` | End-to-end flows |
+| `sdk/` | `OpaqueClient` API reference |
+| `protocol/` | Spec links and deployments |
 
-## Publishing changes
+## Publishing
 
-Install our GitHub app from your [dashboard](https://dashboard.mintlify.com/settings/organization/github-app) to propagate changes from your repo to your deployment. Changes are deployed to production automatically after pushing to the default branch.
+Push to `main` on `opaquecash/mintlify-docs`. Mintlify auto-deploys when the GitHub app is connected.
 
-## Need help?
+## SDK source
 
-### Troubleshooting
-
-- If your dev environment isn't running: Run `mint update` to ensure you have the most recent version of the CLI.
-- If a page loads as a 404: Make sure you are running in a folder with a valid `docs.json`.
-
-### Resources
-- [Mintlify documentation](https://mintlify.com/docs)
+API docs reflect `@opaquecash/opaque` in [`opaquecash/sdk`](https://github.com/opaquecash/sdk). Update docs when client methods change.

@@ -1,0 +1,55 @@
+---
+title: Testnet deployments
+description: Bundled contract and program addresses in the SDK.
+---
+
+Do not hardcode addresses in your app — read them from the SDK.
+
+```ts
+import { getChainDeployment, getSolanaDeployment } from "@opaquecash/opaque";
+
+const evm = getChainDeployment(11155111);
+const sol = getSolanaDeployment("devnet");
+```
+
+Override any address via `OpaqueClient.create({ contracts: { … } })`.
+
+## Ethereum Sepolia (`chainId: 11155111`)
+
+| Contract | Address |
+| --- | --- |
+| StealthMetaAddressRegistry | `0x77425e04163d608B876c7f50E34A378624A12067` |
+| StealthAddressAnnouncer | `0x840f72249A8bF6F10b0eB64412E315efBD730865` |
+| UABSender | `0x872787c0BD1A0C71e6D1be5a144EB044e0CB2069` |
+| UABReceiver | `0x9eF189f7a263F870Cf80f9A89d1349A6AF7b15cF` |
+| OpaqueSchemaRegistry | `0xAA5F3942117bD48E7Cd81A500A8b7Bbb122ae80f` |
+| AttestationRegistry (V2) | `0x049aF9CBB62387034CDd5403794a94E9c000ACCc` |
+| OpaqueReputationVerifier (V2) | `0x18cEc2812953c2E9bcADE20CbF6415BD36aEb44f` |
+
+UAB deployment details: `getUabDeployment(11155111)` from `@opaquecash/opaque`.
+
+## Solana devnet
+
+| Program | Address |
+| --- | --- |
+| StealthMetaAddressRegistry | `E9LBRG5eP2kvuNfveouqQ9tA5P6nrpyLyWFjH9MFYVno` |
+| StealthAddressAnnouncer | `HGFn2fH7bVQ5cSuiG52NjzN9m11YrB3FZUfoN9b9A5jf` |
+| SchemaRegistry | `FbgMJYGWnLKLcrKYS1NxM5uER1ihQkYLMTLs4STuDMWB` |
+| AttestationEngineV2 | `4T9kPCVCFGdEuLpEqRJihsPCbEEo2LWWDEPFvUESEqtM` |
+| Groth16Verifier | `6mFaKyp7F4NqNeoiBLEWSqy5wJSk7rWf1EYumVXgHvhQ` |
+| ReputationVerifier | `BSnkCDoTpgNVN5BbF3aN5L5EJPiaYUkqqj9MHp8kaqWM` |
+
+```ts
+import { getSolanaDeployment } from "@opaquecash/opaque";
+
+const d = getSolanaDeployment("devnet");
+console.log(d.schemaRegistry, d.attestationEngineV2);
+```
+
+## Supported chain IDs
+
+```ts
+OpaqueClient.supportedChainIds();  // [11155111] in current SDK version
+```
+
+Mainnet deployments will ship in `@opaquecash/deployments` (roadmap).

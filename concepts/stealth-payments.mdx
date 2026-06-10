@@ -1,0 +1,62 @@
+---
+title: Stealth payments
+description: EIP-5564 meta-addresses, DKSAP, announcements, and the receive flow.
+---
+
+Opaque stealth payments follow [CSAP](https://github.com/opaquecash/spec/blob/main/CSAP.md) (Confidential Stealth Address Protocol), built on [EIP-5564](https://eips.ethereum.org/EIPS/eip-5564) scheme 1 (secp256k1).
+
+## Key material
+
+When a user signs `SETUP_MESSAGE`, the SDK derives:
+
+| Key | Role |
+| --- | --- |
+| **Viewing key** | Prefilter announcements (view tags) and scan owned outputs |
+| **Spending key** | Reconstruct one-time private keys to sweep funds |
+
+These keys are **chain-neutral** — the same wallet has one meta-address on Ethereum and Solana.
+
+## Meta-address
+
+A 66-byte value (viewing pubkey ‖ spending pubkey) registered on `StealthMetaAddressRegistry`. Share it so senders can derive one-time destinations without linking payments to your public identity.
+
+```ts
+const meta = client.getMetaAddressHex();
+await client.registerMetaAddress("ethereum");
+```
+
+## Send flow
+
+1. Resolve recipient meta-address (registry lookup or direct hex)
+2. `prepareStealthSend(meta)` — derive ephemeral keypair + one-time stealth address
+3. Transfer native asset to the stealth address
+4. `announce` on `StealthAddressAnnouncer` so the recipient can scan
+
+```ts
+const send = client.prepareStealthSend(metaAddressHex);
+// send.stealthAddress, send.ephemeralPublicKey, send.metadata
+```
+
+Or use `sendStealthPayment` for a single high-level call.
+
+## Receive flow
+
+1. Indexer or adapter fetches `Announce` events
+2. WASM view-tag prefilter + DKSAP ownership check (`filterOwnedAnnouncements`)
+3. Reconstruct signing key (`getStealthSignerPrivateKey`)
+4. Sweep to a fresh address (`sweep`)
+
+```ts
+const owned = await client.scan({ chains: ["ethereum", "solana"] });
+await client.sweep({ output: owned[0], chain: owned[0].chain, destination });
+```
+
+## Ghost receive
+
+Receive without a prior on-chain announcement: derive a stealth address to yourself, fund it, then announce later using the stored ephemeral private key.
+
+```ts
+const ghost = client.prepareGhostReceive();
+// Persist ghost.ephemeralPrivateKey securely
+const announce = client.buildAnnounceTransactionRequestForGhost(ghost.ephemeralPrivateKey);
+```

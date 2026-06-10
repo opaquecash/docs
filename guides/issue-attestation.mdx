@@ -1,0 +1,103 @@
+---
+title: Issue an attestation
+description: End-to-end issuer flow — attest to a stealth identity and announce for discovery.
+---
+
+## Prerequisites
+
+- Funded issuer wallet authorized on the target schema (authority or delegate)
+- Recipient meta-address (66-byte hex) for the full announce path
+- `ethereumWalletClient` or `solanaWallet` configured
+
+## Issue to a meta-address
+
+When the recipient is a meta-address, `issueAttestation` resolves stealth material, submits `attest`, and publishes an announcement (default `announce: true`):
+
+```ts
+const { txHash, uid, stealthAddressHash } = await client.issueAttestation("ethereum", {
+  schemaId,
+  recipient: recipientMetaAddressHex,   // 66-byte hex
+  fieldValues: {
+    passed: "true",
+    jurisdiction: "US",
+  },
+  expiration: { slotOrBlock: 9_999_999 },  // optional
+  refUid: undefined,                        // optional chained credential
+  announce: true,                           // default when recipient is meta-address
+});
+
+console.log({ txHash, uid, stealthAddressHash });
+```
+
+## Issue to self (E2E test pattern)
+
+```ts
+const result = await client.issueAttestation("ethereum", {
+  schemaId,
+  recipient: client.getMetaAddressHex(),
+  fieldValues: { passed: "true", note: "e2e" },
+});
+
+const issued = await client.getMyIssuedAttestations("ethereum");
+const found = issued.find((a) => a.uid === result.uid);
+```
+
+## Recipient formats
+
+```ts
+// Meta-address — full announce path
+recipient: "0x" + "04".repeat(66)  // 132 hex chars
+
+// Raw EVM stealth address — resolves to stealth_address_hash
+recipient: "0x" + "ab".repeat(20)
+
+// Precomputed hash — no announce (no ephemeral key available)
+recipient: "0x" + "cd".repeat(32)
+```
+
+## Low-level issuer announce (manual)
+
+For custom flows without `issueAttestation`:
+
+```ts
+const prep = client.prepareReputationAssignment(recipientMeta, attestationId);
+const announce = client.buildAssignReputationTransaction(recipientMeta, attestationId);
+await walletClient.sendTransaction({ to: announce.to, data: announce.data });
+```
+
+Metadata encoding:
+
+```ts
+const metadata = client.encodeReputationMetadata(viewTag, attestationId);
+```
+
+## Verify issuance
+
+```ts
+const attestations = await client.getMyIssuedAttestations("ethereum");
+
+for (const a of attestations) {
+  console.log(a.uid, a.schemaId, a.stealthAddressHash, a.fieldValues);
+}
+```
+
+## Solana
+
+Same API — pass `chain: "solana"`:
+
+```ts
+await client.issueAttestation("solana", {
+  schemaId,
+  recipient: client.getMetaAddressHex(),
+  fieldValues: { passed: "true", note: "devnet" },
+});
+```
+
+## Error cases
+
+| Error | Cause |
+| --- | --- |
+| Schema not found | Invalid `schemaId` or wrong chain |
+| Not authorized issuer | Wallet is not authority/delegate |
+| Recipient not registered | EOA lookup failed (send flows) |
+| Expiry in the past | Invalid `expiration` / `schemaExpiry` |

@@ -1,47 +1,126 @@
 ---
-title: "Quickstart"
-description: "Begin with a guide on the fastest path to a successful outcome"
+title: Quickstart
+description: Install @opaquecash/opaque, derive stealth keys, and run a minimal send/receive flow.
 ---
 
-Describe how someone begins using your product. What is the first thing they need to do? Are there any prerequisites?
-
-A quickstart should take someone from zero to using your product. They'll get a quick win and a sense of what they can accomplish.
+This guide takes you from zero to a working integration: install the SDK, create an `OpaqueClient`, register your meta-address, and prepare a stealth send.
 
 ## Prerequisites
 
-Before you begin, you must have:
+- Node.js **20.17+**
+- An Ethereum wallet (Sepolia testnet ETH for writes)
+- Optional: Solana wallet on devnet for multichain flows
+- For scan/sweep/prove: host or load the [cryptography WASM](/sdk/installation#wasm-module) module
 
-- Requirement one (for example, Node.js 18+, a free account, an API key)
-- Requirement two (for example, a compatible device, a compatible browser, a compatible operating system)
+## 1. Install
 
-## Get started
+```bash
+npm install @opaquecash/opaque viem
+```
 
-<Steps>
-  <Step title="Install">
-    Describe how to install your product or sign up.
+## 2. Derive keys from a wallet signature
 
-    ```bash
-    npm install your-package
-    ```
-  </Step>
-  <Step title="Configure">
-    Describe any setup or configuration needed before first use.
+Opaque derives viewing and spending keys from a **one-time wallet signature** — not from your private key directly. The message is chain-neutral:
 
-    ```bash
-    your-cli init
-    ```
-  </Step>
-  <Step title="Run it">
-    Show the first thing a user does to see it working.
+```ts
+import { OpaqueClient, SETUP_MESSAGE } from "@opaquecash/opaque";
 
-    ```bash
-    your-cli start
-    ```
-  </Step>
-</Steps>
+// In the browser, prompt the user once:
+const walletSignature = await walletClient.signMessage({
+  account: userAddress,
+  message: SETUP_MESSAGE,
+});
+```
 
-<Tip>
-  Give people a way to get help. This could be a link to a support page, a chat with a customer support agent, or a forum for your product.
+`SETUP_MESSAGE` is exported from the SDK and must match [CSAP spec](https://github.com/opaquecash/spec/blob/main/CSAP.md) §2.2 byte-for-byte.
 
-  Example: Need help? Reach out to us at [support@yourcompany.com](mailto:support@yourcompany.com).
-</Tip>
+## 3. Create the client
+
+```ts
+const client = await OpaqueClient.create({
+  chainId: 11155111,                              // Sepolia
+  rpcUrl: "https://ethereum-sepolia.publicnode.com",
+  walletSignature,
+  ethereumAddress: userAddress,
+  wasmModuleSpecifier: "/pkg/cryptography.js",    // required for scan/sweep/prove
+  ethereumProvider: window.ethereum,              // for EVM writes (register, send, PSR)
+});
+```
+
+<Note>
+  PSR schema/attestation admin (`createSchema`, `issueAttestation`) does **not** require WASM. Scanning, sweeping, and proof generation do.
+</Note>
+
+## 4. Share your meta-address
+
+```ts
+const metaAddress = client.getMetaAddressHex();
+// Share this 66-byte hex so senders and issuers can pay or attest to you.
+```
+
+Register on-chain so others can resolve your normal address:
+
+```ts
+// High-level — submits the tx for you
+const { txHash } = await client.registerMetaAddress("ethereum");
+
+// Or build calldata and submit via your own wallet UI
+const reg = client.buildRegisterMetaAddressTransaction();
+await walletClient.sendTransaction({ to: reg.to, data: reg.data, chain: sepolia });
+```
+
+## 5. Send a stealth payment
+
+```ts
+const recipient = "0xRecipientEoaAddress...";
+const { metaAddressHex, registered } = await client.resolveRecipientMetaAddress(recipient);
+
+if (!registered) {
+  throw new Error("Recipient has not registered on Opaque yet");
+}
+
+// Low-level: prepare + announce calldata
+const send = client.prepareStealthSend(metaAddressHex!);
+const announce = client.buildAnnounceTransactionRequest(send);
+await walletClient.sendTransaction({ to: send.stealthAddress, value: parseEther("0.01"), chain: sepolia });
+await walletClient.sendTransaction({ to: announce.to, data: announce.data, chain: sepolia });
+
+// High-level: one call (transfer + announce)
+const result = await client.sendStealthPayment({
+  chain: "ethereum",
+  recipient,
+  amount: parseEther("0.01"),
+});
+```
+
+## 6. Receive: scan and sweep
+
+```ts
+const inbox = await client.scan({ chains: ["ethereum"] });
+const balances = await client.getBalancesForOutputs(inbox);
+
+if (inbox.length > 0) {
+  const { tx } = await client.sweep({
+    output: inbox[0],
+    chain: inbox[0].chain,
+    destination: freshAddress,
+  });
+}
+```
+
+## Next steps
+
+<CardGroup cols={2}>
+  <Card title="Issue an attestation" icon="certificate" href="/guides/issue-attestation">
+    Full issuer flow: schema → attest → announce.
+  </Card>
+  <Card title="Generate a reputation proof" icon="shield" href="/guides/generate-proof">
+    Discover traits and submit a Groth16 proof on-chain.
+  </Card>
+  <Card title="Cross-chain inbox" icon="arrow-right-arrow-left" href="/concepts/cross-chain">
+    UAB announcements over Wormhole.
+  </Card>
+  <Card title="API reference" icon="book" href="/sdk/opaque-client">
+    Every `OpaqueClient` method documented with examples.
+  </Card>
+</CardGroup>

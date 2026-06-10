@@ -1,0 +1,120 @@
+---
+title: Cross-chain API
+description: UAB methods for relaying and scanning cross-chain stealth announcements.
+---
+
+Cross-chain flows use the Universal Announcement Bus (Wormhole). UAB must be configured for the client's `chainId` (bundled on Sepolia) or passed via `contracts`.
+
+## Build relay
+
+### `buildAnnounceWithRelayRequest(send, opts?)`
+
+Ethereum: build `{ to, data, value }` for `announceWithRelay`. `value` is the Wormhole message fee.
+
+```ts
+const send = client.prepareStealthSend(metaAddressHex);
+const req = await client.buildAnnounceWithRelayRequest(send, {
+  consistencyLevel: undefined,
+});
+await walletClient.sendTransaction({
+  to: req.to,
+  data: req.data,
+  value: req.value,
+});
+```
+
+---
+
+### `buildAnnounceWithRelay(chain, send, opts?)`
+
+Discriminated builder for Ethereum or Solana.
+
+```ts
+// Ethereum
+const evm = await client.buildAnnounceWithRelay("ethereum", send);
+// { chain: "ethereum", to, data, value, chainId }
+
+// Solana
+const sol = await client.buildAnnounceWithRelay("solana", send, {
+  batchId: 1,
+  wormholeFee: undefined,  // auto-fetched
+});
+// { chain: "solana", instructions, signers }
+```
+
+**Solana note:** `signers` includes the Wormhole message keypair — must co-sign with `solanaWallet`.
+
+---
+
+## Fetch and scan
+
+### `fetchCrossChainAnnouncements(opts?)`
+
+Read inbound UAB announcements as indexer-shaped rows.
+
+```ts
+const rows = await client.fetchCrossChainAnnouncements({
+  fromBlock: 5_000_000n,
+  toBlock: "latest",
+});
+```
+
+---
+
+### `scanCrossChain(opts?)`
+
+Fetch + WASM filter to owned outputs from UAB only.
+
+```ts
+const owned = await client.scanCrossChain();
+```
+
+---
+
+## Bundled in send / unified scan
+
+`sendStealthPayment({ relay: true })` calls the relay path internally.
+
+`scan({ includeCrossChain: true })` merges UAB outputs with `source: "uab"` (default when UAB is deployed and Ethereum is scanned).
+
+```ts
+const inbox = await client.scan({
+  chains: ["ethereum"],
+  includeCrossChain: true,
+});
+```
+
+---
+
+## Low-level UAB exports
+
+Re-exported from `@opaquecash/uab` via `@opaquecash/opaque`:
+
+```ts
+import {
+  fetchVaa,
+  getUabDeployment,
+  requireUabDeployment,
+  CONSISTENCY_FINALIZED,
+  CONSISTENCY_SAFE,
+  WORMHOLESCAN_TESTNET,
+} from "@opaquecash/opaque";
+```
+
+Payload codec from `@opaquecash/stealth-core`:
+
+```ts
+import {
+  encodeUabPayload,
+  decodeUabPayload,
+  UAB_PAYLOAD_LENGTH,
+} from "@opaquecash/opaque";
+```
+
+---
+
+## Relayer
+
+VAAs must be delivered to `UABReceiver` on the destination chain. Use [`opaquecash/relayer`](https://github.com/opaquecash/relayer) for off-chain delivery.
+
+See [Cross-chain announcements](/concepts/cross-chain).

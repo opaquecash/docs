@@ -1,0 +1,60 @@
+---
+title: Cross-chain announcements
+description: Universal Announcement Bus (UAB) over Wormhole for multichain stealth inboxes.
+---
+
+The [UAB](https://github.com/opaquecash/spec/blob/main/UAB.md) (Universal Announcement Bus) relays stealth announcements across chains via Wormhole. A payment announced on Solana can appear in an Ethereum user's inbox — and vice versa — without a central indexer.
+
+## How it works
+
+1. Sender calls `announceWithRelay` on **UABSender** (local announce + Wormhole publish)
+2. Wormhole guardians attest the 96-byte payload
+3. Relayer delivers the VAA to **UABReceiver** on the destination chain
+4. Receiver re-emits a standard `Announce` event
+5. Recipient scans with the same WASM filter as native announcements
+
+```ts
+// Build cross-chain relay (Ethereum)
+const send = client.prepareStealthSend(metaAddressHex);
+const relay = await client.buildAnnounceWithRelayRequest(send);
+await walletClient.sendTransaction({
+  to: relay.to,
+  data: relay.data,
+  value: relay.value,  // Wormhole message fee
+});
+
+// Or bundled in sendStealthPayment
+await client.sendStealthPayment({
+  chain: "ethereum",
+  recipient,
+  amount: parseEther("0.01"),
+  relay: true,
+});
+```
+
+## Scanning cross-chain outputs
+
+```ts
+// UAB-only scan
+const crossOwned = await client.scanCrossChain();
+
+// Unified inbox (native + UAB when configured)
+const inbox = await client.scan({
+  chains: ["ethereum"],
+  includeCrossChain: true,  // default when UAB is deployed
+});
+// Each output has source: "native" | "uab"
+```
+
+## Relayer
+
+Off-chain VAA delivery is handled by [`opaquecash/relayer`](https://github.com/opaquecash/relayer). The SDK builds and reads announcements; the relayer watches Wormhole and submits VAAs to `UABReceiver`.
+
+## Wormhole chain IDs
+
+| Chain | Wormhole ID |
+| --- | --- |
+| Solana | 1 |
+| Ethereum | 2 |
+
+Exported as `WORMHOLE_CHAIN_SOLANA` and `WORMHOLE_CHAIN_ETHEREUM` from `@opaquecash/opaque`.

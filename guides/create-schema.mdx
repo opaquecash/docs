@@ -1,0 +1,110 @@
+---
+title: Create a PSR schema
+description: Register a schema on Ethereum or Solana and manage delegates.
+---
+
+Schemas define the shape of attestations an issuer can publish. This guide covers creation, listing, delegation, and deprecation.
+
+## Setup (issuer backend)
+
+```ts
+import { createWalletClient, http } from "viem";
+import { privateKeyToAccount } from "viem/accounts";
+import { sepolia } from "viem/chains";
+import { OpaqueClient } from "@opaquecash/opaque";
+
+const account = privateKeyToAccount(process.env.ISSUER_PRIVATE_KEY as `0x${string}`);
+const walletClient = createWalletClient({ account, chain: sepolia, transport: http(rpcUrl) });
+
+const client = await OpaqueClient.create({
+  chainId: sepolia.id,
+  rpcUrl,
+  walletSignature: issuerEntropySignature,
+  ethereumAddress: account.address,
+  ethereumWalletClient: walletClient,
+  // WASM not required for PSR admin
+});
+```
+
+## Create a schema
+
+```ts
+const { txHash, schemaId } = await client.createSchema("ethereum", {
+  name: `kyc-passed-v1`,
+  fieldDefinitions: "bool passed, string jurisdiction",
+  revocable: true,
+  resolver: undefined,                    // optional EVM address or Solana program
+  schemaExpiry: { dateTime: "2027-01-01T00:00:00Z" },  // optional
+});
+
+console.log("schemaId:", schemaId);
+await publicClient.waitForTransactionReceipt({ hash: txHash as `0x${string}` });
+```
+
+### Field definitions
+
+Pass an ABI-style string or `FieldDef[]`:
+
+```ts
+fieldDefinitions: "bool passed, u64 score, string note"
+// or
+fieldDefinitions: [
+  { name: "passed", type: "bool" },
+  { name: "score", type: "u64" },
+  { name: "note", type: "string" },
+]
+```
+
+`schemaId` is derived deterministically from `(authority, name)` — use unique names per run in tests.
+
+## List your schemas
+
+Returns schemas where your wallet is **authority** or **delegate**:
+
+```ts
+const schemas = await client.getMySchemas("ethereum");
+
+for (const s of schemas) {
+  console.log(s.schemaId, s.name, s.fieldDefinitions, s.deprecated);
+}
+```
+
+## Add / remove delegates
+
+Authority-only. Up to 10 delegates per schema.
+
+```ts
+await client.addSchemaDelegate("ethereum", schemaId, delegateAddress);
+await client.removeSchemaDelegate("ethereum", schemaId, delegateAddress);
+```
+
+## Deprecate a schema
+
+Irreversible — blocks new attestations:
+
+```ts
+await client.deprecateSchema("ethereum", schemaId);
+```
+
+## Solana equivalent
+
+```ts
+const client = await OpaqueClient.create({
+  chainId: 11155111,
+  rpcUrl: "https://ethereum-sepolia.publicnode.com",
+  walletSignature,
+  ethereumAddress: dummyEvmAddress,
+  solana: { rpcUrl: solanaRpc, cluster: "devnet" },
+  solanaWallet: { publicKey: keypair.publicKey, signTransaction },
+});
+
+const { schemaId, txHash } = await client.createSchema("solana", {
+  name: `kyc-passed-v1`,
+  fieldDefinitions: "bool passed, string note",
+  revocable: true,
+});
+```
+
+## Full E2E test reference
+
+See `sdk/tests/psr-e2e.test.ts` (Ethereum) and `sdk/tests/psr-e2e-solana.test.ts` (Solana) for live testnet flows.

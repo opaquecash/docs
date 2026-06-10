@@ -1,0 +1,60 @@
+---
+title: Protocol overview
+description: CSAP, PSR, and UAB specifications and how they fit together.
+---
+
+Opaque Protocol is documented in the [`opaquecash/spec`](https://github.com/opaquecash/spec) repository. The SDK implements these three layers:
+
+## CSAP — Confidential Stealth Address Protocol
+
+[EIP-5564](https://eips.ethereum.org/EIPS/eip-5564) stealth addresses with Opaque's DKSAP key derivation (`opaque-cash-v1` HKDF).
+
+- Meta-address registry
+- Stealth address announcer
+- View-tag prefilter + WASM ownership scan
+
+**Spec:** [CSAP.md](https://github.com/opaquecash/spec/blob/main/CSAP.md)
+
+**SDK surface:** [Stealth API](/sdk/stealth-api), [Stealth payments concept](/concepts/stealth-payments)
+
+---
+
+## PSR — Provable Stealth Reputation
+
+Schema registry, attestation engine, and Groth16 reputation verifier. Attestations bind to `stealth_address_hash` — not a public EOA.
+
+- V2 schemas with ABI-style field definitions
+- Delegated issuance (up to 10 delegates)
+- Discovery announcements with attestation metadata
+- ZK proofs scoped by `externalNullifier`
+
+**Spec:** [PSR.md](https://github.com/opaquecash/spec/blob/main/PSR.md)
+
+**SDK surface:** [PSR API](/sdk/psr-api), [PSR concept](/concepts/psr)
+
+---
+
+## UAB — Universal Announcement Bus
+
+Cross-chain relay of 96-byte stealth announcement payloads over Wormhole.
+
+- `UABSender.announceWithRelay` on source chain
+- `UABReceiver` re-emits on destination chain
+- Off-chain relayer delivers VAAs
+
+**Spec:** [UAB.md](https://github.com/opaquecash/spec/blob/main/UAB.md)
+
+**SDK surface:** [Cross-chain API](/sdk/cross-chain-api), [Cross-chain concept](/concepts/cross-chain)
+
+---
+
+## Repositories
+
+| Repo | Role |
+| --- | --- |
+| [`opaquecash/sdk`](https://github.com/opaquecash/sdk) | TypeScript SDK (`@opaquecash/opaque`) |
+| [`opaquecash/spec`](https://github.com/opaquecash/spec) | Protocol specifications |
+| [`opaquecash/ethereum`](https://github.com/opaquecash/ethereum) | EVM contracts |
+| [`opaquecash/solana`](https://github.com/opaquecash/solana) | Solana programs |
+| [`opaquecash/relayer`](https://github.com/opaquecash/relayer) | UAB VAA relayer |
+| [`opaquecash/scanner`](https://github.com/opaquecash/scanner) | Rust→WASM cryptography crate |

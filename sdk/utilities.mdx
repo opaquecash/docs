@@ -1,0 +1,139 @@
+---
+title: Utilities and exports
+description: Helper functions, types, and lower-level packages re-exported from @opaquecash/opaque.
+---
+
+## Key derivation
+
+```ts
+import {
+  SETUP_MESSAGE,
+  deriveKeysFromSignature,
+  keysToStealthMetaAddress,
+  stealthMetaAddressToHex,
+  parseStealthMetaAddress,
+  computeStealthAddressAndViewTag,
+  recomputeStealthSendFromEphemeralPrivateKey,
+  ephemeralPrivateKeyToCompressedPublicKey,
+} from "@opaquecash/opaque";
+```
+
+| Export | Purpose |
+| --- | --- |
+| `SETUP_MESSAGE` | Canonical wallet message for HKDF entropy |
+| `deriveKeysFromSignature` | Viewing + spending keys from signature hex |
+| `computeStealthAddressAndViewTag` | One-time destination from meta-address |
+| `stealthMetaAddressToHex` | Encode meta-address to 66-byte hex |
+
+---
+
+## Chain deployments
+
+```ts
+import {
+  getSupportedChainIds,
+  getChainDeployment,
+  requireChainDeployment,
+  NATIVE_TOKEN_ADDRESS,
+} from "@opaquecash/opaque";
+
+const ids = getSupportedChainIds();           // [11155111]
+const dep = getChainDeployment(11155111);   // registry, announcer, verifier, tokens
+```
+
+---
+
+## Indexer normalization
+
+```ts
+import {
+  announcementToIndexerRow,
+  indexerAnnouncementToScannerRecord,
+  indexerAnnouncementsToScannerJson,
+} from "@opaquecash/opaque";
+```
+
+---
+
+## PSR codecs (`@opaquecash/psr-core`)
+
+```ts
+import {
+  parseFieldDefs,
+  fieldDefsToString,
+  computeSchemaId,
+  computeUid,
+  encodeAttestationData,
+  decodeAttestationData,
+  encodeV2AttestationMetadata,
+  randomNonce,
+  buildActionScope,
+  externalNullifierFromScope,
+} from "@opaquecash/opaque";
+
+import type { SchemaV2, AttestationV2, FieldDef, ProofData } from "@opaquecash/opaque";
+```
+
+---
+
+## Chain adapters
+
+```ts
+import {
+  EvmAdapter,
+  SolanaAdapter,
+  getSolanaDeployment,
+  WORMHOLE_CHAIN_ETHEREUM,
+  WORMHOLE_CHAIN_SOLANA,
+} from "@opaquecash/opaque";
+
+import type { ChainAdapter, Announcement, SolanaCluster } from "@opaquecash/opaque";
+```
+
+Use adapters directly only when bypassing `OpaqueClient.scan`. Most apps should use `client.scan`.
+
+---
+
+## Solana PSR (namespaced)
+
+Avoids `computeSchemaId` name clash with psr-core:
+
+```ts
+import { solanaPsr } from "@opaquecash/opaque";
+
+// solanaPsr.buildRegisterSchemaInstruction, deriveSchemaPda, ...
+```
+
+---
+
+## Prover artifacts
+
+```ts
+import {
+  DEFAULT_REPUTATION_ARTIFACT_PATHS,
+  DEFAULT_REPUTATION_ARTIFACTS_ORIGIN,
+} from "@opaquecash/opaque";
+```
+
+Default Groth16 wasm/zkey URLs point to opaque.cash `/circuits/...`.
+
+---
+
+## Types reference
+
+| Type | Description |
+| --- | --- |
+| `OpaqueClientConfig` | Client construction |
+| `OpaqueScanChain` | `"ethereum" \| "solana"` |
+| `PsrChain` | Same as `OpaqueScanChain` |
+| `UnifiedOwnedOutput` | Scan result with chain + source tags |
+| `OwnedStealthOutput` | Owned stealth output from WASM filter |
+| `IndexerAnnouncement` | Normalized indexer row |
+| `PrepareStealthSendResult` | Stealth send derivation result |
+| `SendStealthPaymentParams` / `SendStealthPaymentResult` | High-level send |
+| `CreateSchemaParams` / `CreateSchemaResult` | Schema registration |
+| `IssueAttestationParams` / `IssueAttestationResult` | Attestation issuance |
+| `VerifyReputationArgs` | Proof verification payload |
+| `DiscoveredTrait` | PSR trait from `discoverTraits` |
+| `TokenBalanceSummary` | Aggregated token balance |
+| `OutputBalance` | Per-output native balance |
