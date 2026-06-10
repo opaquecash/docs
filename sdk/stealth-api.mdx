@@ -133,6 +133,27 @@ const req = client.buildAnnounceTransactionRequestForGhost(storedEphemeralPriv);
 
 ## Scan and filter
 
+### `fetchAnnouncementRows(chain, opts?)`
+
+Fetch ALL native announcements on a chain as indexer-shaped rows — unfiltered, with full
+on-chain `metadata`. Raw input for the metadata-aware scanners (`filterOwnedAnnouncements`,
+`discoverTraits`); unlike `scan`, nothing is dropped.
+
+```ts
+const rows = await client.fetchAnnouncementRows("ethereum", {
+  fromBlock: 5_000_000n, // EVM lower bound; omit to scan from the adapter default
+  toBlock: undefined,    // EVM upper bound; omit for chain tip
+  solanaLimit: 1000,     // max Solana signatures (when chain is "solana")
+});
+// IndexerAnnouncement[]
+```
+
+Cross-chain (UAB) announcements are not included: the 96-byte Wormhole payload only carries a
+24-byte metadata tail, so relayed rows cannot hold attestation metadata. Fetch rows natively on
+each chain instead (UAB outputs still surface in `scan` / `fetchCrossChainAnnouncements`).
+
+---
+
 ### `filterOwnedAnnouncements(rows)`
 
 WASM scan: filter indexer rows to outputs owned by this wallet.

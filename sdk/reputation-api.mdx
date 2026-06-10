@@ -15,6 +15,21 @@ Map owned announcement rows to `DiscoveredTrait` list.
 const traits = await client.discoverTraits(indexerRows);
 ```
 
+Source `rows` per chain with `fetchAnnouncementRows` and discover separately so each trait can
+be tied to the chain whose verifier it proves against:
+
+```ts
+const evmRows = await client.fetchAnnouncementRows("ethereum");
+const solRows = await client.fetchAnnouncementRows("solana");
+const traits = [
+  ...(await client.discoverTraits(evmRows)).map((t) => ({ ...t, chain: "ethereum" })),
+  ...(await client.discoverTraits(solRows)).map((t) => ({ ...t, chain: "solana" })),
+];
+```
+
+Attestation metadata never arrives over the cross-chain UAB (the Wormhole payload is too
+small), so traits are always discovered from each chain's native announcements.
+
 ---
 
 ### `getReputationTraitsFromAnnouncements(rows)`
