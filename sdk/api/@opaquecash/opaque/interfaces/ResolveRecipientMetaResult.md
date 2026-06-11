@@ -1,6 +1,6 @@
 # Interface: ResolveRecipientMetaResult
 
-Defined in: [packages/opaque/src/client.ts:532](https://github.com/opaquecash/sdk/blob/1dd683193540a37fa1c0158af24782241086d3f9/packages/opaque/src/client.ts#L532)
+Defined in: [packages/opaque/src/client.ts:552](https://github.com/opaquecash/sdk/blob/1ac32abb86be54d81add3fae49381204ea1eb7c5/packages/opaque/src/client.ts#L552)
 
 Result of [OpaqueClient.resolveRecipientMetaAddress](../classes/OpaqueClient.md#resolverecipientmetaaddress): registry lookup for a normal EOA.
 
@@ -10,7 +10,7 @@ Result of [OpaqueClient.resolveRecipientMetaAddress](../classes/OpaqueClient.md#
 
 > `optional` **metaAddressHex?**: `` `0x${string}` ``
 
-Defined in: [packages/opaque/src/client.ts:544](https://github.com/opaquecash/sdk/blob/1dd683193540a37fa1c0158af24782241086d3f9/packages/opaque/src/client.ts#L544)
+Defined in: [packages/opaque/src/client.ts:564](https://github.com/opaquecash/sdk/blob/1ac32abb86be54d81add3fae49381204ea1eb7c5/packages/opaque/src/client.ts#L564)
 
 66-byte stealth meta-address (`0x` + 132 hex) for prepareStealthSend.
 Omitted when `registered` is false.
@@ -21,7 +21,7 @@ Omitted when `registered` is false.
 
 > **recipientAddress**: `` `0x${string}` ``
 
-Defined in: [packages/opaque/src/client.ts:537](https://github.com/opaquecash/sdk/blob/1dd683193540a37fa1c0158af24782241086d3f9/packages/opaque/src/client.ts#L537)
+Defined in: [packages/opaque/src/client.ts:557](https://github.com/opaquecash/sdk/blob/1ac32abb86be54d81add3fae49381204ea1eb7c5/packages/opaque/src/client.ts#L557)
 
 Checksummed address you looked up (the would-be recipient).
 When `registered` is false, use this as the plain receiver identity — there is no meta-address yet.
@@ -32,6 +32,6 @@ When `registered` is false, use this as the plain receiver identity — there is
 
 > **registered**: `boolean`
 
-Defined in: [packages/opaque/src/client.ts:539](https://github.com/opaquecash/sdk/blob/1dd683193540a37fa1c0158af24782241086d3f9/packages/opaque/src/client.ts#L539)
+Defined in: [packages/opaque/src/client.ts:559](https://github.com/opaquecash/sdk/blob/1ac32abb86be54d81add3fae49381204ea1eb7c5/packages/opaque/src/client.ts#L559)
 
 True when `stealthMetaAddressOf` returned a 66-byte meta-address for EIP-5564 scheme 1.

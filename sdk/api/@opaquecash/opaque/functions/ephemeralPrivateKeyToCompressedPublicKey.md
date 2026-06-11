@@ -2,7 +2,7 @@
 
 > **ephemeralPrivateKeyToCompressedPublicKey**(`ephemeralPrivateKey`): `Uint8Array`
 
-Defined in: [packages/opaque/src/crypto/dksap.ts:172](https://github.com/opaquecash/sdk/blob/1dd683193540a37fa1c0158af24782241086d3f9/packages/opaque/src/crypto/dksap.ts#L172)
+Defined in: [packages/opaque/src/crypto/dksap.ts:172](https://github.com/opaquecash/sdk/blob/1ac32abb86be54d81add3fae49381204ea1eb7c5/packages/opaque/src/crypto/dksap.ts#L172)
 
 33-byte compressed secp256k1 pubkey for a 32-byte ephemeral secret (sender ghost material).
 

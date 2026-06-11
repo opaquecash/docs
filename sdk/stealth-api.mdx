@@ -59,6 +59,34 @@ record via the bundled `@bonfida/spl-name-service` reader and validates it as a 
 2.9 value (`st:opq:`-prefixed or raw 132-hex). Inject `sns: { getRecord }` to mock or
 to read from a custom source.
 
+---
+
+### ONS name management
+
+Register, claim, and track ONS names for this wallet's meta-address (see the
+[naming guide](/guides/ons-naming) for the consistency model):
+
+```ts
+// Ethereum (authoritative immediately; mirror follows after Wormhole relay):
+const txHash = await client.registerOpaqueName("alice");
+
+// Solana-only claim (PROVISIONAL until the canonical registry confirms):
+const { signature, name } = await client.claimOpaqueName("bob");
+
+// Track a claim through pending / confirmed / lost / expired:
+const { state } = await client.getOpaqueNameStatus("bob.opqtest.eth");
+
+// Close a finished claim and reclaim the provisional rent:
+await client.reconcileOpaqueName("bob.opqtest.eth");
+```
+
+| Method | Chain / signer | Notes |
+| --- | --- | --- |
+| `registerOpaqueName(label)` | Ethereum signer | First-come-first-served on the canonical registry |
+| `claimOpaqueName(label)` | `solanaWallet` | Provisional; loses to a concurrent Ethereum registration |
+| `getOpaqueNameStatus(name)` | Solana reads | `none` / `pending` / `confirmed` / `lost` / `expired` |
+| `reconcileOpaqueName(name)` | `solanaWallet` | Permissionless close; rent refunds to the claimer |
+
 **ENS setup.** The `*.eth` path reads the `com.opaque.meta` text record (CSAP 2.9).
 Pass an ENS-capable viem `PublicClient` (mainnet or Sepolia; your scan RPC usually is
 not one), or inject a custom reader:

@@ -2,7 +2,7 @@
 
 > **requestSetupSignature**(`signer`): `Promise`\<`` `0x${string}` ``\>
 
-Defined in: [packages/opaque/src/signer.ts:43](https://github.com/opaquecash/sdk/blob/1dd683193540a37fa1c0158af24782241086d3f9/packages/opaque/src/signer.ts#L43)
+Defined in: [packages/opaque/src/signer.ts:43](https://github.com/opaquecash/sdk/blob/1ac32abb86be54d81add3fae49381204ea1eb7c5/packages/opaque/src/signer.ts#L43)
 
 Prompt `signer` for the canonical [SETUP\_MESSAGE](../variables/SETUP_MESSAGE.md) signature used as HKDF
 entropy for the viewing/spending keys. Ethereum signs via `personal_sign`

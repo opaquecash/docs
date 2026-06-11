@@ -1,6 +1,6 @@
 # Interface: AnnounceTransactionRequest
 
-Defined in: [packages/opaque/src/client.ts:497](https://github.com/opaquecash/sdk/blob/1dd683193540a37fa1c0158af24782241086d3f9/packages/opaque/src/client.ts#L497)
+Defined in: [packages/opaque/src/client.ts:517](https://github.com/opaquecash/sdk/blob/1ac32abb86be54d81add3fae49381204ea1eb7c5/packages/opaque/src/client.ts#L517)
 
 Calldata-ready request for `StealthAddressAnnouncer.announce` (developer submits via wallet).
 
@@ -10,7 +10,7 @@ Calldata-ready request for `StealthAddressAnnouncer.announce` (developer submits
 
 > **chainId**: `number`
 
-Defined in: [packages/opaque/src/client.ts:500](https://github.com/opaquecash/sdk/blob/1dd683193540a37fa1c0158af24782241086d3f9/packages/opaque/src/client.ts#L500)
+Defined in: [packages/opaque/src/client.ts:520](https://github.com/opaquecash/sdk/blob/1ac32abb86be54d81add3fae49381204ea1eb7c5/packages/opaque/src/client.ts#L520)
 
 ***
 
@@ -18,7 +18,7 @@ Defined in: [packages/opaque/src/client.ts:500](https://github.com/opaquecash/sd
 
 > **data**: `` `0x${string}` ``
 
-Defined in: [packages/opaque/src/client.ts:499](https://github.com/opaquecash/sdk/blob/1dd683193540a37fa1c0158af24782241086d3f9/packages/opaque/src/client.ts#L499)
+Defined in: [packages/opaque/src/client.ts:519](https://github.com/opaquecash/sdk/blob/1ac32abb86be54d81add3fae49381204ea1eb7c5/packages/opaque/src/client.ts#L519)
 
 ***
 
@@ -26,7 +26,7 @@ Defined in: [packages/opaque/src/client.ts:499](https://github.com/opaquecash/sd
 
 > **summary**: `object`
 
-Defined in: [packages/opaque/src/client.ts:501](https://github.com/opaquecash/sdk/blob/1dd683193540a37fa1c0158af24782241086d3f9/packages/opaque/src/client.ts#L501)
+Defined in: [packages/opaque/src/client.ts:521](https://github.com/opaquecash/sdk/blob/1ac32abb86be54d81add3fae49381204ea1eb7c5/packages/opaque/src/client.ts#L521)
 
 #### ephemeralPublicKey
 
@@ -50,4 +50,4 @@ Defined in: [packages/opaque/src/client.ts:501](https://github.com/opaquecash/sd
 
 > **to**: `` `0x${string}` ``
 
-Defined in: [packages/opaque/src/client.ts:498](https://github.com/opaquecash/sdk/blob/1dd683193540a37fa1c0158af24782241086d3f9/packages/opaque/src/client.ts#L498)
+Defined in: [packages/opaque/src/client.ts:518](https://github.com/opaquecash/sdk/blob/1ac32abb86be54d81add3fae49381204ea1eb7c5/packages/opaque/src/client.ts#L518)

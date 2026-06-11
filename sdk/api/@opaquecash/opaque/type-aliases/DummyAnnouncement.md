@@ -2,7 +2,7 @@
 
 > **DummyAnnouncement** = [`PrepareStealthSendResult`](../interfaces/PrepareStealthSendResult.md) & `object`
 
-Defined in: [packages/opaque/src/client.ts:492](https://github.com/opaquecash/sdk/blob/1dd683193540a37fa1c0158af24782241086d3f9/packages/opaque/src/client.ts#L492)
+Defined in: [packages/opaque/src/client.ts:512](https://github.com/opaquecash/sdk/blob/1ac32abb86be54d81add3fae49381204ea1eb7c5/packages/opaque/src/client.ts#L512)
 
 One decoy announcement from [OpaqueClient.generateDummyAnnouncements](../classes/OpaqueClient.md#generatedummyannouncements): a valid
 DKSAP derivation against a throwaway meta-address (included for inspection; its

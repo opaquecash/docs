@@ -1,6 +1,6 @@
 # Interface: OpaqueClientConfig
 
-Defined in: [packages/opaque/src/client.ts:187](https://github.com/opaquecash/sdk/blob/1dd683193540a37fa1c0158af24782241086d3f9/packages/opaque/src/client.ts#L187)
+Defined in: [packages/opaque/src/client.ts:207](https://github.com/opaquecash/sdk/blob/1ac32abb86be54d81add3fae49381204ea1eb7c5/packages/opaque/src/client.ts#L207)
 
 Configuration for [OpaqueClient.create](../classes/OpaqueClient.md#create).
 
@@ -10,7 +10,7 @@ Configuration for [OpaqueClient.create](../classes/OpaqueClient.md#create).
 
 > **chainId**: `number`
 
-Defined in: [packages/opaque/src/client.ts:189](https://github.com/opaquecash/sdk/blob/1dd683193540a37fa1c0158af24782241086d3f9/packages/opaque/src/client.ts#L189)
+Defined in: [packages/opaque/src/client.ts:209](https://github.com/opaquecash/sdk/blob/1ac32abb86be54d81add3fae49381204ea1eb7c5/packages/opaque/src/client.ts#L209)
 
 EVM chain id (must be in [getSupportedChainIds](../functions/getSupportedChainIds.md) unless you override all contracts).
 
@@ -20,7 +20,7 @@ EVM chain id (must be in [getSupportedChainIds](../functions/getSupportedChainId
 
 > `optional` **contracts?**: `Partial`\<\{ `opaqueReputationVerifier`: `` `0x${string}` ``; `stealthAddressAnnouncer`: `` `0x${string}` ``; `stealthMetaAddressRegistry`: `` `0x${string}` ``; `uabReceiver`: `` `0x${string}` ``; `uabSender`: `` `0x${string}` ``; `wormholeCore`: `` `0x${string}` ``; \}\>
 
-Defined in: [packages/opaque/src/client.ts:215](https://github.com/opaquecash/sdk/blob/1dd683193540a37fa1c0158af24782241086d3f9/packages/opaque/src/client.ts#L215)
+Defined in: [packages/opaque/src/client.ts:235](https://github.com/opaquecash/sdk/blob/1ac32abb86be54d81add3fae49381204ea1eb7c5/packages/opaque/src/client.ts#L235)
 
 Override registry / announcer / verifier for custom deployments.
 
@@ -30,7 +30,7 @@ Override registry / announcer / verifier for custom deployments.
 
 > `optional` **ens?**: `object`
 
-Defined in: [packages/opaque/src/client.ts:256](https://github.com/opaquecash/sdk/blob/1dd683193540a37fa1c0158af24782241086d3f9/packages/opaque/src/client.ts#L256)
+Defined in: [packages/opaque/src/client.ts:276](https://github.com/opaquecash/sdk/blob/1ac32abb86be54d81add3fae49381204ea1eb7c5/packages/opaque/src/client.ts#L276)
 
 ENS read access for [OpaqueClient.resolveRecipient](../classes/OpaqueClient.md#resolverecipient) of `*.eth` names
 (CSAP §2.9 `com.opaque.meta` text record). Pass an ENS-capable viem `PublicClient`
@@ -3260,7 +3260,7 @@ const unwatch = await client.watchPendingTransactions({
 
 > **ethereumAddress**: `` `0x${string}` ``
 
-Defined in: [packages/opaque/src/client.ts:201](https://github.com/opaquecash/sdk/blob/1dd683193540a37fa1c0158af24782241086d3f9/packages/opaque/src/client.ts#L201)
+Defined in: [packages/opaque/src/client.ts:221](https://github.com/opaquecash/sdk/blob/1ac32abb86be54d81add3fae49381204ea1eb7c5/packages/opaque/src/client.ts#L221)
 
 The externally owned account that signs / registers (used as registrant context in docs;
 you still pass the same address to your wallet when sending txs).
@@ -3271,7 +3271,7 @@ you still pass the same address to your wallet when sending txs).
 
 > `optional` **ethereumProvider?**: `object`
 
-Defined in: [packages/opaque/src/client.ts:234](https://github.com/opaquecash/sdk/blob/1dd683193540a37fa1c0158af24782241086d3f9/packages/opaque/src/client.ts#L234)
+Defined in: [packages/opaque/src/client.ts:254](https://github.com/opaquecash/sdk/blob/1ac32abb86be54d81add3fae49381204ea1eb7c5/packages/opaque/src/client.ts#L254)
 
 EIP-1193 provider (e.g. `window.ethereum` or a wallet bridge) used to SIGN Ethereum PSR
 writes (`createSchema`, `issueAttestation`, …). Reads never need it. Transactions are signed
@@ -3335,7 +3335,7 @@ by [ethereumAddress](#ethereumaddress); omit it for read-only / Solana-only usag
 
 > `optional` **ethereumWalletClient?**: `object`
 
-Defined in: [packages/opaque/src/client.ts:240](https://github.com/opaquecash/sdk/blob/1dd683193540a37fa1c0158af24782241086d3f9/packages/opaque/src/client.ts#L240)
+Defined in: [packages/opaque/src/client.ts:260](https://github.com/opaquecash/sdk/blob/1ac32abb86be54d81add3fae49381204ea1eb7c5/packages/opaque/src/client.ts#L260)
 
 Pre-built viem `WalletClient` for Ethereum PSR writes (e.g. a backend issuer signing with a
 `privateKeyToAccount`). Takes precedence over [ethereumProvider](#ethereumprovider); the account it carries
@@ -5069,7 +5069,7 @@ const receipt = await client.writeContractSync({
 
 > `optional` **ipfs?**: `object`
 
-Defined in: [packages/opaque/src/client.ts:265](https://github.com/opaquecash/sdk/blob/1dd683193540a37fa1c0158af24782241086d3f9/packages/opaque/src/client.ts#L265)
+Defined in: [packages/opaque/src/client.ts:285](https://github.com/opaquecash/sdk/blob/1ac32abb86be54d81add3fae49381204ea1eb7c5/packages/opaque/src/client.ts#L285)
 
 IPFS access for [OpaqueClient.resolveRecipient](../classes/OpaqueClient.md#resolverecipient) of `ipfs://` DID documents.
 Defaults to public gateways over `globalThis.fetch`; inject `fetch` to mock or to
@@ -5129,7 +5129,7 @@ route through a local node / Helia gateway.
 
 > `optional` **ons?**: `object`
 
-Defined in: [packages/opaque/src/client.ts:275](https://github.com/opaquecash/sdk/blob/1dd683193540a37fa1c0158af24782241086d3f9/packages/opaque/src/client.ts#L275)
+Defined in: [packages/opaque/src/client.ts:295](https://github.com/opaquecash/sdk/blob/1ac32abb86be54d81add3fae49381204ea1eb7c5/packages/opaque/src/client.ts#L295)
 
 ONS (Opaque Name Service, spec/ONS.md) overrides for `*.opq.eth`-style names.
 Defaults come from `@opaquecash/deployments` for [chainId](#chainid) (testnet parent:
@@ -5160,7 +5160,7 @@ Canonical OpaqueNameRegistry address (ENSIP-10 wildcard resolver).
 
 > **rpcUrl**: `string`
 
-Defined in: [packages/opaque/src/client.ts:191](https://github.com/opaquecash/sdk/blob/1dd683193540a37fa1c0158af24782241086d3f9/packages/opaque/src/client.ts#L191)
+Defined in: [packages/opaque/src/client.ts:211](https://github.com/opaquecash/sdk/blob/1ac32abb86be54d81add3fae49381204ea1eb7c5/packages/opaque/src/client.ts#L211)
 
 HTTP(S) RPC URL for reads (balances, optional registry view).
 
@@ -5170,7 +5170,7 @@ HTTP(S) RPC URL for reads (balances, optional registry view).
 
 > `optional` **sns?**: `object`
 
-Defined in: [packages/opaque/src/client.ts:288](https://github.com/opaquecash/sdk/blob/1dd683193540a37fa1c0158af24782241086d3f9/packages/opaque/src/client.ts#L288)
+Defined in: [packages/opaque/src/client.ts:308](https://github.com/opaquecash/sdk/blob/1ac32abb86be54d81add3fae49381204ea1eb7c5/packages/opaque/src/client.ts#L308)
 
 SNS read access for `.sol` recipients (CSAP §2.9 TXT record). Defaults to the
 bundled Records V2 TXT reader over the [solana](#solana) connection; inject
@@ -5200,7 +5200,7 @@ bundled Records V2 TXT reader over the [solana](#solana) connection; inject
 
 > `optional` **solana?**: [`SolanaAdapterConfig`](SolanaAdapterConfig.md)
 
-Defined in: [packages/opaque/src/client.ts:228](https://github.com/opaquecash/sdk/blob/1dd683193540a37fa1c0158af24782241086d3f9/packages/opaque/src/client.ts#L228)
+Defined in: [packages/opaque/src/client.ts:248](https://github.com/opaquecash/sdk/blob/1ac32abb86be54d81add3fae49381204ea1eb7c5/packages/opaque/src/client.ts#L248)
 
 Solana access for the unified [OpaqueClient.scan](../classes/OpaqueClient.md#scan) inbox. Optional: only needed when
 `scan({ chains })` includes `"solana"`. Pass a `connection`, `rpcUrl`, or `cluster`
@@ -5212,7 +5212,7 @@ Solana access for the unified [OpaqueClient.scan](../classes/OpaqueClient.md#sca
 
 > `optional` **solanaWallet?**: `object`
 
-Defined in: [packages/opaque/src/client.ts:246](https://github.com/opaquecash/sdk/blob/1dd683193540a37fa1c0158af24782241086d3f9/packages/opaque/src/client.ts#L246)
+Defined in: [packages/opaque/src/client.ts:266](https://github.com/opaquecash/sdk/blob/1ac32abb86be54d81add3fae49381204ea1eb7c5/packages/opaque/src/client.ts#L266)
 
 Solana wallet used to SIGN Solana PSR writes. `publicKey` is the issuer/authority; pass a
 `@solana/web3.js` `PublicKey` or a base58 string. `signTransaction` matches the wallet-adapter
@@ -5242,7 +5242,7 @@ signature. Required only for Solana PSR writes.
 
 > `optional` **trackedTokens?**: `TrackedToken`[]
 
-Defined in: [packages/opaque/src/client.ts:213](https://github.com/opaquecash/sdk/blob/1dd683193540a37fa1c0158af24782241086d3f9/packages/opaque/src/client.ts#L213)
+Defined in: [packages/opaque/src/client.ts:233](https://github.com/opaquecash/sdk/blob/1ac32abb86be54d81add3fae49381204ea1eb7c5/packages/opaque/src/client.ts#L233)
 
 Extra ERC-20s (and native) to aggregate. Merged with chain defaults; native uses
 [NATIVE\_TOKEN\_ADDRESS](../variables/NATIVE_TOKEN_ADDRESS.md).
@@ -5253,7 +5253,7 @@ Extra ERC-20s (and native) to aggregate. Merged with chain defaults; native uses
 
 > **walletSignature**: `` `0x${string}` ``
 
-Defined in: [packages/opaque/src/client.ts:196](https://github.com/opaquecash/sdk/blob/1dd683193540a37fa1c0158af24782241086d3f9/packages/opaque/src/client.ts#L196)
+Defined in: [packages/opaque/src/client.ts:216](https://github.com/opaquecash/sdk/blob/1ac32abb86be54d81add3fae49381204ea1eb7c5/packages/opaque/src/client.ts#L216)
 
 Wallet signature used as HKDF entropy (`opaque-cash-v1`) for viewing + spending keys.
 Never sent on-chain by the SDK.
@@ -5264,7 +5264,7 @@ Never sent on-chain by the SDK.
 
 > `optional` **wasmModuleSpecifier?**: `string`
 
-Defined in: [packages/opaque/src/client.ts:208](https://github.com/opaquecash/sdk/blob/1dd683193540a37fa1c0158af24782241086d3f9/packages/opaque/src/client.ts#L208)
+Defined in: [packages/opaque/src/client.ts:228](https://github.com/opaquecash/sdk/blob/1ac32abb86be54d81add3fae49381204ea1eb7c5/packages/opaque/src/client.ts#L228)
 
 Dynamic import URL for wasm-pack `cryptography.js`. Required for scanning, sweeping, trait
 discovery, key reconstruction, and proof generation. **Optional** when you only use the PSR
