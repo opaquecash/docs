@@ -4,7 +4,7 @@
 
 - Mintlify site for Opaque Protocol (`@opaquecash/opaque` SDK)
 - Pages are MDX with YAML frontmatter; config in `docs.json`
-- Remote: `https://github.com/opaquecash/mintlify-docs`
+- Remote: `https://github.com/opaquecash/docs` (Mintlify GitHub app deploys `main` automatically; PRs get preview deployments)
 
 ## Terminology
 
