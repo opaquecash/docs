@@ -34,6 +34,26 @@ Groth16 proof verifier program.
 
 ***
 
+### onsMirror
+
+> **onsMirror**: `PublicKey`
+
+Defined in: packages/stealth-chain-solana/dist/programs.d.ts:33
+
+ONS read-only mirror program (spec/ONS.md §3).
+
+***
+
+### onsRegistration
+
+> **onsRegistration**: `PublicKey`
+
+Defined in: packages/stealth-chain-solana/dist/programs.d.ts:35
+
+ONS Solana-originated claims program (spec/ONS.md §4.2).
+
+***
+
 ### reputationVerifier
 
 > **reputationVerifier**: `PublicKey`

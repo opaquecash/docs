@@ -32,11 +32,32 @@ const r = await client.resolveRecipient("alice.opq.eth");
 | `0x...` 20-byte EVM address | ERC-6538 `StealthMetaAddressRegistry` | `"evm-registry"` |
 | Solana base58 pubkey | `stealth-registry` PDA (needs `solana` config) | `"solana-registry"` |
 | `ipfs://CID` or bare CID | DID document fetched via gateways (configure `ipfs`) | `"ipfs-did"` |
-| `*.eth` name | ENS `com.opaque.meta` text record (needs `ens` config) | `"ens-text"` |
+| ONS name (`alice.opq.eth`; testnet parent `opqtest.eth`) | Solana mirror PDA first, canonical `OpaqueNameRegistry` fallback | `"ons-mirror"` / `"ons-registry"` |
+| other `*.eth` name | ENS `com.opaque.meta` text record (needs `ens` config) | `"ens-text"` |
+| `*.sol` name | SNS Records V2 TXT record (needs `solana` config or `sns.getRecord`) | `"sns-record"` |
 
 Every path validates that both 33-byte halves of the result are valid compressed
 secp256k1 points before returning. Unregistered, unset, or malformed identities throw
 with a path-specific message.
+
+**ONS names (spec `ONS.md`).** Subnames of the Opaque Name Service parent resolve
+mirror-first: with `solana` configured, the SDK derives the mirror PDA from
+`keccak256(name)` and reads **one Solana account — no Ethereum RPC**. Without `solana`
+(or when the mirror has no record yet), it falls back to the canonical
+`OpaqueNameRegistry` wildcard resolver over your EVM RPC. The mirror lags the canonical
+record by Wormhole latency (eventually consistent, canonical-chain-wins). Defaults
+(parent name, registry, mirror program) ship in `@opaquecash/deployments`; override
+with `ons: { parentName, registry, mirrorProgram }`.
+
+```ts
+// The named entry point if you only want the meta-address:
+const meta = await client.resolveOpaqueMetaAddress("alice.opqtest.eth");
+```
+
+**`.sol` names.** With `solana` configured, the SDK reads the domain's Records V2 TXT
+record via the bundled `@bonfida/spl-name-service` reader and validates it as a CSAP
+2.9 value (`st:opq:`-prefixed or raw 132-hex). Inject `sns: { getRecord }` to mock or
+to read from a custom source.
 
 **ENS setup.** The `*.eth` path reads the `com.opaque.meta` text record (CSAP 2.9).
 Pass an ENS-capable viem `PublicClient` (mainnet or Sepolia; your scan RPC usually is

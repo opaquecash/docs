@@ -2,7 +2,7 @@
 
 > **parseMetaAddressValue**(`value`): `` `0x${string}` `` \| `null`
 
-Defined in: [packages/opaque/src/resolve.ts:67](https://github.com/opaquecash/sdk/blob/1c668db24714147d90bc3f7ba748f59aed829f1f/packages/opaque/src/resolve.ts#L67)
+Defined in: [packages/opaque/src/resolve.ts:73](https://github.com/opaquecash/sdk/blob/1dd683193540a37fa1c0158af24782241086d3f9/packages/opaque/src/resolve.ts#L73)
 
 Parse and validate a published meta-address value: the §2.1 serialisation
 (`0x` + 132 hex, `V‖S`), optionally `st:opq:`-prefixed. Returns the canonical

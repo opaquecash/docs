@@ -2,7 +2,7 @@
 
 > **parseStealthMetaAddress**(`metaHex`): `object`
 
-Defined in: [packages/opaque/src/crypto/dksap.ts:67](https://github.com/opaquecash/sdk/blob/1c668db24714147d90bc3f7ba748f59aed829f1f/packages/opaque/src/crypto/dksap.ts#L67)
+Defined in: [packages/opaque/src/crypto/dksap.ts:67](https://github.com/opaquecash/sdk/blob/1dd683193540a37fa1c0158af24782241086d3f9/packages/opaque/src/crypto/dksap.ts#L67)
 
 ## Parameters
 

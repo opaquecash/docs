@@ -1,6 +1,6 @@
 # Interface: OpaqueChainDeployment
 
-Defined in: [packages/opaque/src/chains.ts:16](https://github.com/opaquecash/sdk/blob/1c668db24714147d90bc3f7ba748f59aed829f1f/packages/opaque/src/chains.ts#L16)
+Defined in: [packages/opaque/src/chains.ts:16](https://github.com/opaquecash/sdk/blob/1dd683193540a37fa1c0158af24782241086d3f9/packages/opaque/src/chains.ts#L16)
 
 Contract bundle for one chain (Opaque deployments).
 
@@ -10,7 +10,7 @@ Contract bundle for one chain (Opaque deployments).
 
 > **chainId**: `number`
 
-Defined in: [packages/opaque/src/chains.ts:17](https://github.com/opaquecash/sdk/blob/1c668db24714147d90bc3f7ba748f59aed829f1f/packages/opaque/src/chains.ts#L17)
+Defined in: [packages/opaque/src/chains.ts:17](https://github.com/opaquecash/sdk/blob/1dd683193540a37fa1c0158af24782241086d3f9/packages/opaque/src/chains.ts#L17)
 
 ***
 
@@ -18,7 +18,7 @@ Defined in: [packages/opaque/src/chains.ts:17](https://github.com/opaquecash/sdk
 
 > **defaultTrackedTokens**: `TrackedToken`[]
 
-Defined in: [packages/opaque/src/chains.ts:24](https://github.com/opaquecash/sdk/blob/1c668db24714147d90bc3f7ba748f59aed829f1f/packages/opaque/src/chains.ts#L24)
+Defined in: [packages/opaque/src/chains.ts:24](https://github.com/opaquecash/sdk/blob/1dd683193540a37fa1c0158af24782241086d3f9/packages/opaque/src/chains.ts#L24)
 
 Default tokens merged with `OpaqueClientConfig.trackedTokens`.
 
@@ -28,7 +28,7 @@ Default tokens merged with `OpaqueClientConfig.trackedTokens`.
 
 > **name**: `string`
 
-Defined in: [packages/opaque/src/chains.ts:18](https://github.com/opaquecash/sdk/blob/1c668db24714147d90bc3f7ba748f59aed829f1f/packages/opaque/src/chains.ts#L18)
+Defined in: [packages/opaque/src/chains.ts:18](https://github.com/opaquecash/sdk/blob/1dd683193540a37fa1c0158af24782241086d3f9/packages/opaque/src/chains.ts#L18)
 
 ***
 
@@ -36,7 +36,7 @@ Defined in: [packages/opaque/src/chains.ts:18](https://github.com/opaquecash/sdk
 
 > `optional` **opaqueReputationVerifier?**: `` `0x${string}` ``
 
-Defined in: [packages/opaque/src/chains.ts:22](https://github.com/opaquecash/sdk/blob/1c668db24714147d90bc3f7ba748f59aed829f1f/packages/opaque/src/chains.ts#L22)
+Defined in: [packages/opaque/src/chains.ts:22](https://github.com/opaquecash/sdk/blob/1dd683193540a37fa1c0158af24782241086d3f9/packages/opaque/src/chains.ts#L22)
 
 Optional PSR verifier; omitted if not deployed.
 
@@ -46,7 +46,7 @@ Optional PSR verifier; omitted if not deployed.
 
 > **stealthAddressAnnouncer**: `` `0x${string}` ``
 
-Defined in: [packages/opaque/src/chains.ts:20](https://github.com/opaquecash/sdk/blob/1c668db24714147d90bc3f7ba748f59aed829f1f/packages/opaque/src/chains.ts#L20)
+Defined in: [packages/opaque/src/chains.ts:20](https://github.com/opaquecash/sdk/blob/1dd683193540a37fa1c0158af24782241086d3f9/packages/opaque/src/chains.ts#L20)
 
 ***
 
@@ -54,4 +54,4 @@ Defined in: [packages/opaque/src/chains.ts:20](https://github.com/opaquecash/sdk
 
 > **stealthMetaAddressRegistry**: `` `0x${string}` ``
 
-Defined in: [packages/opaque/src/chains.ts:19](https://github.com/opaquecash/sdk/blob/1c668db24714147d90bc3f7ba748f59aed829f1f/packages/opaque/src/chains.ts#L19)
+Defined in: [packages/opaque/src/chains.ts:19](https://github.com/opaquecash/sdk/blob/1dd683193540a37fa1c0158af24782241086d3f9/packages/opaque/src/chains.ts#L19)

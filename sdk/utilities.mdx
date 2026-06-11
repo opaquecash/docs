@@ -56,8 +56,11 @@ import {
   parseMetaAddressValue,
   extractMetaAddressFromDidDocument,
   ipfsPathFromInput,
+  isOnsNameInput,
+  isSnsNameInput,
   resolveIpfsDidMetaAddress,
   resolveEnsMetaAddress,
+  resolveSnsMetaAddress,
   OPAQUE_META_RECORD_KEY,      // "com.opaque.meta"
   META_ADDRESS_VALUE_PREFIX,   // "st:opq:"
   DEFAULT_IPFS_GATEWAYS,
@@ -68,6 +71,10 @@ import type { ResolvedRecipient, ResolvedRecipientSource } from "@opaquecash/opa
 
 Building blocks behind [`client.resolveRecipient`](/sdk/stealth-api#resolverecipientinput).
 `parseMetaAddressValue` validates that both 33-byte halves are real curve points.
+`isOnsNameInput(name, parentName)` gates the ONS path (depth-1 subnames of the parent
+in force). The Solana mirror primitives (`fetchOnsMirrorRecord`, `getOnsMirrorRecordPda`,
+`onsNameHash`, `decodeOnsMirrorRecord`, `fetchSnsTxtRecord`) live in
+`@opaquecash/stealth-chain-solana`.
 
 ---
 

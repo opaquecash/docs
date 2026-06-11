@@ -84,7 +84,8 @@
               "guides/create-schema",
               "guides/issue-attestation",
               "guides/scan-and-sweep",
-              "guides/generate-proof"
+              "guides/generate-proof",
+              "guides/ons-naming"
             ]
           },
           {

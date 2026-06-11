@@ -2,7 +2,7 @@
 
 > **indexerAnnouncementToScannerRecord**(`row`): `AnnouncementJsonRecord`
 
-Defined in: [packages/opaque/src/indexer/normalize.ts:12](https://github.com/opaquecash/sdk/blob/1c668db24714147d90bc3f7ba748f59aed829f1f/packages/opaque/src/indexer/normalize.ts#L12)
+Defined in: [packages/opaque/src/indexer/normalize.ts:12](https://github.com/opaquecash/sdk/blob/1dd683193540a37fa1c0158af24782241086d3f9/packages/opaque/src/indexer/normalize.ts#L12)
 
 Map a subgraph/indexer row into the JSON record expected by `scan_attestations_wasm`.
 

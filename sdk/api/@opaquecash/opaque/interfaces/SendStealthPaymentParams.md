@@ -1,6 +1,6 @@
 # Interface: SendStealthPaymentParams
 
-Defined in: [packages/opaque/src/client.ts:345](https://github.com/opaquecash/sdk/blob/1c668db24714147d90bc3f7ba748f59aed829f1f/packages/opaque/src/client.ts#L345)
+Defined in: [packages/opaque/src/client.ts:374](https://github.com/opaquecash/sdk/blob/1dd683193540a37fa1c0158af24782241086d3f9/packages/opaque/src/client.ts#L374)
 
 Parameters for [OpaqueClient.sendStealthPayment](../classes/OpaqueClient.md#sendstealthpayment).
 
@@ -10,7 +10,7 @@ Parameters for [OpaqueClient.sendStealthPayment](../classes/OpaqueClient.md#send
 
 > **amount**: `bigint`
 
-Defined in: [packages/opaque/src/client.ts:354](https://github.com/opaquecash/sdk/blob/1c668db24714147d90bc3f7ba748f59aed829f1f/packages/opaque/src/client.ts#L354)
+Defined in: [packages/opaque/src/client.ts:383](https://github.com/opaquecash/sdk/blob/1dd683193540a37fa1c0158af24782241086d3f9/packages/opaque/src/client.ts#L383)
 
 Amount in base units: lamports (Solana) or wei (Ethereum native).
 
@@ -20,7 +20,7 @@ Amount in base units: lamports (Solana) or wei (Ethereum native).
 
 > `optional` **announce?**: `boolean`
 
-Defined in: [packages/opaque/src/client.ts:358](https://github.com/opaquecash/sdk/blob/1c668db24714147d90bc3f7ba748f59aed829f1f/packages/opaque/src/client.ts#L358)
+Defined in: [packages/opaque/src/client.ts:387](https://github.com/opaquecash/sdk/blob/1dd683193540a37fa1c0158af24782241086d3f9/packages/opaque/src/client.ts#L387)
 
 Publish the discovery announcement (default `true`).
 
@@ -30,7 +30,7 @@ Publish the discovery announcement (default `true`).
 
 > `optional` **batchId?**: `number`
 
-Defined in: [packages/opaque/src/client.ts:362](https://github.com/opaquecash/sdk/blob/1c668db24714147d90bc3f7ba748f59aed829f1f/packages/opaque/src/client.ts#L362)
+Defined in: [packages/opaque/src/client.ts:391](https://github.com/opaquecash/sdk/blob/1dd683193540a37fa1c0158af24782241086d3f9/packages/opaque/src/client.ts#L391)
 
 Solana Wormhole nonce (`batch_id`) when `relay` is set.
 
@@ -40,7 +40,7 @@ Solana Wormhole nonce (`batch_id`) when `relay` is set.
 
 > **chain**: [`OpaqueScanChain`](../type-aliases/OpaqueScanChain.md)
 
-Defined in: [packages/opaque/src/client.ts:347](https://github.com/opaquecash/sdk/blob/1c668db24714147d90bc3f7ba748f59aed829f1f/packages/opaque/src/client.ts#L347)
+Defined in: [packages/opaque/src/client.ts:376](https://github.com/opaquecash/sdk/blob/1dd683193540a37fa1c0158af24782241086d3f9/packages/opaque/src/client.ts#L376)
 
 Chain to send on.
 
@@ -50,7 +50,7 @@ Chain to send on.
 
 > `optional` **delayAnnouncement?**: `number`
 
-Defined in: [packages/opaque/src/client.ts:370](https://github.com/opaquecash/sdk/blob/1c668db24714147d90bc3f7ba748f59aed829f1f/packages/opaque/src/client.ts#L370)
+Defined in: [packages/opaque/src/client.ts:399](https://github.com/opaquecash/sdk/blob/1dd683193540a37fa1c0158af24782241086d3f9/packages/opaque/src/client.ts#L399)
 
 Anonymity-set utility (guide §17): decouple send time from announce time. When set,
 the value transfer is submitted immediately but the announcement is submitted only
@@ -64,7 +64,7 @@ handler to) it, or the delayed announce dies with your process.
 
 > **recipient**: `string`
 
-Defined in: [packages/opaque/src/client.ts:352](https://github.com/opaquecash/sdk/blob/1c668db24714147d90bc3f7ba748f59aed829f1f/packages/opaque/src/client.ts#L352)
+Defined in: [packages/opaque/src/client.ts:381](https://github.com/opaquecash/sdk/blob/1dd683193540a37fa1c0158af24782241086d3f9/packages/opaque/src/client.ts#L381)
 
 Recipient: a 66-byte meta-address hex (used directly), a Solana base58 pubkey, or an
 Ethereum `0x` address — the latter two are resolved through the chain's registry.
@@ -75,7 +75,7 @@ Ethereum `0x` address — the latter two are resolved through the chain's regist
 
 > `optional` **relay?**: `boolean`
 
-Defined in: [packages/opaque/src/client.ts:360](https://github.com/opaquecash/sdk/blob/1c668db24714147d90bc3f7ba748f59aed829f1f/packages/opaque/src/client.ts#L360)
+Defined in: [packages/opaque/src/client.ts:389](https://github.com/opaquecash/sdk/blob/1dd683193540a37fa1c0158af24782241086d3f9/packages/opaque/src/client.ts#L389)
 
 Also relay the announcement cross-chain over Wormhole (default `false`).
 
@@ -85,6 +85,6 @@ Also relay the announcement cross-chain over Wormhole (default `false`).
 
 > `optional` **token?**: `string`
 
-Defined in: [packages/opaque/src/client.ts:356](https://github.com/opaquecash/sdk/blob/1c668db24714147d90bc3f7ba748f59aed829f1f/packages/opaque/src/client.ts#L356)
+Defined in: [packages/opaque/src/client.ts:385](https://github.com/opaquecash/sdk/blob/1dd683193540a37fa1c0158af24782241086d3f9/packages/opaque/src/client.ts#L385)
 
 SPL mint / ERC-20 address; omit for native. Token sends are not yet supported (native only).

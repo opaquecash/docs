@@ -1,0 +1,81 @@
+---
+title: Name a meta-address (ONS)
+description: Give a stealth meta-address a human-readable name that resolves on both Ethereum and Solana.
+---
+
+The Opaque Name Service (spec `ONS.md`) maps `alice.opq.eth`-style names to CSAP
+meta-addresses on **both chains**: a MetaMask sender resolves through the canonical
+`OpaqueNameRegistry` (an ENSIP-10 wildcard resolver on Ethereum), and a Phantom sender
+resolves the same name from a **read-only mirror PDA on Solana** — one account fetch,
+no Ethereum RPC. The mirror is written exclusively from Wormhole VAAs emitted by the
+canonical registry.
+
+On testnet the parent name in force is **`opqtest.eth`** (Sepolia); production
+`opq.eth` is deferred until mainnet. The parent, registry address, and mirror program
+ship in `@opaquecash/deployments`.
+
+<Warning>
+**Consistency model: eventually consistent, canonical-chain-wins.** There is no atomic
+cross-chain claim. Ethereum registrations are immediately authoritative; the Solana
+mirror catches up after Wormhole finality (~20-40 minutes for the Ethereum leg).
+Solana-originated claims are **provisional** until the canonical registry confirms
+them, and lose to any concurrent direct Ethereum registration.
+</Warning>
+
+## Resolve a name
+
+`resolveRecipient` (and therefore `sendStealthPayment`) accepts ONS names directly;
+`resolveOpaqueMetaAddress` is the named entry point:
+
+```ts
+// Mirror-first when `solana` is configured (no Ethereum RPC on this path):
+const client = await OpaqueClient.create({
+  chainId: 11155111,
+  rpcUrl: sepoliaRpcUrl,
+  solana: { cluster: "devnet" },
+  // ...keys
+});
+
+const meta = await client.resolveOpaqueMetaAddress("alice.opqtest.eth");
+// or, with the resolution source:
+const r = await client.resolveRecipient("alice.opqtest.eth");
+// r.source: "ons-mirror" (Solana PDA) or "ons-registry" (canonical fallback)
+```
+
+Runnable example: `sdk/examples/ons-resolve.ts` resolves a name through both paths
+and asserts they agree.
+
+## Register a name (Ethereum, authoritative)
+
+Registration is first-come-first-served on the `OpaqueNameRegistry`
+(`register(label, spendPubKey, viewPubKey)`; addresses in `@opaquecash/deployments`).
+Pass empty keys to source your meta-address live from your ERC-6538 registry entry —
+the name then tracks future key rotations (call `sync(label)` after rotating to
+re-publish the mirror). Every registration publishes the mirror payload through
+Wormhole; the Solana side resolves once the relay delivers it.
+
+## Claim a name from Solana (provisional)
+
+A Solana-only user claims through the `ons-registration` program: `claim` creates a
+provisional PDA and publishes the claim to Wormhole; the canonical registry applies it
+**if the name is still free**, recording the claimer's Solana pubkey as the name's
+update authority. Track the claim through four states (spec `ONS.md` §6):
+
+| State | Meaning | UI |
+| --- | --- | --- |
+| `pending` | claim sent, no mirror record yet | "pending confirmation (~20-40 min)"; do not show as owned |
+| `confirmed` | mirror record carries your pubkey | owned; `reconcile` reclaims the provisional rent |
+| `lost` | mirror record carries another owner | the canonical chain won the race; `reconcile` refunds rent |
+| `expired` | no mirror record after 24 h | delivery failure; `reconcile` and retry |
+
+Names never resolve from provisional claims — only canonical (ENS) or mirrored (PDA)
+records serve senders.
+
+## Existing `.eth` and `.sol` names
+
+You do not need an ONS name if you already own one elsewhere (CSAP §2.9):
+
+- **`.eth`** — set a `com.opaque.meta` text record to your `st:opq:0x...` meta-address;
+  `resolveRecipient` reads it through your `ens` config.
+- **`.sol`** — set a Records V2 TXT record to the same value; `resolveRecipient` reads
+  it through the bundled SNS reader (needs `solana` config).

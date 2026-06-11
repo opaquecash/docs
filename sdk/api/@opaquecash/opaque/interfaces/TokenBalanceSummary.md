@@ -1,6 +1,6 @@
 # Interface: TokenBalanceSummary
 
-Defined in: [packages/opaque/src/types/indexer.ts:38](https://github.com/opaquecash/sdk/blob/1c668db24714147d90bc3f7ba748f59aed829f1f/packages/opaque/src/types/indexer.ts#L38)
+Defined in: [packages/opaque/src/types/indexer.ts:38](https://github.com/opaquecash/sdk/blob/1dd683193540a37fa1c0158af24782241086d3f9/packages/opaque/src/types/indexer.ts#L38)
 
 Aggregated balance for a single tracked asset across all owned stealth addresses.
 
@@ -10,7 +10,7 @@ Aggregated balance for a single tracked asset across all owned stealth addresses
 
 > **decimals**: `number`
 
-Defined in: [packages/opaque/src/types/indexer.ts:42](https://github.com/opaquecash/sdk/blob/1c668db24714147d90bc3f7ba748f59aed829f1f/packages/opaque/src/types/indexer.ts#L42)
+Defined in: [packages/opaque/src/types/indexer.ts:42](https://github.com/opaquecash/sdk/blob/1dd683193540a37fa1c0158af24782241086d3f9/packages/opaque/src/types/indexer.ts#L42)
 
 ***
 
@@ -18,7 +18,7 @@ Defined in: [packages/opaque/src/types/indexer.ts:42](https://github.com/opaquec
 
 > **symbol**: `string`
 
-Defined in: [packages/opaque/src/types/indexer.ts:41](https://github.com/opaquecash/sdk/blob/1c668db24714147d90bc3f7ba748f59aed829f1f/packages/opaque/src/types/indexer.ts#L41)
+Defined in: [packages/opaque/src/types/indexer.ts:41](https://github.com/opaquecash/sdk/blob/1dd683193540a37fa1c0158af24782241086d3f9/packages/opaque/src/types/indexer.ts#L41)
 
 ***
 
@@ -26,7 +26,7 @@ Defined in: [packages/opaque/src/types/indexer.ts:41](https://github.com/opaquec
 
 > **tokenAddress**: `` `0x${string}` ``
 
-Defined in: [packages/opaque/src/types/indexer.ts:40](https://github.com/opaquecash/sdk/blob/1c668db24714147d90bc3f7ba748f59aed829f1f/packages/opaque/src/types/indexer.ts#L40)
+Defined in: [packages/opaque/src/types/indexer.ts:40](https://github.com/opaquecash/sdk/blob/1dd683193540a37fa1c0158af24782241086d3f9/packages/opaque/src/types/indexer.ts#L40)
 
 `0x0000…0000` denotes native ETH when using [NATIVE\_TOKEN\_ADDRESS](../variables/NATIVE_TOKEN_ADDRESS.md).
 
@@ -36,6 +36,6 @@ Defined in: [packages/opaque/src/types/indexer.ts:40](https://github.com/opaquec
 
 > **totalRaw**: `bigint`
 
-Defined in: [packages/opaque/src/types/indexer.ts:44](https://github.com/opaquecash/sdk/blob/1c668db24714147d90bc3f7ba748f59aed829f1f/packages/opaque/src/types/indexer.ts#L44)
+Defined in: [packages/opaque/src/types/indexer.ts:44](https://github.com/opaquecash/sdk/blob/1dd683193540a37fa1c0158af24782241086d3f9/packages/opaque/src/types/indexer.ts#L44)
 
 Sum of raw units (wei for ETH, base units for ERC-20).

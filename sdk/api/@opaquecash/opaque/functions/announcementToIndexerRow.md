@@ -2,7 +2,7 @@
 
 > **announcementToIndexerRow**(`a`): [`IndexerAnnouncement`](../interfaces/IndexerAnnouncement.md)
 
-Defined in: [packages/opaque/src/client.ts:2376](https://github.com/opaquecash/sdk/blob/1c668db24714147d90bc3f7ba748f59aed829f1f/packages/opaque/src/client.ts#L2376)
+Defined in: [packages/opaque/src/client.ts:2503](https://github.com/opaquecash/sdk/blob/1dd683193540a37fa1c0158af24782241086d3f9/packages/opaque/src/client.ts#L2503)
 
 Map a chain-neutral [Announcement](../interfaces/Announcement.md) (from any [ChainAdapter](../interfaces/ChainAdapter.md)) into the
 [IndexerAnnouncement](../interfaces/IndexerAnnouncement.md) row shape consumed by [OpaqueClient.filterOwnedAnnouncements](../classes/OpaqueClient.md#filterownedannouncements).

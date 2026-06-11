@@ -77,6 +77,8 @@ const client = await OpaqueClient.create(config);
 | `solanaWallet` | `{ publicKey, signTransaction }` | No**** | ****Required for Solana writes |
 | `ens` | `{ client?, getText? }` | No | ENS read access for `resolveRecipient` of `*.eth` names (an ENS-capable viem client, or a custom text-record reader) |
 | `ipfs` | `{ gateways?, fetch? }` | No | Gateway list + fetch override for `resolveRecipient` of `ipfs://` DID documents |
+| `ons` | `{ parentName?, registry?, mirrorProgram? }` | No | ONS overrides for `*.opq.eth`-style names; defaults from `@opaquecash/deployments` (testnet parent `opqtest.eth`) |
+| `sns` | `{ getRecord? }` | No | Custom `.sol` record reader; defaults to the Records V2 TXT reader over the `solana` connection |
 
 ## Unified signer
 

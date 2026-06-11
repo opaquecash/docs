@@ -1,6 +1,6 @@
 # Interface: ResolveTransports
 
-Defined in: [packages/opaque/src/resolve.ts:49](https://github.com/opaquecash/sdk/blob/1c668db24714147d90bc3f7ba748f59aed829f1f/packages/opaque/src/resolve.ts#L49)
+Defined in: [packages/opaque/src/resolve.ts:55](https://github.com/opaquecash/sdk/blob/1dd683193540a37fa1c0158af24782241086d3f9/packages/opaque/src/resolve.ts#L55)
 
 Injectable transports for the off-chain resolution paths (all optional).
 
@@ -10,7 +10,7 @@ Injectable transports for the off-chain resolution paths (all optional).
 
 > `optional` **ensGetText?**: (`name`, `key`) => `Promise`\<`string` \| `null`\>
 
-Defined in: [packages/opaque/src/resolve.ts:54](https://github.com/opaquecash/sdk/blob/1c668db24714147d90bc3f7ba748f59aed829f1f/packages/opaque/src/resolve.ts#L54)
+Defined in: [packages/opaque/src/resolve.ts:60](https://github.com/opaquecash/sdk/blob/1dd683193540a37fa1c0158af24782241086d3f9/packages/opaque/src/resolve.ts#L60)
 
 ENS text-record reader: returns the raw record value or `null` when unset.
 Inject your own (e.g. viem `getEnsText` on a mainnet client, or a mock in tests).
@@ -35,7 +35,7 @@ Inject your own (e.g. viem `getEnsText` on a mainnet client, or a mock in tests)
 
 > `optional` **fetchFn?**: \{(`input`, `init?`): `Promise`\<`Response`\>; (`input`, `init?`): `Promise`\<`Response`\>; \}
 
-Defined in: [packages/opaque/src/resolve.ts:58](https://github.com/opaquecash/sdk/blob/1c668db24714147d90bc3f7ba748f59aed829f1f/packages/opaque/src/resolve.ts#L58)
+Defined in: [packages/opaque/src/resolve.ts:64](https://github.com/opaquecash/sdk/blob/1dd683193540a37fa1c0158af24782241086d3f9/packages/opaque/src/resolve.ts#L64)
 
 Fetch implementation for gateway requests (default `globalThis.fetch`).
 
@@ -85,6 +85,6 @@ Fetch implementation for gateway requests (default `globalThis.fetch`).
 
 > `optional` **ipfsGateways?**: readonly `string`[]
 
-Defined in: [packages/opaque/src/resolve.ts:56](https://github.com/opaquecash/sdk/blob/1c668db24714147d90bc3f7ba748f59aed829f1f/packages/opaque/src/resolve.ts#L56)
+Defined in: [packages/opaque/src/resolve.ts:62](https://github.com/opaquecash/sdk/blob/1dd683193540a37fa1c0158af24782241086d3f9/packages/opaque/src/resolve.ts#L62)
 
 IPFS gateway base URLs tried in order (default [DEFAULT\_IPFS\_GATEWAYS](../variables/DEFAULT_IPFS_GATEWAYS.md)).

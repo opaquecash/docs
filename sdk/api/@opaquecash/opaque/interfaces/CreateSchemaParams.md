@@ -1,6 +1,6 @@
 # Interface: CreateSchemaParams
 
-Defined in: [packages/opaque/src/client.ts:276](https://github.com/opaquecash/sdk/blob/1c668db24714147d90bc3f7ba748f59aed829f1f/packages/opaque/src/client.ts#L276)
+Defined in: [packages/opaque/src/client.ts:305](https://github.com/opaquecash/sdk/blob/1dd683193540a37fa1c0158af24782241086d3f9/packages/opaque/src/client.ts#L305)
 
 Parameters for [OpaqueClient.createSchema](../classes/OpaqueClient.md#createschema).
 
@@ -10,7 +10,7 @@ Parameters for [OpaqueClient.createSchema](../classes/OpaqueClient.md#createsche
 
 > **fieldDefinitions**: `string` \| [`FieldDef`](FieldDef.md)[]
 
-Defined in: [packages/opaque/src/client.ts:280](https://github.com/opaquecash/sdk/blob/1c668db24714147d90bc3f7ba748f59aed829f1f/packages/opaque/src/client.ts#L280)
+Defined in: [packages/opaque/src/client.ts:309](https://github.com/opaquecash/sdk/blob/1dd683193540a37fa1c0158af24782241086d3f9/packages/opaque/src/client.ts#L309)
 
 ABI-style string (`"bool passed, u64 score"`) or [FieldDef](FieldDef.md)s — normalized internally.
 
@@ -20,7 +20,7 @@ ABI-style string (`"bool passed, u64 score"`) or [FieldDef](FieldDef.md)s — no
 
 > **name**: `string`
 
-Defined in: [packages/opaque/src/client.ts:278](https://github.com/opaquecash/sdk/blob/1c668db24714147d90bc3f7ba748f59aed829f1f/packages/opaque/src/client.ts#L278)
+Defined in: [packages/opaque/src/client.ts:307](https://github.com/opaquecash/sdk/blob/1dd683193540a37fa1c0158af24782241086d3f9/packages/opaque/src/client.ts#L307)
 
 Human-readable schema name (part of the `schemaId` preimage).
 
@@ -30,7 +30,7 @@ Human-readable schema name (part of the `schemaId` preimage).
 
 > `optional` **resolver?**: `string`
 
-Defined in: [packages/opaque/src/client.ts:284](https://github.com/opaquecash/sdk/blob/1c668db24714147d90bc3f7ba748f59aed829f1f/packages/opaque/src/client.ts#L284)
+Defined in: [packages/opaque/src/client.ts:313](https://github.com/opaquecash/sdk/blob/1dd683193540a37fa1c0158af24782241086d3f9/packages/opaque/src/client.ts#L313)
 
 Optional resolver: EVM address or Solana program pubkey. Omit for none.
 
@@ -40,7 +40,7 @@ Optional resolver: EVM address or Solana program pubkey. Omit for none.
 
 > **revocable**: `boolean`
 
-Defined in: [packages/opaque/src/client.ts:282](https://github.com/opaquecash/sdk/blob/1c668db24714147d90bc3f7ba748f59aed829f1f/packages/opaque/src/client.ts#L282)
+Defined in: [packages/opaque/src/client.ts:311](https://github.com/opaquecash/sdk/blob/1dd683193540a37fa1c0158af24782241086d3f9/packages/opaque/src/client.ts#L311)
 
 Whether issued attestations can be revoked (immutable after creation).
 
@@ -50,6 +50,6 @@ Whether issued attestations can be revoked (immutable after creation).
 
 > `optional` **schemaExpiry?**: [`PsrExpiryInput`](PsrExpiryInput.md)
 
-Defined in: [packages/opaque/src/client.ts:286](https://github.com/opaquecash/sdk/blob/1c668db24714147d90bc3f7ba748f59aed829f1f/packages/opaque/src/client.ts#L286)
+Defined in: [packages/opaque/src/client.ts:315](https://github.com/opaquecash/sdk/blob/1dd683193540a37fa1c0158af24782241086d3f9/packages/opaque/src/client.ts#L315)
 
 Optional schema expiry.

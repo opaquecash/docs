@@ -1,6 +1,6 @@
 # Interface: CreateSchemaResult
 
-Defined in: [packages/opaque/src/client.ts:315](https://github.com/opaquecash/sdk/blob/1c668db24714147d90bc3f7ba748f59aed829f1f/packages/opaque/src/client.ts#L315)
+Defined in: [packages/opaque/src/client.ts:344](https://github.com/opaquecash/sdk/blob/1dd683193540a37fa1c0158af24782241086d3f9/packages/opaque/src/client.ts#L344)
 
 Result of [OpaqueClient.createSchema](../classes/OpaqueClient.md#createschema).
 
@@ -14,7 +14,7 @@ Result of [OpaqueClient.createSchema](../classes/OpaqueClient.md#createschema).
 
 > **schemaId**: `string`
 
-Defined in: [packages/opaque/src/client.ts:317](https://github.com/opaquecash/sdk/blob/1c668db24714147d90bc3f7ba748f59aed829f1f/packages/opaque/src/client.ts#L317)
+Defined in: [packages/opaque/src/client.ts:346](https://github.com/opaquecash/sdk/blob/1dd683193540a37fa1c0158af24782241086d3f9/packages/opaque/src/client.ts#L346)
 
 Derived `schemaId` (`0x`-hex bytes32).
 
@@ -24,7 +24,7 @@ Derived `schemaId` (`0x`-hex bytes32).
 
 > **txHash**: `string`
 
-Defined in: [packages/opaque/src/client.ts:311](https://github.com/opaquecash/sdk/blob/1c668db24714147d90bc3f7ba748f59aed829f1f/packages/opaque/src/client.ts#L311)
+Defined in: [packages/opaque/src/client.ts:340](https://github.com/opaquecash/sdk/blob/1dd683193540a37fa1c0158af24782241086d3f9/packages/opaque/src/client.ts#L340)
 
 EVM `0x` tx hash or Solana base58 signature.
 

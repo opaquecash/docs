@@ -1,6 +1,6 @@
 # Interface: IssueAttestationResult
 
-Defined in: [packages/opaque/src/client.ts:321](https://github.com/opaquecash/sdk/blob/1c668db24714147d90bc3f7ba748f59aed829f1f/packages/opaque/src/client.ts#L321)
+Defined in: [packages/opaque/src/client.ts:350](https://github.com/opaquecash/sdk/blob/1dd683193540a37fa1c0158af24782241086d3f9/packages/opaque/src/client.ts#L350)
 
 Result of [OpaqueClient.issueAttestation](../classes/OpaqueClient.md#issueattestation).
 
@@ -14,7 +14,7 @@ Result of [OpaqueClient.issueAttestation](../classes/OpaqueClient.md#issueattest
 
 > **stealthAddressHash**: `string`
 
-Defined in: [packages/opaque/src/client.ts:325](https://github.com/opaquecash/sdk/blob/1c668db24714147d90bc3f7ba748f59aed829f1f/packages/opaque/src/client.ts#L325)
+Defined in: [packages/opaque/src/client.ts:354](https://github.com/opaquecash/sdk/blob/1dd683193540a37fa1c0158af24782241086d3f9/packages/opaque/src/client.ts#L354)
 
 The 32-byte `stealth_address_hash` the attestation is bound to (`0x`-hex).
 
@@ -24,7 +24,7 @@ The 32-byte `stealth_address_hash` the attestation is bound to (`0x`-hex).
 
 > **txHash**: `string`
 
-Defined in: [packages/opaque/src/client.ts:311](https://github.com/opaquecash/sdk/blob/1c668db24714147d90bc3f7ba748f59aed829f1f/packages/opaque/src/client.ts#L311)
+Defined in: [packages/opaque/src/client.ts:340](https://github.com/opaquecash/sdk/blob/1dd683193540a37fa1c0158af24782241086d3f9/packages/opaque/src/client.ts#L340)
 
 EVM `0x` tx hash or Solana base58 signature.
 
@@ -38,6 +38,6 @@ EVM `0x` tx hash or Solana base58 signature.
 
 > **uid**: `string`
 
-Defined in: [packages/opaque/src/client.ts:323](https://github.com/opaquecash/sdk/blob/1c668db24714147d90bc3f7ba748f59aed829f1f/packages/opaque/src/client.ts#L323)
+Defined in: [packages/opaque/src/client.ts:352](https://github.com/opaquecash/sdk/blob/1dd683193540a37fa1c0158af24782241086d3f9/packages/opaque/src/client.ts#L352)
 
 Attestation uid (`0x`-hex bytes32).
