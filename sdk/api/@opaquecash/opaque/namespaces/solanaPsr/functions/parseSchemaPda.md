@@ -1,6 +1,6 @@
 # Function: parseSchemaPda()
 
-> **parseSchemaPda**(`data`): [`ParsedSchemaPda`](../interfaces/ParsedSchemaPda.md) \| `null`
+> **parseSchemaPda**(`data`): [`ParsedSchemaPda`](/sdk/api/@opaquecash/opaque/namespaces/solanaPsr/interfaces/ParsedSchemaPda.md) \| `null`
 
 Defined in: packages/psr-chain-solana/dist/schema.d.ts:52
 
@@ -12,4 +12,4 @@ Defined in: packages/psr-chain-solana/dist/schema.d.ts:52
 
 ## Returns
 
-[`ParsedSchemaPda`](../interfaces/ParsedSchemaPda.md) \| `null`
+[`ParsedSchemaPda`](/sdk/api/@opaquecash/opaque/namespaces/solanaPsr/interfaces/ParsedSchemaPda.md) \| `null`

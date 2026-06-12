@@ -4,12 +4,12 @@ Defined in: packages/stealth-chain-solana/dist/adapter.d.ts:24
 
 Abstracts chain-specific announcement retrieval and registry reads so the universal
 scan loop is written once. The universal scanner iterates a set of adapters, calls
-[ChainAdapter.fetchAnnouncements](../interfaces/ChainAdapter.md#fetchannouncements), then runs the shared view-tag filter and DKSAP
-recovery on the returned [Announcement](../interfaces/Announcement.md)s.
+[ChainAdapter.fetchAnnouncements](/sdk/api/@opaquecash/opaque/interfaces/ChainAdapter.md#fetchannouncements), then runs the shared view-tag filter and DKSAP
+recovery on the returned [Announcement](/sdk/api/@opaquecash/opaque/interfaces/Announcement.md)s.
 
 ## Implements
 
-- [`ChainAdapter`](../interfaces/ChainAdapter.md)
+- [`ChainAdapter`](/sdk/api/@opaquecash/opaque/interfaces/ChainAdapter.md)
 
 ## Constructors
 
@@ -23,7 +23,7 @@ Defined in: packages/stealth-chain-solana/dist/adapter.d.ts:30
 
 ##### config?
 
-[`SolanaAdapterConfig`](../interfaces/SolanaAdapterConfig.md)
+[`SolanaAdapterConfig`](/sdk/api/@opaquecash/opaque/interfaces/SolanaAdapterConfig.md)
 
 #### Returns
 
@@ -41,7 +41,7 @@ Wormhole chain id this adapter serves (Ethereum = 2, Solana = 1).
 
 #### Implementation of
 
-[`ChainAdapter`](../interfaces/ChainAdapter.md).[`chainId`](../interfaces/ChainAdapter.md#chainid)
+[`ChainAdapter`](/sdk/api/@opaquecash/opaque/interfaces/ChainAdapter.md).[`chainId`](/sdk/api/@opaquecash/opaque/interfaces/ChainAdapter.md#chainid)
 
 ***
 
@@ -55,7 +55,7 @@ Defined in: packages/stealth-chain-solana/dist/adapter.d.ts:27
 
 ### deployment
 
-> `readonly` **deployment**: [`SolanaDeployment`](../interfaces/SolanaDeployment.md)
+> `readonly` **deployment**: [`SolanaDeployment`](/sdk/api/@opaquecash/opaque/interfaces/SolanaDeployment.md)
 
 Defined in: packages/stealth-chain-solana/dist/adapter.d.ts:28
 
@@ -71,7 +71,7 @@ Human-readable adapter name, e.g. `"ethereum"` or `"solana"`.
 
 #### Implementation of
 
-[`ChainAdapter`](../interfaces/ChainAdapter.md).[`name`](../interfaces/ChainAdapter.md#name)
+[`ChainAdapter`](/sdk/api/@opaquecash/opaque/interfaces/ChainAdapter.md).[`name`](/sdk/api/@opaquecash/opaque/interfaces/ChainAdapter.md#name)
 
 ## Methods
 
@@ -191,7 +191,7 @@ Build a `register_keys` instruction for `registrant`'s 66-byte meta-address.
 
 ### fetchAnnouncements()
 
-> **fetchAnnouncements**(`opts?`): `Promise`\<[`Announcement`](../interfaces/Announcement.md)[]\>
+> **fetchAnnouncements**(`opts?`): `Promise`\<[`Announcement`](/sdk/api/@opaquecash/opaque/interfaces/Announcement.md)[]\>
 
 Defined in: packages/stealth-chain-solana/dist/adapter.d.ts:31
 
@@ -201,15 +201,15 @@ Fetch announcements in chain-neutral form (order is adapter-defined).
 
 ##### opts?
 
-[`FetchAnnouncementsOptions`](../interfaces/FetchAnnouncementsOptions.md)
+[`FetchAnnouncementsOptions`](/sdk/api/@opaquecash/opaque/interfaces/FetchAnnouncementsOptions.md)
 
 #### Returns
 
-`Promise`\<[`Announcement`](../interfaces/Announcement.md)[]\>
+`Promise`\<[`Announcement`](/sdk/api/@opaquecash/opaque/interfaces/Announcement.md)[]\>
 
 #### Implementation of
 
-[`ChainAdapter`](../interfaces/ChainAdapter.md).[`fetchAnnouncements`](../interfaces/ChainAdapter.md#fetchannouncements)
+[`ChainAdapter`](/sdk/api/@opaquecash/opaque/interfaces/ChainAdapter.md).[`fetchAnnouncements`](/sdk/api/@opaquecash/opaque/interfaces/ChainAdapter.md#fetchannouncements)
 
 ***
 
@@ -247,7 +247,7 @@ Whether `identity` has a stealth meta-address registered.
 
 #### Implementation of
 
-[`ChainAdapter`](../interfaces/ChainAdapter.md).[`isRegistered`](../interfaces/ChainAdapter.md#isregistered)
+[`ChainAdapter`](/sdk/api/@opaquecash/opaque/interfaces/ChainAdapter.md).[`isRegistered`](/sdk/api/@opaquecash/opaque/interfaces/ChainAdapter.md#isregistered)
 
 ***
 
@@ -272,7 +272,7 @@ unregistered. Identity is an EVM address (Ethereum) or a base58 pubkey (Solana).
 
 #### Implementation of
 
-[`ChainAdapter`](../interfaces/ChainAdapter.md).[`resolveMetaAddress`](../interfaces/ChainAdapter.md#resolvemetaaddress)
+[`ChainAdapter`](/sdk/api/@opaquecash/opaque/interfaces/ChainAdapter.md).[`resolveMetaAddress`](/sdk/api/@opaquecash/opaque/interfaces/ChainAdapter.md#resolvemetaaddress)
 
 ***
 
@@ -320,7 +320,7 @@ Optional live subscription to new announcements; returns an unsubscribe function
 
 ##### handlers
 
-[`AnnouncementHandlers`](../interfaces/AnnouncementHandlers.md)
+[`AnnouncementHandlers`](/sdk/api/@opaquecash/opaque/interfaces/AnnouncementHandlers.md)
 
 #### Returns
 
@@ -328,4 +328,4 @@ Optional live subscription to new announcements; returns an unsubscribe function
 
 #### Implementation of
 
-[`ChainAdapter`](../interfaces/ChainAdapter.md).[`watchAnnouncements`](../interfaces/ChainAdapter.md#watchannouncements)
+[`ChainAdapter`](/sdk/api/@opaquecash/opaque/interfaces/ChainAdapter.md).[`watchAnnouncements`](/sdk/api/@opaquecash/opaque/interfaces/ChainAdapter.md#watchannouncements)

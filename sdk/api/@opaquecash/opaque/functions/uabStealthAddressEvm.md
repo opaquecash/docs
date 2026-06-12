@@ -10,7 +10,7 @@ The low 20 bytes of the stealth-address field (the EVM-style one-time address).
 
 ### p
 
-[`UabPayload`](../interfaces/UabPayload.md)
+[`UabPayload`](/sdk/api/@opaquecash/opaque/interfaces/UabPayload.md)
 
 ## Returns
 

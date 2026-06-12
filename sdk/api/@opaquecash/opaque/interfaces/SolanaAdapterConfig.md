@@ -2,13 +2,13 @@
 
 Defined in: packages/stealth-chain-solana/dist/adapter.d.ts:12
 
-Construction options for [SolanaAdapter](../classes/SolanaAdapter.md).
+Construction options for [SolanaAdapter](/sdk/api/@opaquecash/opaque/classes/SolanaAdapter.md).
 
 ## Properties
 
 ### cluster?
 
-> `optional` **cluster?**: [`SolanaCluster`](../type-aliases/SolanaCluster.md)
+> `optional` **cluster?**: [`SolanaCluster`](/sdk/api/@opaquecash/opaque/type-aliases/SolanaCluster.md)
 
 Defined in: packages/stealth-chain-solana/dist/adapter.d.ts:18
 
@@ -38,7 +38,7 @@ Pre-built connection (takes precedence over `rpcUrl`/`cluster`).
 
 ### deployment?
 
-> `optional` **deployment?**: [`SolanaDeployment`](SolanaDeployment.md)
+> `optional` **deployment?**: [`SolanaDeployment`](/sdk/api/@opaquecash/opaque/interfaces/SolanaDeployment.md)
 
 Defined in: packages/stealth-chain-solana/dist/adapter.d.ts:20
 

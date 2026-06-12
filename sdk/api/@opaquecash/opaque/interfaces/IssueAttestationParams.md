@@ -1,8 +1,8 @@
 # Interface: IssueAttestationParams
 
-Defined in: [packages/opaque/src/client.ts:339](https://github.com/opaquecash/sdk/blob/1ac32abb86be54d81add3fae49381204ea1eb7c5/packages/opaque/src/client.ts#L339)
+Defined in: [packages/opaque/src/client.ts:356](https://github.com/opaquecash/sdk/blob/d653e273eb390dbec38241c20772af6021a1f8d8/packages/opaque/src/client.ts#L356)
 
-Parameters for [OpaqueClient.issueAttestation](../classes/OpaqueClient.md#issueattestation).
+Parameters for [OpaqueClient.issueAttestation](/sdk/api/@opaquecash/opaque/classes/OpaqueClient.md#issueattestation).
 
 ## Properties
 
@@ -10,7 +10,7 @@ Parameters for [OpaqueClient.issueAttestation](../classes/OpaqueClient.md#issuea
 
 > `optional` **announce?**: `boolean`
 
-Defined in: [packages/opaque/src/client.ts:354](https://github.com/opaquecash/sdk/blob/1ac32abb86be54d81add3fae49381204ea1eb7c5/packages/opaque/src/client.ts#L354)
+Defined in: [packages/opaque/src/client.ts:371](https://github.com/opaquecash/sdk/blob/d653e273eb390dbec38241c20772af6021a1f8d8/packages/opaque/src/client.ts#L371)
 
 Publish a discovery announcement after issuance. Defaults to `true` when `recipient` is a
 meta-address (only then is an ephemeral key available). No-op for raw-hash recipients.
@@ -19,9 +19,9 @@ meta-address (only then is an ephemeral key available). No-op for raw-hash recip
 
 ### expiration?
 
-> `optional` **expiration?**: [`PsrExpiryInput`](PsrExpiryInput.md)
+> `optional` **expiration?**: [`PsrExpiryInput`](/sdk/api/@opaquecash/opaque/interfaces/PsrExpiryInput.md)
 
-Defined in: [packages/opaque/src/client.ts:347](https://github.com/opaquecash/sdk/blob/1ac32abb86be54d81add3fae49381204ea1eb7c5/packages/opaque/src/client.ts#L347)
+Defined in: [packages/opaque/src/client.ts:364](https://github.com/opaquecash/sdk/blob/d653e273eb390dbec38241c20772af6021a1f8d8/packages/opaque/src/client.ts#L364)
 
 Optional attestation expiry.
 
@@ -31,7 +31,7 @@ Optional attestation expiry.
 
 > **fieldValues**: `Record`\<`string`, `string`\>
 
-Defined in: [packages/opaque/src/client.ts:345](https://github.com/opaquecash/sdk/blob/1ac32abb86be54d81add3fae49381204ea1eb7c5/packages/opaque/src/client.ts#L345)
+Defined in: [packages/opaque/src/client.ts:362](https://github.com/opaquecash/sdk/blob/d653e273eb390dbec38241c20772af6021a1f8d8/packages/opaque/src/client.ts#L362)
 
 Field values keyed by field name — must match the schema's `fieldDefinitions`.
 
@@ -41,7 +41,7 @@ Field values keyed by field name — must match the schema's `fieldDefinitions`.
 
 > **recipient**: `string`
 
-Defined in: [packages/opaque/src/client.ts:343](https://github.com/opaquecash/sdk/blob/1ac32abb86be54d81add3fae49381204ea1eb7c5/packages/opaque/src/client.ts#L343)
+Defined in: [packages/opaque/src/client.ts:360](https://github.com/opaquecash/sdk/blob/d653e273eb390dbec38241c20772af6021a1f8d8/packages/opaque/src/client.ts#L360)
 
 66-byte meta-address, 20-byte stealth address, or 32-byte `stealth_address_hash` (hex).
 
@@ -51,7 +51,7 @@ Defined in: [packages/opaque/src/client.ts:343](https://github.com/opaquecash/sd
 
 > `optional` **refUid?**: `string`
 
-Defined in: [packages/opaque/src/client.ts:349](https://github.com/opaquecash/sdk/blob/1ac32abb86be54d81add3fae49381204ea1eb7c5/packages/opaque/src/client.ts#L349)
+Defined in: [packages/opaque/src/client.ts:366](https://github.com/opaquecash/sdk/blob/d653e273eb390dbec38241c20772af6021a1f8d8/packages/opaque/src/client.ts#L366)
 
 Optional reference uid (chained credential).
 
@@ -61,6 +61,6 @@ Optional reference uid (chained credential).
 
 > **schemaId**: `string`
 
-Defined in: [packages/opaque/src/client.ts:341](https://github.com/opaquecash/sdk/blob/1ac32abb86be54d81add3fae49381204ea1eb7c5/packages/opaque/src/client.ts#L341)
+Defined in: [packages/opaque/src/client.ts:358](https://github.com/opaquecash/sdk/blob/d653e273eb390dbec38241c20772af6021a1f8d8/packages/opaque/src/client.ts#L358)
 
 Target schema id (`0x`-hex bytes32).

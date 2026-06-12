@@ -1,15 +1,15 @@
 # Class: EvmAdapter
 
-Defined in: packages/stealth-chain/dist/adapter.d.ts:32
+Defined in: packages/stealth-chain/dist/adapter.d.ts:38
 
 Abstracts chain-specific announcement retrieval and registry reads so the universal
 scan loop is written once. The universal scanner iterates a set of adapters, calls
-[ChainAdapter.fetchAnnouncements](../interfaces/ChainAdapter.md#fetchannouncements), then runs the shared view-tag filter and DKSAP
-recovery on the returned [Announcement](../interfaces/Announcement.md)s.
+[ChainAdapter.fetchAnnouncements](/sdk/api/@opaquecash/opaque/interfaces/ChainAdapter.md#fetchannouncements), then runs the shared view-tag filter and DKSAP
+recovery on the returned [Announcement](/sdk/api/@opaquecash/opaque/interfaces/Announcement.md)s.
 
 ## Implements
 
-- [`ChainAdapter`](../interfaces/ChainAdapter.md)
+- [`ChainAdapter`](/sdk/api/@opaquecash/opaque/interfaces/ChainAdapter.md)
 
 ## Constructors
 
@@ -17,13 +17,13 @@ recovery on the returned [Announcement](../interfaces/Announcement.md)s.
 
 > **new EvmAdapter**(`config`): `EvmAdapter`
 
-Defined in: packages/stealth-chain/dist/adapter.d.ts:42
+Defined in: packages/stealth-chain/dist/adapter.d.ts:48
 
 #### Parameters
 
 ##### config
 
-[`EvmAdapterConfig`](../interfaces/EvmAdapterConfig.md)
+[`EvmAdapterConfig`](/sdk/api/@opaquecash/opaque/interfaces/EvmAdapterConfig.md)
 
 #### Returns
 
@@ -35,13 +35,13 @@ Defined in: packages/stealth-chain/dist/adapter.d.ts:42
 
 > `readonly` **chainId**: `2` = `2`
 
-Defined in: packages/stealth-chain/dist/adapter.d.ts:33
+Defined in: packages/stealth-chain/dist/adapter.d.ts:39
 
 Wormhole chain id this adapter serves (Ethereum = 2, Solana = 1).
 
 #### Implementation of
 
-[`ChainAdapter`](../interfaces/ChainAdapter.md).[`chainId`](../interfaces/ChainAdapter.md#chainid)
+[`ChainAdapter`](/sdk/api/@opaquecash/opaque/interfaces/ChainAdapter.md).[`chainId`](/sdk/api/@opaquecash/opaque/interfaces/ChainAdapter.md#chainid)
 
 ***
 
@@ -49,9 +49,9 @@ Wormhole chain id this adapter serves (Ethereum = 2, Solana = 1).
 
 > `readonly` `optional` **evmChainId?**: `number`
 
-Defined in: packages/stealth-chain/dist/adapter.d.ts:36
+Defined in: packages/stealth-chain/dist/adapter.d.ts:42
 
-Underlying EVM chain id (Wormhole [chainId](#chainid) stays 2).
+Underlying EVM chain id (Wormhole [chainId](/sdk/api/@opaquecash/opaque/classes/EvmAdapter.md#chainid) stays 2).
 
 ***
 
@@ -59,13 +59,13 @@ Underlying EVM chain id (Wormhole [chainId](#chainid) stays 2).
 
 > `readonly` **name**: `"ethereum"` = `"ethereum"`
 
-Defined in: packages/stealth-chain/dist/adapter.d.ts:34
+Defined in: packages/stealth-chain/dist/adapter.d.ts:40
 
 Human-readable adapter name, e.g. `"ethereum"` or `"solana"`.
 
 #### Implementation of
 
-[`ChainAdapter`](../interfaces/ChainAdapter.md).[`name`](../interfaces/ChainAdapter.md#name)
+[`ChainAdapter`](/sdk/api/@opaquecash/opaque/interfaces/ChainAdapter.md).[`name`](/sdk/api/@opaquecash/opaque/interfaces/ChainAdapter.md#name)
 
 ***
 
@@ -73,7 +73,7 @@ Human-readable adapter name, e.g. `"ethereum"` or `"solana"`.
 
 > `readonly` **publicClient**: `object`
 
-Defined in: packages/stealth-chain/dist/adapter.d.ts:37
+Defined in: packages/stealth-chain/dist/adapter.d.ts:43
 
 #### account
 
@@ -1659,7 +1659,7 @@ const feeHistory = await client.getFeeHistory({
 
 > **getFilterChanges**: \<`filterType`, `abi`, `eventName`, `strict`, `fromBlock`, `toBlock`\>(`args`) => `Promise`\<`GetFilterChangesReturnType`\<`filterType`, `abi`, `eventName`, `strict`, `fromBlock`, `toBlock`\>\>
 
-Returns a list of logs or hashes based on a [Filter](/docs/glossary/terms#filter) since the last time it was called.
+Returns a list of logs or hashes based on a [Filter](https://viem.sh/docs/glossary/terms#filter) since the last time it was called.
 
 - Docs: https://viem.sh/docs/actions/public/getFilterChanges
 - JSON-RPC Methods: [`eth_getFilterChanges`](https://ethereum.org/en/developers/docs/apis/json-rpc/#eth_getfilterchanges)
@@ -3274,9 +3274,9 @@ const unwatch = await client.watchPendingTransactions({
 
 ### fetchAnnouncements()
 
-> **fetchAnnouncements**(`opts?`): `Promise`\<[`Announcement`](../interfaces/Announcement.md)[]\>
+> **fetchAnnouncements**(`opts?`): `Promise`\<[`Announcement`](/sdk/api/@opaquecash/opaque/interfaces/Announcement.md)[]\>
 
-Defined in: packages/stealth-chain/dist/adapter.d.ts:43
+Defined in: packages/stealth-chain/dist/adapter.d.ts:49
 
 Fetch announcements in chain-neutral form (order is adapter-defined).
 
@@ -3284,15 +3284,15 @@ Fetch announcements in chain-neutral form (order is adapter-defined).
 
 ##### opts?
 
-[`FetchAnnouncementsOptions`](../interfaces/FetchAnnouncementsOptions.md)
+[`FetchAnnouncementsOptions`](/sdk/api/@opaquecash/opaque/interfaces/FetchAnnouncementsOptions.md)
 
 #### Returns
 
-`Promise`\<[`Announcement`](../interfaces/Announcement.md)[]\>
+`Promise`\<[`Announcement`](/sdk/api/@opaquecash/opaque/interfaces/Announcement.md)[]\>
 
 #### Implementation of
 
-[`ChainAdapter`](../interfaces/ChainAdapter.md).[`fetchAnnouncements`](../interfaces/ChainAdapter.md#fetchannouncements)
+[`ChainAdapter`](/sdk/api/@opaquecash/opaque/interfaces/ChainAdapter.md).[`fetchAnnouncements`](/sdk/api/@opaquecash/opaque/interfaces/ChainAdapter.md#fetchannouncements)
 
 ***
 
@@ -3300,7 +3300,7 @@ Fetch announcements in chain-neutral form (order is adapter-defined).
 
 > **isRegistered**(`identity`): `Promise`\<`boolean`\>
 
-Defined in: packages/stealth-chain/dist/adapter.d.ts:45
+Defined in: packages/stealth-chain/dist/adapter.d.ts:51
 
 Whether `identity` has a stealth meta-address registered.
 
@@ -3316,7 +3316,7 @@ Whether `identity` has a stealth meta-address registered.
 
 #### Implementation of
 
-[`ChainAdapter`](../interfaces/ChainAdapter.md).[`isRegistered`](../interfaces/ChainAdapter.md#isregistered)
+[`ChainAdapter`](/sdk/api/@opaquecash/opaque/interfaces/ChainAdapter.md).[`isRegistered`](/sdk/api/@opaquecash/opaque/interfaces/ChainAdapter.md#isregistered)
 
 ***
 
@@ -3324,7 +3324,7 @@ Whether `identity` has a stealth meta-address registered.
 
 > **resolveMetaAddress**(`identity`): `Promise`\<`` `0x${string}` `` \| `null`\>
 
-Defined in: packages/stealth-chain/dist/adapter.d.ts:44
+Defined in: packages/stealth-chain/dist/adapter.d.ts:50
 
 Resolve an identity to its 66-byte stealth meta-address as `0x`-hex, or `null` when
 unregistered. Identity is an EVM address (Ethereum) or a base58 pubkey (Solana).
@@ -3341,7 +3341,7 @@ unregistered. Identity is an EVM address (Ethereum) or a base58 pubkey (Solana).
 
 #### Implementation of
 
-[`ChainAdapter`](../interfaces/ChainAdapter.md).[`resolveMetaAddress`](../interfaces/ChainAdapter.md#resolvemetaaddress)
+[`ChainAdapter`](/sdk/api/@opaquecash/opaque/interfaces/ChainAdapter.md).[`resolveMetaAddress`](/sdk/api/@opaquecash/opaque/interfaces/ChainAdapter.md#resolvemetaaddress)
 
 ***
 
@@ -3349,7 +3349,7 @@ unregistered. Identity is an EVM address (Ethereum) or a base58 pubkey (Solana).
 
 > **watchAnnouncements**(`handlers`): () => `void`
 
-Defined in: packages/stealth-chain/dist/adapter.d.ts:46
+Defined in: packages/stealth-chain/dist/adapter.d.ts:52
 
 Optional live subscription to new announcements; returns an unsubscribe function.
 
@@ -3357,7 +3357,7 @@ Optional live subscription to new announcements; returns an unsubscribe function
 
 ##### handlers
 
-[`AnnouncementHandlers`](../interfaces/AnnouncementHandlers.md)
+[`AnnouncementHandlers`](/sdk/api/@opaquecash/opaque/interfaces/AnnouncementHandlers.md)
 
 #### Returns
 
@@ -3365,4 +3365,4 @@ Optional live subscription to new announcements; returns an unsubscribe function
 
 #### Implementation of
 
-[`ChainAdapter`](../interfaces/ChainAdapter.md).[`watchAnnouncements`](../interfaces/ChainAdapter.md#watchannouncements)
+[`ChainAdapter`](/sdk/api/@opaquecash/opaque/interfaces/ChainAdapter.md).[`watchAnnouncements`](/sdk/api/@opaquecash/opaque/interfaces/ChainAdapter.md#watchannouncements)

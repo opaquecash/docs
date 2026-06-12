@@ -2,7 +2,7 @@
 
 Defined in: packages/adapter/dist/index.d.ts:48
 
-Options for [ChainAdapter.fetchAnnouncements](ChainAdapter.md#fetchannouncements).
+Options for [ChainAdapter.fetchAnnouncements](/sdk/api/@opaquecash/opaque/interfaces/ChainAdapter.md#fetchannouncements).
 
 ## Properties
 
@@ -23,7 +23,7 @@ Inclusive lower bound cursor (EVM block number or Solana slot).
 Defined in: packages/adapter/dist/index.d.ts:60
 
 Also include cross-chain (UAB) announcements relayed TO this chain, normalised to the
-same [Announcement](Announcement.md) shape with their *origin* `chainId`. Adapter-interpreted:
+same [Announcement](/sdk/api/@opaquecash/opaque/interfaces/Announcement.md) shape with their *origin* `chainId`. Adapter-interpreted:
 defaults to `true` where the chain has a UAB receiver deployment configured.
 
 ***

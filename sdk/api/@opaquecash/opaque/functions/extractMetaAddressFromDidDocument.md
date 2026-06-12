@@ -2,7 +2,7 @@
 
 > **extractMetaAddressFromDidDocument**(`doc`): `` `0x${string}` `` \| `null`
 
-Defined in: [packages/opaque/src/resolve.ts:190](https://github.com/opaquecash/sdk/blob/1ac32abb86be54d81add3fae49381204ea1eb7c5/packages/opaque/src/resolve.ts#L190)
+Defined in: [packages/opaque/src/resolve.ts:190](https://github.com/opaquecash/sdk/blob/d653e273eb390dbec38241c20772af6021a1f8d8/packages/opaque/src/resolve.ts#L190)
 
 Pull a meta-address out of a DID document (or any JSON object) fetched from IPFS.
 Accepted shapes, in order:

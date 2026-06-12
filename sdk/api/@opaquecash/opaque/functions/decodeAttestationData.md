@@ -14,7 +14,7 @@ Decode attestation data back into a field-value map.
 
 ### fieldDefs
 
-readonly [`AttestationField`](../type-aliases/AttestationField.md)[]
+readonly [`AttestationField`](/sdk/api/@opaquecash/opaque/type-aliases/AttestationField.md)[]
 
 ## Returns
 

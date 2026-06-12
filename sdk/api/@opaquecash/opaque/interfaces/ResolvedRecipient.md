@@ -1,8 +1,8 @@
 # Interface: ResolvedRecipient
 
-Defined in: [packages/opaque/src/resolve.ts:45](https://github.com/opaquecash/sdk/blob/1ac32abb86be54d81add3fae49381204ea1eb7c5/packages/opaque/src/resolve.ts#L45)
+Defined in: [packages/opaque/src/resolve.ts:45](https://github.com/opaquecash/sdk/blob/d653e273eb390dbec38241c20772af6021a1f8d8/packages/opaque/src/resolve.ts#L45)
 
-Result of [OpaqueClient.resolveRecipient](../classes/OpaqueClient.md#resolverecipient).
+Result of [OpaqueClient.resolveRecipient](/sdk/api/@opaquecash/opaque/classes/OpaqueClient.md#resolverecipient).
 
 ## Properties
 
@@ -10,7 +10,7 @@ Result of [OpaqueClient.resolveRecipient](../classes/OpaqueClient.md#resolvereci
 
 > **input**: `string`
 
-Defined in: [packages/opaque/src/resolve.ts:51](https://github.com/opaquecash/sdk/blob/1ac32abb86be54d81add3fae49381204ea1eb7c5/packages/opaque/src/resolve.ts#L51)
+Defined in: [packages/opaque/src/resolve.ts:51](https://github.com/opaquecash/sdk/blob/d653e273eb390dbec38241c20772af6021a1f8d8/packages/opaque/src/resolve.ts#L51)
 
 The (trimmed) input that was resolved.
 
@@ -20,7 +20,7 @@ The (trimmed) input that was resolved.
 
 > **metaAddressHex**: `` `0x${string}` ``
 
-Defined in: [packages/opaque/src/resolve.ts:47](https://github.com/opaquecash/sdk/blob/1ac32abb86be54d81add3fae49381204ea1eb7c5/packages/opaque/src/resolve.ts#L47)
+Defined in: [packages/opaque/src/resolve.ts:47](https://github.com/opaquecash/sdk/blob/d653e273eb390dbec38241c20772af6021a1f8d8/packages/opaque/src/resolve.ts#L47)
 
 Validated 66-byte `V‖S` meta-address (`0x` + 132 hex).
 
@@ -28,8 +28,8 @@ Validated 66-byte `V‖S` meta-address (`0x` + 132 hex).
 
 ### source
 
-> **source**: [`ResolvedRecipientSource`](../type-aliases/ResolvedRecipientSource.md)
+> **source**: [`ResolvedRecipientSource`](/sdk/api/@opaquecash/opaque/type-aliases/ResolvedRecipientSource.md)
 
-Defined in: [packages/opaque/src/resolve.ts:49](https://github.com/opaquecash/sdk/blob/1ac32abb86be54d81add3fae49381204ea1eb7c5/packages/opaque/src/resolve.ts#L49)
+Defined in: [packages/opaque/src/resolve.ts:49](https://github.com/opaquecash/sdk/blob/d653e273eb390dbec38241c20772af6021a1f8d8/packages/opaque/src/resolve.ts#L49)
 
 Resolution path that produced the meta-address.

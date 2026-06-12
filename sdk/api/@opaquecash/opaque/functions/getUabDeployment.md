@@ -1,6 +1,6 @@
 # Function: getUabDeployment()
 
-> **getUabDeployment**(`chainId`): [`UabDeployment`](../interfaces/UabDeployment.md) \| `undefined`
+> **getUabDeployment**(`chainId`): [`UabDeployment`](/sdk/api/@opaquecash/opaque/interfaces/UabDeployment.md) \| `undefined`
 
 Defined in: packages/uab/dist/config.d.ts:28
 
@@ -12,4 +12,4 @@ Defined in: packages/uab/dist/config.d.ts:28
 
 ## Returns
 
-[`UabDeployment`](../interfaces/UabDeployment.md) \| `undefined`
+[`UabDeployment`](/sdk/api/@opaquecash/opaque/interfaces/UabDeployment.md) \| `undefined`

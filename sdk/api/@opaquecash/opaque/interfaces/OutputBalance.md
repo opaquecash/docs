@@ -1,6 +1,6 @@
 # Interface: OutputBalance
 
-Defined in: [packages/opaque/src/client.ts:445](https://github.com/opaquecash/sdk/blob/1ac32abb86be54d81add3fae49381204ea1eb7c5/packages/opaque/src/client.ts#L445)
+Defined in: [packages/opaque/src/client.ts:462](https://github.com/opaquecash/sdk/blob/d653e273eb390dbec38241c20772af6021a1f8d8/packages/opaque/src/client.ts#L462)
 
 Native balance of one owned stealth output, resolved per chain.
 
@@ -10,7 +10,7 @@ Native balance of one owned stealth output, resolved per chain.
 
 > **address**: `string`
 
-Defined in: [packages/opaque/src/client.ts:453](https://github.com/opaquecash/sdk/blob/1ac32abb86be54d81add3fae49381204ea1eb7c5/packages/opaque/src/client.ts#L453)
+Defined in: [packages/opaque/src/client.ts:470](https://github.com/opaquecash/sdk/blob/d653e273eb390dbec38241c20772af6021a1f8d8/packages/opaque/src/client.ts#L470)
 
 Account actually holding the funds: the same address on Ethereum, or the derived Solana
 stealth account (base58) on Solana.
@@ -19,9 +19,9 @@ stealth account (base58) on Solana.
 
 ### chain
 
-> **chain**: [`OpaqueScanChain`](../type-aliases/OpaqueScanChain.md)
+> **chain**: [`OpaqueScanChain`](/sdk/api/@opaquecash/opaque/type-aliases/OpaqueScanChain.md)
 
-Defined in: [packages/opaque/src/client.ts:446](https://github.com/opaquecash/sdk/blob/1ac32abb86be54d81add3fae49381204ea1eb7c5/packages/opaque/src/client.ts#L446)
+Defined in: [packages/opaque/src/client.ts:463](https://github.com/opaquecash/sdk/blob/d653e273eb390dbec38241c20772af6021a1f8d8/packages/opaque/src/client.ts#L463)
 
 ***
 
@@ -29,7 +29,7 @@ Defined in: [packages/opaque/src/client.ts:446](https://github.com/opaquecash/sd
 
 > **nativeRaw**: `bigint`
 
-Defined in: [packages/opaque/src/client.ts:455](https://github.com/opaquecash/sdk/blob/1ac32abb86be54d81add3fae49381204ea1eb7c5/packages/opaque/src/client.ts#L455)
+Defined in: [packages/opaque/src/client.ts:472](https://github.com/opaquecash/sdk/blob/d653e273eb390dbec38241c20772af6021a1f8d8/packages/opaque/src/client.ts#L472)
 
 Native balance in base units (wei on Ethereum, lamports on Solana).
 
@@ -39,6 +39,6 @@ Native balance in base units (wei on Ethereum, lamports on Solana).
 
 > **stealthAddress**: `string`
 
-Defined in: [packages/opaque/src/client.ts:448](https://github.com/opaquecash/sdk/blob/1ac32abb86be54d81add3fae49381204ea1eb7c5/packages/opaque/src/client.ts#L448)
+Defined in: [packages/opaque/src/client.ts:465](https://github.com/opaquecash/sdk/blob/d653e273eb390dbec38241c20772af6021a1f8d8/packages/opaque/src/client.ts#L465)
 
 EVM-style 20-byte scanner address the announcement was matched on.

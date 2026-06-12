@@ -14,7 +14,7 @@ Encode field values: per field a 4-byte LE length prefix followed by UTF-8 bytes
 
 ### fieldDefs
 
-readonly [`AttestationField`](../type-aliases/AttestationField.md)[]
+readonly [`AttestationField`](/sdk/api/@opaquecash/opaque/type-aliases/AttestationField.md)[]
 
 ## Returns
 

@@ -104,7 +104,9 @@ await client.removeSchemaDelegate("solana", schemaId, delegatePubkey);
 
 ### `issueAttestation(chain, params)`
 
-Issue a schema-bound attestation to a stealth identity. Resolves recipient, encodes fields, submits `attest`, optionally announces.
+Issue a schema-bound V2 attestation to a stealth identity. Resolves the recipient,
+encodes fields, submits `attest`, and optionally announces with V2 `0xB2` metadata so
+the recipient can discover it with `discoverTraitsV2`.
 
 ```ts
 const { txHash, uid, stealthAddressHash } = await client.issueAttestation("ethereum", {
@@ -126,11 +128,12 @@ const list: AttestationV2[] = await client.getMyIssuedAttestations("ethereum");
 
 ---
 
-## Issuer helpers (announce metadata)
+## Legacy V1 issuer helpers
 
 ### `encodeReputationMetadata(viewTag, attestationId)`
 
-Encode PSR metadata bytes for `announce`.
+Encode legacy V1 PSR metadata bytes for `announce` (`viewTag || 0xA7 || attestationId`).
+New schema-bound attestations issued by `issueAttestation` use V2 metadata instead.
 
 ```ts
 const metadata = client.encodeReputationMetadata(viewTag, 42n);
@@ -140,7 +143,7 @@ const metadata = client.encodeReputationMetadata(viewTag, 42n);
 
 ### `prepareReputationAssignment(recipientMetaAddressHex, attestationId)`
 
-Derive stealth send material with PSR metadata embedded.
+Derive stealth send material with legacy V1 PSR metadata embedded.
 
 ```ts
 const prep = client.prepareReputationAssignment(metaHex, attestationId);
@@ -150,7 +153,7 @@ const prep = client.prepareReputationAssignment(metaHex, attestationId);
 
 ### `buildAssignReputationTransaction(recipientMetaAddressHex, attestationId)`
 
-Calldata for announce-with-PSR-metadata (no asset transfer).
+Calldata for a legacy V1 announce-with-PSR-metadata transaction (no asset transfer).
 
 ```ts
 const req = client.buildAssignReputationTransaction(metaHex, attestationId);

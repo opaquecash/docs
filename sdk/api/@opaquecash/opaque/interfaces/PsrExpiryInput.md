@@ -1,6 +1,6 @@
 # Interface: PsrExpiryInput
 
-Defined in: [packages/opaque/src/client.ts:317](https://github.com/opaquecash/sdk/blob/1ac32abb86be54d81add3fae49381204ea1eb7c5/packages/opaque/src/client.ts#L317)
+Defined in: [packages/opaque/src/client.ts:334](https://github.com/opaquecash/sdk/blob/d653e273eb390dbec38241c20772af6021a1f8d8/packages/opaque/src/client.ts#L334)
 
 Future block (Ethereum) / slot (Solana) for a schema or attestation expiry.
 
@@ -10,7 +10,7 @@ Future block (Ethereum) / slot (Solana) for a schema or attestation expiry.
 
 > `optional` **dateTime?**: `string`
 
-Defined in: [packages/opaque/src/client.ts:321](https://github.com/opaquecash/sdk/blob/1ac32abb86be54d81add3fae49381204ea1eb7c5/packages/opaque/src/client.ts#L321)
+Defined in: [packages/opaque/src/client.ts:338](https://github.com/opaquecash/sdk/blob/d653e273eb390dbec38241c20772af6021a1f8d8/packages/opaque/src/client.ts#L338)
 
 ISO datetime; converted to a block (~12s/block) or slot (~400ms/slot) at call time.
 
@@ -20,6 +20,6 @@ ISO datetime; converted to a block (~12s/block) or slot (~400ms/slot) at call ti
 
 > `optional` **slotOrBlock?**: `number`
 
-Defined in: [packages/opaque/src/client.ts:319](https://github.com/opaquecash/sdk/blob/1ac32abb86be54d81add3fae49381204ea1eb7c5/packages/opaque/src/client.ts#L319)
+Defined in: [packages/opaque/src/client.ts:336](https://github.com/opaquecash/sdk/blob/d653e273eb390dbec38241c20772af6021a1f8d8/packages/opaque/src/client.ts#L336)
 
-Absolute Ethereum block number or Solana slot. Takes precedence over [dateTime](#datetime).
+Absolute Ethereum block number or Solana slot. Takes precedence over [dateTime](/sdk/api/@opaquecash/opaque/interfaces/PsrExpiryInput.md#datetime).

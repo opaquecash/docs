@@ -153,7 +153,7 @@ client.getContracts()         // { stealthMetaAddressRegistry, stealthAddressAnn
 | Stealth writes | `registerMetaAddress`, `sendStealthPayment` | yes | yes | no |
 | Scan / sweep | `scan`, `sweep`, `filterOwnedAnnouncements`, balances | no | `solana` | yes |
 | PSR admin | `createSchema`, `issueAttestation`, ... | yes (EVM) | yes (Solana) | no |
-| Reputation | `discoverTraits`, `generateReputationProof`, `submitReputationVerification` | yes (submit EVM) | yes (submit Solana) | yes |
+| Reputation | `discoverTraitsV2`, `discoverTraits` (legacy V1), `generateReputationProof`, `submitReputationVerification` | yes (submit EVM) | yes (submit Solana) | yes |
 
 ## Error: WASM not configured
 

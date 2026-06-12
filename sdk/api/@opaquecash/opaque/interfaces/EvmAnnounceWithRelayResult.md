@@ -1,6 +1,6 @@
 # Interface: EvmAnnounceWithRelayResult
 
-Defined in: [packages/opaque/src/client.ts:459](https://github.com/opaquecash/sdk/blob/1ac32abb86be54d81add3fae49381204ea1eb7c5/packages/opaque/src/client.ts#L459)
+Defined in: [packages/opaque/src/client.ts:476](https://github.com/opaquecash/sdk/blob/d653e273eb390dbec38241c20772af6021a1f8d8/packages/opaque/src/client.ts#L476)
 
 A cross-chain `announceWithRelay` built for Ethereum (submit `{to,data,value}` via wallet).
 
@@ -10,7 +10,7 @@ A cross-chain `announceWithRelay` built for Ethereum (submit `{to,data,value}` v
 
 > **chain**: `"ethereum"`
 
-Defined in: [packages/opaque/src/client.ts:460](https://github.com/opaquecash/sdk/blob/1ac32abb86be54d81add3fae49381204ea1eb7c5/packages/opaque/src/client.ts#L460)
+Defined in: [packages/opaque/src/client.ts:477](https://github.com/opaquecash/sdk/blob/d653e273eb390dbec38241c20772af6021a1f8d8/packages/opaque/src/client.ts#L477)
 
 ***
 
@@ -18,7 +18,7 @@ Defined in: [packages/opaque/src/client.ts:460](https://github.com/opaquecash/sd
 
 > **chainId**: `number`
 
-Defined in: [packages/opaque/src/client.ts:465](https://github.com/opaquecash/sdk/blob/1ac32abb86be54d81add3fae49381204ea1eb7c5/packages/opaque/src/client.ts#L465)
+Defined in: [packages/opaque/src/client.ts:482](https://github.com/opaquecash/sdk/blob/d653e273eb390dbec38241c20772af6021a1f8d8/packages/opaque/src/client.ts#L482)
 
 ***
 
@@ -26,7 +26,7 @@ Defined in: [packages/opaque/src/client.ts:465](https://github.com/opaquecash/sd
 
 > **data**: `` `0x${string}` ``
 
-Defined in: [packages/opaque/src/client.ts:462](https://github.com/opaquecash/sdk/blob/1ac32abb86be54d81add3fae49381204ea1eb7c5/packages/opaque/src/client.ts#L462)
+Defined in: [packages/opaque/src/client.ts:479](https://github.com/opaquecash/sdk/blob/d653e273eb390dbec38241c20772af6021a1f8d8/packages/opaque/src/client.ts#L479)
 
 ***
 
@@ -34,7 +34,7 @@ Defined in: [packages/opaque/src/client.ts:462](https://github.com/opaquecash/sd
 
 > **to**: `` `0x${string}` ``
 
-Defined in: [packages/opaque/src/client.ts:461](https://github.com/opaquecash/sdk/blob/1ac32abb86be54d81add3fae49381204ea1eb7c5/packages/opaque/src/client.ts#L461)
+Defined in: [packages/opaque/src/client.ts:478](https://github.com/opaquecash/sdk/blob/d653e273eb390dbec38241c20772af6021a1f8d8/packages/opaque/src/client.ts#L478)
 
 ***
 
@@ -42,6 +42,6 @@ Defined in: [packages/opaque/src/client.ts:461](https://github.com/opaquecash/sd
 
 > **value**: `bigint`
 
-Defined in: [packages/opaque/src/client.ts:464](https://github.com/opaquecash/sdk/blob/1ac32abb86be54d81add3fae49381204ea1eb7c5/packages/opaque/src/client.ts#L464)
+Defined in: [packages/opaque/src/client.ts:481](https://github.com/opaquecash/sdk/blob/d653e273eb390dbec38241c20772af6021a1f8d8/packages/opaque/src/client.ts#L481)
 
 Wormhole message fee (wei) to send as `value`.

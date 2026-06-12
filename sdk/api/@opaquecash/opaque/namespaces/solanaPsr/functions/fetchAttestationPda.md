@@ -1,6 +1,6 @@
 # Function: fetchAttestationPda()
 
-> **fetchAttestationPda**(`connection`, `attestationPdaAddress`): `Promise`\<[`ParsedAttestationPda`](../interfaces/ParsedAttestationPda.md) \| `null`\>
+> **fetchAttestationPda**(`connection`, `attestationPdaAddress`): `Promise`\<[`ParsedAttestationPda`](/sdk/api/@opaquecash/opaque/namespaces/solanaPsr/interfaces/ParsedAttestationPda.md) \| `null`\>
 
 Defined in: packages/psr-chain-solana/dist/attestation.d.ts:41
 
@@ -16,4 +16,4 @@ Defined in: packages/psr-chain-solana/dist/attestation.d.ts:41
 
 ## Returns
 
-`Promise`\<[`ParsedAttestationPda`](../interfaces/ParsedAttestationPda.md) \| `null`\>
+`Promise`\<[`ParsedAttestationPda`](/sdk/api/@opaquecash/opaque/namespaces/solanaPsr/interfaces/ParsedAttestationPda.md) \| `null`\>

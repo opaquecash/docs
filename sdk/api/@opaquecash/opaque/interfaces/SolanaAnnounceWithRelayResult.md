@@ -1,6 +1,6 @@
 # Interface: SolanaAnnounceWithRelayResult
 
-Defined in: [packages/opaque/src/client.ts:469](https://github.com/opaquecash/sdk/blob/1ac32abb86be54d81add3fae49381204ea1eb7c5/packages/opaque/src/client.ts#L469)
+Defined in: [packages/opaque/src/client.ts:486](https://github.com/opaquecash/sdk/blob/d653e273eb390dbec38241c20772af6021a1f8d8/packages/opaque/src/client.ts#L486)
 
 A cross-chain `announce_with_relay` built for Solana (sign with the wallet + extra signers).
 
@@ -10,7 +10,7 @@ A cross-chain `announce_with_relay` built for Solana (sign with the wallet + ext
 
 > **chain**: `"solana"`
 
-Defined in: [packages/opaque/src/client.ts:470](https://github.com/opaquecash/sdk/blob/1ac32abb86be54d81add3fae49381204ea1eb7c5/packages/opaque/src/client.ts#L470)
+Defined in: [packages/opaque/src/client.ts:487](https://github.com/opaquecash/sdk/blob/d653e273eb390dbec38241c20772af6021a1f8d8/packages/opaque/src/client.ts#L487)
 
 ***
 
@@ -18,7 +18,7 @@ Defined in: [packages/opaque/src/client.ts:470](https://github.com/opaquecash/sd
 
 > **instructions**: `TransactionInstruction`[]
 
-Defined in: [packages/opaque/src/client.ts:471](https://github.com/opaquecash/sdk/blob/1ac32abb86be54d81add3fae49381204ea1eb7c5/packages/opaque/src/client.ts#L471)
+Defined in: [packages/opaque/src/client.ts:488](https://github.com/opaquecash/sdk/blob/d653e273eb390dbec38241c20772af6021a1f8d8/packages/opaque/src/client.ts#L488)
 
 ***
 
@@ -26,6 +26,6 @@ Defined in: [packages/opaque/src/client.ts:471](https://github.com/opaquecash/sd
 
 > **signers**: `Keypair`[]
 
-Defined in: [packages/opaque/src/client.ts:473](https://github.com/opaquecash/sdk/blob/1ac32abb86be54d81add3fae49381204ea1eb7c5/packages/opaque/src/client.ts#L473)
+Defined in: [packages/opaque/src/client.ts:490](https://github.com/opaquecash/sdk/blob/d653e273eb390dbec38241c20772af6021a1f8d8/packages/opaque/src/client.ts#L490)
 
 Extra signers (the fresh Wormhole message keypair) that must co-sign with the wallet.

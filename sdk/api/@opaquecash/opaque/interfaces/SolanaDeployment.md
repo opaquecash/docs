@@ -18,7 +18,7 @@ PSR V2 attestation engine program.
 
 ### cluster
 
-> **cluster**: [`SolanaCluster`](../type-aliases/SolanaCluster.md)
+> **cluster**: [`SolanaCluster`](/sdk/api/@opaquecash/opaque/type-aliases/SolanaCluster.md)
 
 Defined in: packages/stealth-chain-solana/dist/programs.d.ts:15
 

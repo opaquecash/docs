@@ -2,7 +2,7 @@
 
 Defined in: packages/adapter/dist/index.d.ts:63
 
-Callbacks for [ChainAdapter.watchAnnouncements](ChainAdapter.md#watchannouncements).
+Callbacks for [ChainAdapter.watchAnnouncements](/sdk/api/@opaquecash/opaque/interfaces/ChainAdapter.md#watchannouncements).
 
 ## Properties
 
@@ -18,7 +18,7 @@ Invoked for each decoded announcement (caller handles its own sync errors).
 
 ##### announcement
 
-[`Announcement`](Announcement.md)
+[`Announcement`](/sdk/api/@opaquecash/opaque/interfaces/Announcement.md)
 
 #### Returns
 

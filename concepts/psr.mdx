@@ -39,8 +39,8 @@ sequenceDiagram
   participant SDK as OpaqueClient
   participant Verifier as OpaqueReputationVerifier
 
-  Recipient->>SDK: scan / filterOwnedAnnouncements
-  Recipient->>SDK: discoverTraits(rows)
+  Recipient->>SDK: fetch native announcements
+  Recipient->>SDK: discoverTraitsV2(rows, { chain })
   Recipient->>SDK: generateReputationProof({ trait, externalNullifier })
   Recipient->>SDK: submitReputationVerification(chain, args)
   SDK->>Verifier: verifyReputation (consumes nullifier)
@@ -63,7 +63,11 @@ Proofs are scoped to a specific action via `externalNullifier`:
 ```ts
 import { buildActionScope, externalNullifierFromScope } from "@opaquecash/opaque";
 
-const scope = buildActionScope(11155111, "my-dapp", "gate-v1");
+const scope = buildActionScope({
+  chainId: 11155111,
+  module: "my-dapp",
+  actionId: "gate-v1",
+});
 const externalNullifier = externalNullifierFromScope(scope);
 ```
 

@@ -3,38 +3,69 @@ title: Reputation API
 description: Trait discovery, Groth16 proofs, and on-chain verification.
 ---
 
-Reputation methods require WASM. On-chain verification uses `OpaqueReputationVerifier` (bundled address per chain).
+Reputation discovery and proof generation require WASM. On-chain verification uses
+`OpaqueReputationVerifier` (bundled address per chain).
 
 ## Discovery
 
-### `discoverTraits(rows)`
+### `discoverTraitsV2(rows, options)`
 
-Map owned announcement rows to `DiscoveredTrait` list.
-
-```ts
-const traits = await client.discoverTraits(indexerRows);
-```
-
-Source `rows` per chain with `fetchAnnouncementRows` and discover separately so each trait can
-be tied to the chain whose verifier it proves against:
+Use this for schema-bound V2 attestations created by `issueAttestation`. V2 announcements
+use marker `0xB2`, include 130 bytes of metadata, and are validated against the target
+chain's schema registry before the SDK returns them.
 
 ```ts
 const evmRows = await client.fetchAnnouncementRows("ethereum");
+const evmTraits = await client.discoverTraitsV2(evmRows, { chain: "ethereum" });
+
 const solRows = await client.fetchAnnouncementRows("solana");
+const solTraits = await client.discoverTraitsV2(solRows, { chain: "solana" });
+
 const traits = [
-  ...(await client.discoverTraits(evmRows)).map((t) => ({ ...t, chain: "ethereum" })),
-  ...(await client.discoverTraits(solRows)).map((t) => ({ ...t, chain: "solana" })),
+  ...evmTraits.map((t) => ({ ...t, chain: "ethereum" })),
+  ...solTraits.map((t) => ({ ...t, chain: "solana" })),
 ];
 ```
 
-Attestation metadata never arrives over the cross-chain UAB (the Wormhole payload is too
-small), so traits are always discovered from each chain's native announcements.
+**Params**
+
+| Param | Type | Description |
+| --- | --- | --- |
+| `rows` | `IndexerAnnouncement[]` | Native announcement rows from `fetchAnnouncementRows(chain)` or your indexer |
+| `options.chain` | `"ethereum" \| "solana"` | Chain whose schema registry validates the marker |
+| `options.schemas` | `SchemaV2[]` | Optional cached schema snapshot. The SDK fetches all schemas when omitted |
+| `options.currentSlot` | `number \| bigint` | Optional block or slot for expiry checks |
+| `options.trustedIssuers` | `string[]` | Optional issuer allowlist in chain-native identity format |
+
+**Returns:** `Promise<DiscoveredTrait[]>`.
+
+For V2, `DiscoveredTrait` includes `schemaId`, `schemaName`, `issuer`, `attestationUid`,
+`dataHex`, `nonce`, `merkleLeafPreimage`, `isValid`, and `issuerAuthorized` in addition
+to the shared stealth address, tx hash, block/slot, discovery time, and ephemeral pubkey.
+`generateReputationProof` consumes `merkleLeafPreimage` automatically.
+
+Attestation metadata never arrives over the cross-chain UAB because the Wormhole payload
+only carries a 24-byte metadata tail. Fetch trait rows natively on each chain.
+
+---
+
+### `discoverTraits(rows)`
+
+Legacy V1 discovery for `0xA7` metadata markers. New schema-bound attestations issued by
+`issueAttestation` use V2, so call `discoverTraitsV2` for current app flows.
+
+```ts
+const traits = await client.discoverTraits(legacyRows);
+```
+
+**Returns:** `Promise<DiscoveredTrait[]>` with V1 fields: `attestationId`,
+`stealthAddress`, `txHash`, `blockNumber`, `discoveredAt`, and `ephemeralPubkey`.
 
 ---
 
 ### `getReputationTraitsFromAnnouncements(rows)`
 
-Alias for `discoverTraits`.
+Legacy alias for `discoverTraits`.
 
 ```ts
 const traits = await client.getReputationTraitsFromAnnouncements(rows);
@@ -83,8 +114,10 @@ const proofData = await client.generateReputationProof({
 });
 ```
 
-Optional inputs `issuerPkX`, `traitDataHash`, and `nonce` pin the V2 leaf fields; in
-dev mode the prover fills deterministic defaults.
+For traits returned by `discoverTraitsV2`, the prover reads `issuerPkX`, `traitDataHash`,
+and `nonce` from `trait.merkleLeafPreimage`. You can still pass those fields manually to
+override the trait context. If they are absent, the prover fills deterministic dev-mode
+defaults.
 
 **Returns:** `ProofData`: `{ proof, publicSignals, nullifier, attestationId }`. The
 public signals are `[merkle_root, attestation_id, external_nullifier, nullifier_hash]`

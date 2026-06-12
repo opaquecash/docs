@@ -1,12 +1,12 @@
 # Interface: UnifiedOwnedOutput
 
-Defined in: [packages/opaque/src/client.ts:381](https://github.com/opaquecash/sdk/blob/1ac32abb86be54d81add3fae49381204ea1eb7c5/packages/opaque/src/client.ts#L381)
+Defined in: [packages/opaque/src/client.ts:398](https://github.com/opaquecash/sdk/blob/d653e273eb390dbec38241c20772af6021a1f8d8/packages/opaque/src/client.ts#L398)
 
 One owned stealth output from the unified inbox, tagged with its source chain.
 
 ## Extends
 
-- [`OwnedStealthOutput`](OwnedStealthOutput.md)
+- [`OwnedStealthOutput`](/sdk/api/@opaquecash/opaque/interfaces/OwnedStealthOutput.md)
 
 ## Properties
 
@@ -14,13 +14,13 @@ One owned stealth output from the unified inbox, tagged with its source chain.
 
 > `optional` **attestationId?**: `number`
 
-Defined in: [packages/opaque/src/types/indexer.ts:32](https://github.com/opaquecash/sdk/blob/1ac32abb86be54d81add3fae49381204ea1eb7c5/packages/opaque/src/types/indexer.ts#L32)
+Defined in: [packages/opaque/src/types/indexer.ts:32](https://github.com/opaquecash/sdk/blob/d653e273eb390dbec38241c20772af6021a1f8d8/packages/opaque/src/types/indexer.ts#L32)
 
 Present when announcement carried PSR attestation metadata.
 
 #### Inherited from
 
-[`OwnedStealthOutput`](OwnedStealthOutput.md).[`attestationId`](OwnedStealthOutput.md#attestationid)
+[`OwnedStealthOutput`](/sdk/api/@opaquecash/opaque/interfaces/OwnedStealthOutput.md).[`attestationId`](/sdk/api/@opaquecash/opaque/interfaces/OwnedStealthOutput.md#attestationid)
 
 ***
 
@@ -28,19 +28,19 @@ Present when announcement carried PSR attestation metadata.
 
 > **blockNumber**: `number`
 
-Defined in: [packages/opaque/src/types/indexer.ts:27](https://github.com/opaquecash/sdk/blob/1ac32abb86be54d81add3fae49381204ea1eb7c5/packages/opaque/src/types/indexer.ts#L27)
+Defined in: [packages/opaque/src/types/indexer.ts:27](https://github.com/opaquecash/sdk/blob/d653e273eb390dbec38241c20772af6021a1f8d8/packages/opaque/src/types/indexer.ts#L27)
 
 #### Inherited from
 
-[`OwnedStealthOutput`](OwnedStealthOutput.md).[`blockNumber`](OwnedStealthOutput.md#blocknumber)
+[`OwnedStealthOutput`](/sdk/api/@opaquecash/opaque/interfaces/OwnedStealthOutput.md).[`blockNumber`](/sdk/api/@opaquecash/opaque/interfaces/OwnedStealthOutput.md#blocknumber)
 
 ***
 
 ### chain
 
-> **chain**: [`OpaqueScanChain`](../type-aliases/OpaqueScanChain.md)
+> **chain**: [`OpaqueScanChain`](/sdk/api/@opaquecash/opaque/type-aliases/OpaqueScanChain.md)
 
-Defined in: [packages/opaque/src/client.ts:383](https://github.com/opaquecash/sdk/blob/1ac32abb86be54d81add3fae49381204ea1eb7c5/packages/opaque/src/client.ts#L383)
+Defined in: [packages/opaque/src/client.ts:400](https://github.com/opaquecash/sdk/blob/d653e273eb390dbec38241c20772af6021a1f8d8/packages/opaque/src/client.ts#L400)
 
 Source chain of this output.
 
@@ -50,7 +50,7 @@ Source chain of this output.
 
 > **chainId**: `number`
 
-Defined in: [packages/opaque/src/client.ts:385](https://github.com/opaquecash/sdk/blob/1ac32abb86be54d81add3fae49381204ea1eb7c5/packages/opaque/src/client.ts#L385)
+Defined in: [packages/opaque/src/client.ts:402](https://github.com/opaquecash/sdk/blob/d653e273eb390dbec38241c20772af6021a1f8d8/packages/opaque/src/client.ts#L402)
 
 Wormhole chain id of the source (Ethereum = 2, Solana = 1).
 
@@ -60,11 +60,11 @@ Wormhole chain id of the source (Ethereum = 2, Solana = 1).
 
 > **ephemeralPublicKey**: `` `0x${string}` ``
 
-Defined in: [packages/opaque/src/types/indexer.ts:30](https://github.com/opaquecash/sdk/blob/1ac32abb86be54d81add3fae49381204ea1eb7c5/packages/opaque/src/types/indexer.ts#L30)
+Defined in: [packages/opaque/src/types/indexer.ts:30](https://github.com/opaquecash/sdk/blob/d653e273eb390dbec38241c20772af6021a1f8d8/packages/opaque/src/types/indexer.ts#L30)
 
 #### Inherited from
 
-[`OwnedStealthOutput`](OwnedStealthOutput.md).[`ephemeralPublicKey`](OwnedStealthOutput.md#ephemeralpublickey)
+[`OwnedStealthOutput`](/sdk/api/@opaquecash/opaque/interfaces/OwnedStealthOutput.md).[`ephemeralPublicKey`](/sdk/api/@opaquecash/opaque/interfaces/OwnedStealthOutput.md#ephemeralpublickey)
 
 ***
 
@@ -72,11 +72,11 @@ Defined in: [packages/opaque/src/types/indexer.ts:30](https://github.com/opaquec
 
 > **logIndex**: `number`
 
-Defined in: [packages/opaque/src/types/indexer.ts:28](https://github.com/opaquecash/sdk/blob/1ac32abb86be54d81add3fae49381204ea1eb7c5/packages/opaque/src/types/indexer.ts#L28)
+Defined in: [packages/opaque/src/types/indexer.ts:28](https://github.com/opaquecash/sdk/blob/d653e273eb390dbec38241c20772af6021a1f8d8/packages/opaque/src/types/indexer.ts#L28)
 
 #### Inherited from
 
-[`OwnedStealthOutput`](OwnedStealthOutput.md).[`logIndex`](OwnedStealthOutput.md#logindex)
+[`OwnedStealthOutput`](/sdk/api/@opaquecash/opaque/interfaces/OwnedStealthOutput.md).[`logIndex`](/sdk/api/@opaquecash/opaque/interfaces/OwnedStealthOutput.md#logindex)
 
 ***
 
@@ -84,7 +84,7 @@ Defined in: [packages/opaque/src/types/indexer.ts:28](https://github.com/opaquec
 
 > **source**: `"native"` \| `"uab"`
 
-Defined in: [packages/opaque/src/client.ts:390](https://github.com/opaquecash/sdk/blob/1ac32abb86be54d81add3fae49381204ea1eb7c5/packages/opaque/src/client.ts#L390)
+Defined in: [packages/opaque/src/client.ts:407](https://github.com/opaquecash/sdk/blob/d653e273eb390dbec38241c20772af6021a1f8d8/packages/opaque/src/client.ts#L407)
 
 How the announcement was discovered: `"native"` (the chain's own announcer) or `"uab"`
 (relayed cross-chain over Wormhole and re-emitted by the UABReceiver).
@@ -95,11 +95,11 @@ How the announcement was discovered: `"native"` (the chain's own announcer) or `
 
 > **stealthAddress**: `` `0x${string}` ``
 
-Defined in: [packages/opaque/src/types/indexer.ts:25](https://github.com/opaquecash/sdk/blob/1ac32abb86be54d81add3fae49381204ea1eb7c5/packages/opaque/src/types/indexer.ts#L25)
+Defined in: [packages/opaque/src/types/indexer.ts:25](https://github.com/opaquecash/sdk/blob/d653e273eb390dbec38241c20772af6021a1f8d8/packages/opaque/src/types/indexer.ts#L25)
 
 #### Inherited from
 
-[`OwnedStealthOutput`](OwnedStealthOutput.md).[`stealthAddress`](OwnedStealthOutput.md#stealthaddress)
+[`OwnedStealthOutput`](/sdk/api/@opaquecash/opaque/interfaces/OwnedStealthOutput.md).[`stealthAddress`](/sdk/api/@opaquecash/opaque/interfaces/OwnedStealthOutput.md#stealthaddress)
 
 ***
 
@@ -107,11 +107,11 @@ Defined in: [packages/opaque/src/types/indexer.ts:25](https://github.com/opaquec
 
 > **transactionHash**: `` `0x${string}` ``
 
-Defined in: [packages/opaque/src/types/indexer.ts:26](https://github.com/opaquecash/sdk/blob/1ac32abb86be54d81add3fae49381204ea1eb7c5/packages/opaque/src/types/indexer.ts#L26)
+Defined in: [packages/opaque/src/types/indexer.ts:26](https://github.com/opaquecash/sdk/blob/d653e273eb390dbec38241c20772af6021a1f8d8/packages/opaque/src/types/indexer.ts#L26)
 
 #### Inherited from
 
-[`OwnedStealthOutput`](OwnedStealthOutput.md).[`transactionHash`](OwnedStealthOutput.md#transactionhash)
+[`OwnedStealthOutput`](/sdk/api/@opaquecash/opaque/interfaces/OwnedStealthOutput.md).[`transactionHash`](/sdk/api/@opaquecash/opaque/interfaces/OwnedStealthOutput.md#transactionhash)
 
 ***
 
@@ -119,8 +119,8 @@ Defined in: [packages/opaque/src/types/indexer.ts:26](https://github.com/opaquec
 
 > **viewTag**: `number`
 
-Defined in: [packages/opaque/src/types/indexer.ts:29](https://github.com/opaquecash/sdk/blob/1ac32abb86be54d81add3fae49381204ea1eb7c5/packages/opaque/src/types/indexer.ts#L29)
+Defined in: [packages/opaque/src/types/indexer.ts:29](https://github.com/opaquecash/sdk/blob/d653e273eb390dbec38241c20772af6021a1f8d8/packages/opaque/src/types/indexer.ts#L29)
 
 #### Inherited from
 
-[`OwnedStealthOutput`](OwnedStealthOutput.md).[`viewTag`](OwnedStealthOutput.md#viewtag)
+[`OwnedStealthOutput`](/sdk/api/@opaquecash/opaque/interfaces/OwnedStealthOutput.md).[`viewTag`](/sdk/api/@opaquecash/opaque/interfaces/OwnedStealthOutput.md#viewtag)

@@ -8,23 +8,27 @@ This guide covers trait discovery, Groth16 proof generation, simulation, and sub
 ## Prerequisites
 
 - WASM module (`wasmModuleSpecifier`)
-- Owned announcements with PSR attestation metadata
+- Native announcement rows with V2 PSR attestation metadata
 - `snarkjs` (pulled in by `@opaquecash/psr-prover`)
 - Circuit artifacts (default: hosted on opaque.cash `/circuits/...`)
 
 ## Step 1: Discover traits
 
 ```ts
-const inbox = await client.scan({ chains: ["ethereum"] });
-const rows = inbox.map(/* convert to IndexerAnnouncement if needed */);
-const traits = await client.discoverTraits(rows);
+const chain = "ethereum" as const;
+const rows = await client.fetchAnnouncementRows(chain);
+const traits = await client.discoverTraitsV2(rows, { chain });
 
 if (traits.length === 0) {
-  throw new Error("No reputation traits found in inbox");
+  throw new Error("No V2 reputation traits found in inbox");
 }
 
 const trait = traits[0];
 ```
+
+`discoverTraitsV2` validates each `0xB2` marker against the chain's schema registry and
+returns only traits issued by an authorized schema authority or delegate. Fetch rows from
+the native chain, not UAB, because relayed payloads cannot carry the full V2 metadata.
 
 ## Step 2: Reconstruct the stealth signing key
 
@@ -63,6 +67,10 @@ const proofData = await client.generateReputationProof({
 
 // proofData: { proof, publicSignals, nullifier, attestationId }
 ```
+
+When `trait` comes from `discoverTraitsV2`, the SDK uses the trait's V2 Merkle leaf
+preimage fields automatically. You only need to pass `issuerPkX`, `traitDataHash`, or
+`nonce` yourself for custom witness construction.
 
 ## Step 5: Fetch a valid Merkle root
 
@@ -119,7 +127,7 @@ await client.submitReputationVerification("solana", {
 
 ```mermaid
 flowchart TD
-  A[scan inbox] --> B[discoverTraits]
+  A[fetch native announcements] --> B[discoverTraitsV2]
   B --> C[getStealthSignerPrivateKeyForReputationTrait]
   C --> D[generateReputationProof]
   D --> E[fetchLatestValidReputationRoot]

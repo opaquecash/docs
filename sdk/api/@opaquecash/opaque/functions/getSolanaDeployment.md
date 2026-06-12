@@ -1,18 +1,18 @@
 # Function: getSolanaDeployment()
 
-> **getSolanaDeployment**(`cluster?`): [`SolanaDeployment`](../interfaces/SolanaDeployment.md)
+> **getSolanaDeployment**(`cluster?`): [`SolanaDeployment`](/sdk/api/@opaquecash/opaque/interfaces/SolanaDeployment.md)
 
 Defined in: packages/stealth-chain-solana/dist/programs.d.ts:43
 
-Resolve the bundled [SolanaDeployment](../interfaces/SolanaDeployment.md) for a cluster (default `devnet`), or throw
+Resolve the bundled [SolanaDeployment](/sdk/api/@opaquecash/opaque/interfaces/SolanaDeployment.md) for a cluster (default `devnet`), or throw
 if no addresses are bundled for it.
 
 ## Parameters
 
 ### cluster?
 
-[`SolanaCluster`](../type-aliases/SolanaCluster.md)
+[`SolanaCluster`](/sdk/api/@opaquecash/opaque/type-aliases/SolanaCluster.md)
 
 ## Returns
 
-[`SolanaDeployment`](../interfaces/SolanaDeployment.md)
+[`SolanaDeployment`](/sdk/api/@opaquecash/opaque/interfaces/SolanaDeployment.md)

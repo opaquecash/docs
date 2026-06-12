@@ -1,6 +1,6 @@
 # Function: requireUabDeployment()
 
-> **requireUabDeployment**(`chainId`): [`UabDeployment`](../interfaces/UabDeployment.md)
+> **requireUabDeployment**(`chainId`): [`UabDeployment`](/sdk/api/@opaquecash/opaque/interfaces/UabDeployment.md)
 
 Defined in: packages/uab/dist/config.d.ts:29
 
@@ -12,4 +12,4 @@ Defined in: packages/uab/dist/config.d.ts:29
 
 ## Returns
 
-[`UabDeployment`](../interfaces/UabDeployment.md)
+[`UabDeployment`](/sdk/api/@opaquecash/opaque/interfaces/UabDeployment.md)

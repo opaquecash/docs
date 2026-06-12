@@ -1,6 +1,6 @@
 # Function: parseAttestationPda()
 
-> **parseAttestationPda**(`data`): [`ParsedAttestationPda`](../interfaces/ParsedAttestationPda.md) \| `null`
+> **parseAttestationPda**(`data`): [`ParsedAttestationPda`](/sdk/api/@opaquecash/opaque/namespaces/solanaPsr/interfaces/ParsedAttestationPda.md) \| `null`
 
 Defined in: packages/psr-chain-solana/dist/attestation.d.ts:40
 
@@ -12,4 +12,4 @@ Defined in: packages/psr-chain-solana/dist/attestation.d.ts:40
 
 ## Returns
 
-[`ParsedAttestationPda`](../interfaces/ParsedAttestationPda.md) \| `null`
+[`ParsedAttestationPda`](/sdk/api/@opaquecash/opaque/namespaces/solanaPsr/interfaces/ParsedAttestationPda.md) \| `null`

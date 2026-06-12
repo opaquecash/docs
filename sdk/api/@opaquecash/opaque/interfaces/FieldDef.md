@@ -22,6 +22,6 @@ Defined in: packages/psr-core/dist/schema.d.ts:9
 
 ### type
 
-> **type**: [`FieldType`](../type-aliases/FieldType.md)
+> **type**: [`FieldType`](/sdk/api/@opaquecash/opaque/type-aliases/FieldType.md)
 
 Defined in: packages/psr-core/dist/schema.d.ts:10

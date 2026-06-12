@@ -24,6 +24,6 @@ Merkle root (decimal or hex string).
 
 ### proofData
 
-> **proofData**: [`ProofData`](ProofData.md)
+> **proofData**: [`ProofData`](/sdk/api/@opaquecash/opaque/interfaces/ProofData.md)
 
 Defined in: packages/psr-chain/dist/submit.d.ts:18

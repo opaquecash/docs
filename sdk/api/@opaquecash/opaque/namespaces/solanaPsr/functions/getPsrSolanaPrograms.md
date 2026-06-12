@@ -1,6 +1,6 @@
 # Function: getPsrSolanaPrograms()
 
-> **getPsrSolanaPrograms**(`cluster?`): [`PsrSolanaPrograms`](../interfaces/PsrSolanaPrograms.md)
+> **getPsrSolanaPrograms**(`cluster?`): [`PsrSolanaPrograms`](/sdk/api/@opaquecash/opaque/namespaces/solanaPsr/interfaces/PsrSolanaPrograms.md)
 
 Defined in: packages/psr-chain-solana/dist/programs.d.ts:15
 
@@ -10,8 +10,8 @@ Resolve the PSR program ids for a cluster (default devnet) from the bundled depl
 
 ### cluster?
 
-[`SolanaCluster`](../../../type-aliases/SolanaCluster.md)
+[`SolanaCluster`](/sdk/api/@opaquecash/opaque/type-aliases/SolanaCluster.md)
 
 ## Returns
 
-[`PsrSolanaPrograms`](../interfaces/PsrSolanaPrograms.md)
+[`PsrSolanaPrograms`](/sdk/api/@opaquecash/opaque/namespaces/solanaPsr/interfaces/PsrSolanaPrograms.md)

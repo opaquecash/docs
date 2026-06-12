@@ -2,7 +2,7 @@
 
 Defined in: packages/stealth-chain/dist/adapter.d.ts:14
 
-Construction options for [EvmAdapter](../classes/EvmAdapter.md).
+Construction options for [EvmAdapter](/sdk/api/@opaquecash/opaque/classes/EvmAdapter.md).
 
 ## Properties
 
@@ -20,7 +20,7 @@ Defined in: packages/stealth-chain/dist/adapter.d.ts:20
 
 > `optional` **evmChainId?**: `number`
 
-Defined in: packages/stealth-chain/dist/adapter.d.ts:24
+Defined in: packages/stealth-chain/dist/adapter.d.ts:30
 
 Underlying EVM chain id (e.g. 11155111 Sepolia); informational. Wormhole id is fixed at 2.
 
@@ -30,7 +30,7 @@ Underlying EVM chain id (e.g. 11155111 Sepolia); informational. Wormhole id is f
 
 > `optional` **fromBlock?**: `bigint`
 
-Defined in: packages/stealth-chain/dist/adapter.d.ts:28
+Defined in: packages/stealth-chain/dist/adapter.d.ts:34
 
 Lower-bound block for fetch/watch when not overridden per call (default 0).
 
@@ -1628,7 +1628,7 @@ const feeHistory = await client.getFeeHistory({
 
 > **getFilterChanges**: \<`filterType`, `abi`, `eventName`, `strict`, `fromBlock`, `toBlock`\>(`args`) => `Promise`\<`GetFilterChangesReturnType`\<`filterType`, `abi`, `eventName`, `strict`, `fromBlock`, `toBlock`\>\>
 
-Returns a list of logs or hashes based on a [Filter](/docs/glossary/terms#filter) since the last time it was called.
+Returns a list of logs or hashes based on a [Filter](https://viem.sh/docs/glossary/terms#filter) since the last time it was called.
 
 - Docs: https://viem.sh/docs/actions/public/getFilterChanges
 - JSON-RPC Methods: [`eth_getFilterChanges`](https://ethereum.org/en/developers/docs/apis/json-rpc/#eth_getfilterchanges)
@@ -3245,7 +3245,7 @@ const unwatch = await client.watchPendingTransactions({
 
 > **registryAddress**: `` `0x${string}` ``
 
-Defined in: packages/stealth-chain/dist/adapter.d.ts:22
+Defined in: packages/stealth-chain/dist/adapter.d.ts:28
 
 `StealthMetaAddressRegistry` address.
 
@@ -3265,6 +3265,18 @@ RPC URL to build a public client from when `publicClient` is omitted.
 
 > `optional` **schemeId?**: `bigint`
 
-Defined in: packages/stealth-chain/dist/adapter.d.ts:26
+Defined in: packages/stealth-chain/dist/adapter.d.ts:32
 
 EIP-5564 scheme id for registry reads (default 1, secp256k1).
+
+***
+
+### uabSenderAddress?
+
+> `optional` **uabSenderAddress?**: `` `0x${string}` ``
+
+Defined in: packages/stealth-chain/dist/adapter.d.ts:26
+
+`UABSender` address. `announceWithRelay` mirrors the ERC-5564 `Announcement` event from
+this contract (the announcer singleton is left untouched), so relay-sent payments are
+only locally scannable when its logs are read too.

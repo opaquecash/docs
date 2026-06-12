@@ -1,6 +1,6 @@
 # Function: decodeUabPayload()
 
-> **decodeUabPayload**(`bytes`): [`UabPayload`](../interfaces/UabPayload.md)
+> **decodeUabPayload**(`bytes`): [`UabPayload`](/sdk/api/@opaquecash/opaque/interfaces/UabPayload.md)
 
 Defined in: packages/stealth-core/dist/payload.d.ts:52
 
@@ -14,4 +14,4 @@ Decode a 96-byte cross-chain announcement body.
 
 ## Returns
 
-[`UabPayload`](../interfaces/UabPayload.md)
+[`UabPayload`](/sdk/api/@opaquecash/opaque/interfaces/UabPayload.md)

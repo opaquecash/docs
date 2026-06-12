@@ -4,7 +4,7 @@
 
 Defined in: packages/psr-chain-solana/dist/reputation.d.ts:33
 
-Build a `verify_reputation` instruction. PDAs are derived by the caller (or [submitReputationProof](submitReputationProof.md)).
+Build a `verify_reputation` instruction. PDAs are derived by the caller (or [submitReputationProof](/sdk/api/@opaquecash/opaque/namespaces/solanaPsr/functions/submitReputationProof.md)).
 
 ## Parameters
 
@@ -12,7 +12,7 @@ Build a `verify_reputation` instruction. PDAs are derived by the caller (or [sub
 
 #### attestationId
 
-`number` \| `bigint`
+`string` \| `number` \| `bigint`
 
 #### configPda
 

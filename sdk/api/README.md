@@ -2,5 +2,5 @@
 
 ## Packages
 
-- [@opaquecash/opaque](@opaquecash/opaque/README.md)
-- [@opaquecash/react](@opaquecash/react/README.md)
+- [@opaquecash/opaque](/sdk/api/@opaquecash/opaque/README.md)
+- [@opaquecash/react](/sdk/api/@opaquecash/react/README.md)

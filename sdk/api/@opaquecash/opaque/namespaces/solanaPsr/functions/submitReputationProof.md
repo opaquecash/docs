@@ -17,7 +17,7 @@ nullifier is unused, builds the instruction, then signs (via `signTransaction`) 
 
 #### attestationId
 
-`number` \| `bigint`
+`string` \| `number` \| `bigint`
 
 #### externalNullifier
 
@@ -42,7 +42,7 @@ V2 `nullifier_hash` public input (`publicSignals[3]` =
 
 #### proof
 
-[`Groth16ProofInput`](../interfaces/Groth16ProofInput.md)
+[`Groth16ProofInput`](/sdk/api/@opaquecash/opaque/namespaces/solanaPsr/interfaces/Groth16ProofInput.md)
 
 #### publicKey
 

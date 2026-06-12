@@ -1,6 +1,6 @@
 # Interface: PrepareStealthSendResult
 
-Defined in: [packages/opaque/src/client.ts:484](https://github.com/opaquecash/sdk/blob/1ac32abb86be54d81add3fae49381204ea1eb7c5/packages/opaque/src/client.ts#L484)
+Defined in: [packages/opaque/src/client.ts:501](https://github.com/opaquecash/sdk/blob/d653e273eb390dbec38241c20772af6021a1f8d8/packages/opaque/src/client.ts#L501)
 
 Result of preparing a stealth send (ephemeral material + announce fields).
 
@@ -10,7 +10,7 @@ Result of preparing a stealth send (ephemeral material + announce fields).
 
 > **ephemeralPrivateKey**: `Uint8Array`
 
-Defined in: [packages/opaque/src/client.ts:491](https://github.com/opaquecash/sdk/blob/1ac32abb86be54d81add3fae49381204ea1eb7c5/packages/opaque/src/client.ts#L491)
+Defined in: [packages/opaque/src/client.ts:508](https://github.com/opaquecash/sdk/blob/d653e273eb390dbec38241c20772af6021a1f8d8/packages/opaque/src/client.ts#L508)
 
 32-byte ephemeral private key — store securely if you need ghost / later announce.
 
@@ -20,7 +20,7 @@ Defined in: [packages/opaque/src/client.ts:491](https://github.com/opaquecash/sd
 
 > **ephemeralPublicKey**: `Uint8Array`
 
-Defined in: [packages/opaque/src/client.ts:489](https://github.com/opaquecash/sdk/blob/1ac32abb86be54d81add3fae49381204ea1eb7c5/packages/opaque/src/client.ts#L489)
+Defined in: [packages/opaque/src/client.ts:506](https://github.com/opaquecash/sdk/blob/d653e273eb390dbec38241c20772af6021a1f8d8/packages/opaque/src/client.ts#L506)
 
 33-byte compressed ephemeral public key.
 
@@ -30,7 +30,7 @@ Defined in: [packages/opaque/src/client.ts:489](https://github.com/opaquecash/sd
 
 > **metadata**: `Uint8Array`
 
-Defined in: [packages/opaque/src/client.ts:493](https://github.com/opaquecash/sdk/blob/1ac32abb86be54d81add3fae49381204ea1eb7c5/packages/opaque/src/client.ts#L493)
+Defined in: [packages/opaque/src/client.ts:510](https://github.com/opaquecash/sdk/blob/d653e273eb390dbec38241c20772af6021a1f8d8/packages/opaque/src/client.ts#L510)
 
 Metadata bytes for `announce` (view tag byte; extend with WASM for PSR).
 
@@ -40,7 +40,7 @@ Metadata bytes for `announce` (view tag byte; extend with WASM for PSR).
 
 > **schemeId**: `bigint`
 
-Defined in: [packages/opaque/src/client.ts:485](https://github.com/opaquecash/sdk/blob/1ac32abb86be54d81add3fae49381204ea1eb7c5/packages/opaque/src/client.ts#L485)
+Defined in: [packages/opaque/src/client.ts:502](https://github.com/opaquecash/sdk/blob/d653e273eb390dbec38241c20772af6021a1f8d8/packages/opaque/src/client.ts#L502)
 
 ***
 
@@ -48,7 +48,7 @@ Defined in: [packages/opaque/src/client.ts:485](https://github.com/opaquecash/sd
 
 > **stealthAddress**: `` `0x${string}` ``
 
-Defined in: [packages/opaque/src/client.ts:486](https://github.com/opaquecash/sdk/blob/1ac32abb86be54d81add3fae49381204ea1eb7c5/packages/opaque/src/client.ts#L486)
+Defined in: [packages/opaque/src/client.ts:503](https://github.com/opaquecash/sdk/blob/d653e273eb390dbec38241c20772af6021a1f8d8/packages/opaque/src/client.ts#L503)
 
 ***
 
@@ -56,7 +56,7 @@ Defined in: [packages/opaque/src/client.ts:486](https://github.com/opaquecash/sd
 
 > **stealthPubKey**: `Uint8Array`
 
-Defined in: [packages/opaque/src/client.ts:498](https://github.com/opaquecash/sdk/blob/1ac32abb86be54d81add3fae49381204ea1eb7c5/packages/opaque/src/client.ts#L498)
+Defined in: [packages/opaque/src/client.ts:515](https://github.com/opaquecash/sdk/blob/d653e273eb390dbec38241c20772af6021a1f8d8/packages/opaque/src/client.ts#L515)
 
 Uncompressed (65-byte) stealth public-key point. Needed to derive the Solana destination
 account (`deriveStealthSolanaAddress`); not required for the EVM `announce`.
@@ -67,4 +67,4 @@ account (`deriveStealthSolanaAddress`); not required for the EVM `announce`.
 
 > **viewTag**: `number`
 
-Defined in: [packages/opaque/src/client.ts:487](https://github.com/opaquecash/sdk/blob/1ac32abb86be54d81add3fae49381204ea1eb7c5/packages/opaque/src/client.ts#L487)
+Defined in: [packages/opaque/src/client.ts:504](https://github.com/opaquecash/sdk/blob/d653e273eb390dbec38241c20772af6021a1f8d8/packages/opaque/src/client.ts#L504)

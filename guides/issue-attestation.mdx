@@ -29,6 +29,9 @@ const { txHash, uid, stealthAddressHash } = await client.issueAttestation("ether
 console.log({ txHash, uid, stealthAddressHash });
 ```
 
+The announcement uses the V2 `0xB2` metadata layout, so recipients discover it with
+`discoverTraitsV2(rows, { chain })`.
+
 ## Issue to self (E2E test pattern)
 
 ```ts
@@ -55,9 +58,11 @@ recipient: "0x" + "ab".repeat(20)
 recipient: "0x" + "cd".repeat(32)
 ```
 
-## Low-level issuer announce (manual)
+## Legacy V1 issuer announce helpers
 
-For custom flows without `issueAttestation`:
+These helpers encode the older V1 `0xA7` attestation id marker. Keep them only for legacy
+integrations. For schema-bound V2 attestations, prefer `issueAttestation`, which submits
+the attestation and publishes the matching V2 announcement.
 
 ```ts
 const prep = client.prepareReputationAssignment(recipientMeta, attestationId);

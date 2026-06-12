@@ -10,7 +10,7 @@ Reconstruct the EIP-5564 `metadata` (view tag + tail) for the WASM scanner.
 
 ### p
 
-[`UabPayload`](../interfaces/UabPayload.md)
+[`UabPayload`](/sdk/api/@opaquecash/opaque/interfaces/UabPayload.md)
 
 ## Returns
 

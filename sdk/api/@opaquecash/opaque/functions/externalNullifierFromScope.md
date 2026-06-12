@@ -14,7 +14,7 @@ Must stay consistent with how your circuit expects the external nullifier input.
 
 `string`
 
-Output of [buildActionScope](buildActionScope.md).
+Output of [buildActionScope](/sdk/api/@opaquecash/opaque/functions/buildActionScope.md).
 
 ## Returns
 

@@ -1,8 +1,8 @@
 # Function: getChainDeployment()
 
-> **getChainDeployment**(`chainId`): [`OpaqueChainDeployment`](../interfaces/OpaqueChainDeployment.md) \| `undefined`
+> **getChainDeployment**(`chainId`): [`OpaqueChainDeployment`](/sdk/api/@opaquecash/opaque/interfaces/OpaqueChainDeployment.md) \| `undefined`
 
-Defined in: [packages/opaque/src/chains.ts:58](https://github.com/opaquecash/sdk/blob/1ac32abb86be54d81add3fae49381204ea1eb7c5/packages/opaque/src/chains.ts#L58)
+Defined in: [packages/opaque/src/chains.ts:58](https://github.com/opaquecash/sdk/blob/d653e273eb390dbec38241c20772af6021a1f8d8/packages/opaque/src/chains.ts#L58)
 
 Resolve deployment metadata for a chain, or `undefined` if unknown.
 
@@ -14,4 +14,4 @@ Resolve deployment metadata for a chain, or `undefined` if unknown.
 
 ## Returns
 
-[`OpaqueChainDeployment`](../interfaces/OpaqueChainDeployment.md) \| `undefined`
+[`OpaqueChainDeployment`](/sdk/api/@opaquecash/opaque/interfaces/OpaqueChainDeployment.md) \| `undefined`

@@ -91,23 +91,29 @@ Build a viem `PrivateKeyAccount` from the bytes and sign a transfer from `output
 
 ## PSR trait discovery
 
-Scan attestation markers from the same announcement set:
+Fetch native announcement rows for the chain and scan V2 attestation markers:
 
 ```ts
-const traits = await client.discoverTraits(indexerRows);
-// alias: getReputationTraitsFromAnnouncements
+const chain = "ethereum" as const;
+const rows = await client.fetchAnnouncementRows(chain);
+const traits = await client.discoverTraitsV2(rows, { chain });
 
 for (const t of traits) {
-  // DiscoveredTrait: { attestationId, stealthAddress, txHash, blockNumber, ephemeralPubkey, discoveredAt }
-  console.log(t.attestationId, t.stealthAddress, t.txHash);
+  console.log(t.schemaName, t.schemaId, t.attestationUid, t.stealthAddress);
 }
 ```
 
-The trait carries the on-chain attestation id and provenance; fetch the attestation
-body (schema, field values) from the chain's attestation registry when you need it.
+`DiscoveredTrait` includes the shared fields (`attestationId`, `stealthAddress`, `txHash`,
+`blockNumber`, `discoveredAt`, `ephemeralPubkey`) plus V2 fields (`schemaId`,
+`schemaName`, `issuer`, `attestationUid`, `dataHex`, `nonce`, `merkleLeafPreimage`,
+`isValid`, `issuerAuthorized`). `getStealthSignerPrivateKeyForReputationTrait` needs the
+`ephemeralPubkey` field returned by the scanner.
 
-Witness JSON for proof generation:
+Use `discoverTraits(rows)` or its alias `getReputationTraitsFromAnnouncements(rows)` only
+for legacy V1 `0xA7` markers. New attestations created by `issueAttestation` use V2.
+
+Low-level witness JSON for custom prover flows:
 
 ```ts
-const json = client.announcementsJsonForReputationWitness(indexerRows);
+const json = client.announcementsJsonForReputationWitness(rows);
 ```

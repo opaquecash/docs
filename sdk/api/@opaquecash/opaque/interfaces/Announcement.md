@@ -2,7 +2,7 @@
 
 Defined in: packages/adapter/dist/index.d.ts:29
 
-A chain-neutral stealth announcement, as surfaced by a [ChainAdapter](ChainAdapter.md).
+A chain-neutral stealth announcement, as surfaced by a [ChainAdapter](/sdk/api/@opaquecash/opaque/interfaces/ChainAdapter.md).
 
 Mirrors `opaque_scanner::dksap::Announcement`. Each adapter decodes its chain's native
 event/log into this shape so the cheap view-tag filter and the expensive DKSAP recovery

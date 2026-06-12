@@ -4,8 +4,8 @@ Defined in: packages/adapter/dist/index.d.ts:75
 
 Abstracts chain-specific announcement retrieval and registry reads so the universal
 scan loop is written once. The universal scanner iterates a set of adapters, calls
-[ChainAdapter.fetchAnnouncements](#fetchannouncements), then runs the shared view-tag filter and DKSAP
-recovery on the returned [Announcement](Announcement.md)s.
+[ChainAdapter.fetchAnnouncements](/sdk/api/@opaquecash/opaque/interfaces/ChainAdapter.md#fetchannouncements), then runs the shared view-tag filter and DKSAP
+recovery on the returned [Announcement](/sdk/api/@opaquecash/opaque/interfaces/Announcement.md)s.
 
 ## Properties
 
@@ -31,7 +31,7 @@ Human-readable adapter name, e.g. `"ethereum"` or `"solana"`.
 
 ### fetchAnnouncements()
 
-> **fetchAnnouncements**(`opts?`): `Promise`\<[`Announcement`](Announcement.md)[]\>
+> **fetchAnnouncements**(`opts?`): `Promise`\<[`Announcement`](/sdk/api/@opaquecash/opaque/interfaces/Announcement.md)[]\>
 
 Defined in: packages/adapter/dist/index.d.ts:81
 
@@ -41,11 +41,11 @@ Fetch announcements in chain-neutral form (order is adapter-defined).
 
 ##### opts?
 
-[`FetchAnnouncementsOptions`](FetchAnnouncementsOptions.md)
+[`FetchAnnouncementsOptions`](/sdk/api/@opaquecash/opaque/interfaces/FetchAnnouncementsOptions.md)
 
 #### Returns
 
-`Promise`\<[`Announcement`](Announcement.md)[]\>
+`Promise`\<[`Announcement`](/sdk/api/@opaquecash/opaque/interfaces/Announcement.md)[]\>
 
 ***
 
@@ -102,7 +102,7 @@ Optional live subscription to new announcements; returns an unsubscribe function
 
 ##### handlers
 
-[`AnnouncementHandlers`](AnnouncementHandlers.md)
+[`AnnouncementHandlers`](/sdk/api/@opaquecash/opaque/interfaces/AnnouncementHandlers.md)
 
 #### Returns
 

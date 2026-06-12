@@ -24,7 +24,7 @@ Defined in: packages/uab/dist/receiver.d.ts:12
 
 ### payload
 
-> **payload**: [`UabPayload`](UabPayload.md)
+> **payload**: [`UabPayload`](/sdk/api/@opaquecash/opaque/interfaces/UabPayload.md)
 
 Defined in: packages/uab/dist/receiver.d.ts:8
 

@@ -1,6 +1,6 @@
 # Interface: EvmUnifiedSigner
 
-Defined in: [packages/opaque/src/signer.ts:14](https://github.com/opaquecash/sdk/blob/1ac32abb86be54d81add3fae49381204ea1eb7c5/packages/opaque/src/signer.ts#L14)
+Defined in: [packages/opaque/src/signer.ts:14](https://github.com/opaquecash/sdk/blob/d653e273eb390dbec38241c20772af6021a1f8d8/packages/opaque/src/signer.ts#L14)
 
 An Ethereum wallet in unified shape: EIP-1193 provider or a pre-built viem WalletClient.
 
@@ -10,7 +10,7 @@ An Ethereum wallet in unified shape: EIP-1193 provider or a pre-built viem Walle
 
 > **address**: `` `0x${string}` ``
 
-Defined in: [packages/opaque/src/signer.ts:17](https://github.com/opaquecash/sdk/blob/1ac32abb86be54d81add3fae49381204ea1eb7c5/packages/opaque/src/signer.ts#L17)
+Defined in: [packages/opaque/src/signer.ts:17](https://github.com/opaquecash/sdk/blob/d653e273eb390dbec38241c20772af6021a1f8d8/packages/opaque/src/signer.ts#L17)
 
 Account that signs the setup message and transactions.
 
@@ -20,7 +20,7 @@ Account that signs the setup message and transactions.
 
 > **chain**: `"ethereum"`
 
-Defined in: [packages/opaque/src/signer.ts:15](https://github.com/opaquecash/sdk/blob/1ac32abb86be54d81add3fae49381204ea1eb7c5/packages/opaque/src/signer.ts#L15)
+Defined in: [packages/opaque/src/signer.ts:15](https://github.com/opaquecash/sdk/blob/d653e273eb390dbec38241c20772af6021a1f8d8/packages/opaque/src/signer.ts#L15)
 
 ***
 
@@ -28,7 +28,7 @@ Defined in: [packages/opaque/src/signer.ts:15](https://github.com/opaquecash/sdk
 
 > `optional` **provider?**: `object`
 
-Defined in: [packages/opaque/src/signer.ts:19](https://github.com/opaquecash/sdk/blob/1ac32abb86be54d81add3fae49381204ea1eb7c5/packages/opaque/src/signer.ts#L19)
+Defined in: [packages/opaque/src/signer.ts:19](https://github.com/opaquecash/sdk/blob/d653e273eb390dbec38241c20772af6021a1f8d8/packages/opaque/src/signer.ts#L19)
 
 EIP-1193 provider (`window.ethereum`, a connector bridge, …).
 
@@ -90,7 +90,7 @@ EIP-1193 provider (`window.ethereum`, a connector bridge, …).
 
 > `optional` **walletClient?**: `object`
 
-Defined in: [packages/opaque/src/signer.ts:21](https://github.com/opaquecash/sdk/blob/1ac32abb86be54d81add3fae49381204ea1eb7c5/packages/opaque/src/signer.ts#L21)
+Defined in: [packages/opaque/src/signer.ts:21](https://github.com/opaquecash/sdk/blob/d653e273eb390dbec38241c20772af6021a1f8d8/packages/opaque/src/signer.ts#L21)
 
 Alternative to `provider`: a viem WalletClient (e.g. wagmi's, or `privateKeyToAccount`).
 

@@ -307,7 +307,7 @@ for (const tx of client.buildDummyAnnouncementTransactions(3)) {
 
 Fetch ALL native announcements on a chain as indexer-shaped rows, unfiltered, with full
 on-chain `metadata`. Raw input for the metadata-aware scanners (`filterOwnedAnnouncements`,
-`discoverTraits`); unlike `scan`, nothing is dropped.
+`discoverTraitsV2`, and legacy `discoverTraits`); unlike `scan`, nothing is dropped.
 
 ```ts
 const rows = await client.fetchAnnouncementRows("ethereum", {

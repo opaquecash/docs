@@ -10,7 +10,7 @@ Flatten a Groth16 proof into the verifier's 64/128/64-byte big-endian layout.
 
 ### proof
 
-[`Groth16ProofInput`](../interfaces/Groth16ProofInput.md)
+[`Groth16ProofInput`](/sdk/api/@opaquecash/opaque/namespaces/solanaPsr/interfaces/Groth16ProofInput.md)
 
 ## Returns
 
