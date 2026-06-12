@@ -85,7 +85,8 @@
               "guides/issue-attestation",
               "guides/scan-and-sweep",
               "guides/generate-proof",
-              "guides/ons-naming"
+              "guides/ons-naming",
+              "guides/privacy-pool"
             ]
           },
           {

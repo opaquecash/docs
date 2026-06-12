@@ -1,0 +1,103 @@
+---
+title: Amount privacy (privacy pool)
+description: Deposit and withdraw through the Opaque privacy pool with association-set compliance.
+---
+
+The privacy pool adds **amount privacy** on top of stealth addresses: deposit a
+value-bearing commitment, then withdraw to a fresh stealth address with no on-chain link
+between deposit and withdrawal. It is the
+[Privacy Pools](https://github.com/opaquecash/spec/blob/main/privacy-pool.md) construction
+(Buterin, Illum, Nadler, Schär, Soleimani), **not a mixer**: a withdrawal requires a
+zero-knowledge proof that the deposit belongs to an Association Set Provider (ASP)-curated
+"clean" set, so honest users cryptographically dissociate from illicit funds.
+
+<Warning>
+**Testnet only, unaudited.** The circuits, contracts, and trusted setup are not audited
+and the setup is a single-contributor testnet ceremony. Do not deposit real value.
+Mainnet is gated on circuit + contract audits, a production trusted-setup ceremony, and a
+legal opinion (see the ethereum repo's `DISCLAIMER.md` and
+`security/privacy-pool-audit-plan.md`).
+</Warning>
+
+## How it works
+
+```
+deposit:  pick nullifier, secret  →  precommitment = Poseidon(nullifier, secret)
+          deposit(precommitment){value}  →  contract assigns label = Poseidon(scope, index),
+          inserts commitment = Poseidon(value, label, precommitment) into the state tree
+ASP:      provider reviews the deposit; if clean, adds `label` to the association set
+withdraw: prove (commitment ∈ state tree) ∧ (label ∈ association set) ∧ nullifier ∧
+          value-accounting, to a FRESH stealth address  →  paid out, remainder re-inserted
+```
+
+The commitment scheme, trees, and proof are specified in
+[privacy-pool.md](https://github.com/opaquecash/spec/blob/main/privacy-pool.md). The SDK's
+Poseidon commitments and Merkle trees are byte-identical to the circuit and contract.
+
+## Deposit
+
+```ts
+import { buildPoolCrypto, generateDepositNote, buildDepositTx } from "@opaquecash/privacy-pool";
+import { randomBytes } from "@noble/hashes/utils";
+
+const crypto = await buildPoolCrypto();
+const note = generateDepositNote(crypto, randomBytes); // { nullifier, secret, precommitment }
+
+const tx = buildDepositTx(poolAddress, note, parseEther("1"));
+await wallet.sendTransaction(tx); // value = 1 ETH
+
+// PERSIST `note` (nullifier + secret) and the assigned `label` (from the Deposit event)
+// — they are required to withdraw and are never recoverable from the chain alone.
+```
+
+## Withdraw
+
+Reconstruct the state tree from the pool's `Deposit` commitments and the association tree
+from the ASP's approved labels, then prove and submit:
+
+```ts
+import {
+  buildWithdrawalWitness,
+  generateWithdrawalProof,
+  buildWithdrawTx,
+} from "@opaquecash/privacy-pool";
+
+// The contract binds the payout into the proof via `context`; read it first.
+const params = { recipient: freshStealthAddress, feeRecipient, fee };
+const context = await publicClient.readContract({
+  address: poolAddress, abi: opaquePrivacyPoolAbi, functionName: "context", args: [params],
+});
+
+const witness = buildWithdrawalWitness(crypto, {
+  note: { value, label, nullifier, secret },
+  withdrawnValue: parseEther("0.4"),
+  newNullifier, newSecret,            // fresh openings for the remainder
+  stateLeaves, stateIndex,            // from the pool's Deposit events
+  aspLeaves, aspIndex,                // from the ASP's approved labels
+  context,
+});
+
+const { proof } = await generateWithdrawalProof(witness, {
+  wasmPath: "withdrawal.wasm",
+  zkeyPath: "withdrawal_final.zkey",
+});
+
+const tx = buildWithdrawTx(poolAddress, proof, witness.publics, params);
+await wallet.sendTransaction(tx); // the recipient receives withdrawnValue - fee
+```
+
+The remainder (`value - withdrawnValue`) is re-inserted as a fresh commitment under the
+**same label**, so it stays in the association set; persist `(remainder, label,
+newNullifier, newSecret)` to spend it later.
+
+## Compose with recipient privacy
+
+Withdraw to a fresh stealth address resolved from a recipient's meta-address (CSAP /
+[ONS](/guides/ons-naming)): amount privacy (pool) and recipient privacy (stealth address)
+compose, so neither the payer↔payee link nor the deposit↔withdrawal link is on-chain.
+
+## Policy
+
+There is **no hosted one-click pool UI**. Pool access is via this SDK and self-hosted
+integrators only. See the [relayer market](/sdk/relayer-client) to also hide the gas
+wallet that submits the withdrawal.
