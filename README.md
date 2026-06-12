@@ -69,3 +69,7 @@ It is intentionally not wired into the site navigation; the hand-written pages u
 ## Support
 
 Questions or corrections: open an issue or PR here, or email [hello@collinsadi.xyz](mailto:hello@collinsadi.xyz).
+
+## License
+
+MIT.
