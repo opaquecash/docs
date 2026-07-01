@@ -131,7 +131,10 @@ const sweep = await client.buildGaslessTokenSweep({
 ```
 
 On Solana, pass the relayer's `feePayer`; the returned transaction is partially signed by
-the stealth key, and the relayer co-signs as fee payer:
+the stealth key, and the relayer co-signs as fee payer. The `fee` is split in the same
+signed transaction: the destination receives `amount - fee` and the relayer's token
+account receives `fee`, so the relayer is reimbursed in-token for the gas it fronts
+(`sweep.fee` / `sweep.destinationAmount` report the split):
 
 ```ts
 const sweep = await client.buildGaslessTokenSweep({
@@ -139,12 +142,35 @@ const sweep = await client.buildGaslessTokenSweep({
   chain: "solana",
   token: "EPjF...USDCmint",
   destination: "FreshOwner...base58",
-  fee: 50_000n,
+  fee: 50_000n,                       // transferred to the relayer's ATA
   deadline: 0n,                       // unused on Solana
-  feePayer: "RelayerPubkey...base58",
+  feePayer: "RelayerPubkey...base58", // read it from the relayer's /v1/sweep/info
 });
-// Relayer: submitSolanaGaslessSweep(connection, sweep.transactionBase64, relayerKeypair)
 ```
+
+### Submitting to a relayer node
+
+An `opaque-relayer` node serves the sweep directly over HTTP — no job, bid, or payload
+round. Discover its per-chain fee payer / forwarder with `getSweepInfo`, then POST the
+built sweep with `postGaslessSweep` (both from `@opaquecash/relayer-client`):
+
+```ts
+import {
+  getSweepInfo,
+  postGaslessSweep,
+  gaslessSweepSubmission,
+} from "@opaquecash/relayer-client";
+
+const gateway = { baseUrl: "http://relayer.example:8787" };
+const info = await getSweepInfo(gateway);   // { chains: [{ chain, operator, forwarder? }] }
+
+const { tx } = await postGaslessSweep(gateway, gaslessSweepSubmission(sweep));
+```
+
+The node fronts the gas, is reimbursed the in-token `fee`, and returns the confirmed
+transaction id. If it rejects the sweep (wrong forwarder, wrong fee payer, or an
+under-priced fee), the error message says why — rebuild with the values from
+`/v1/sweep/info` and retry.
 
 ## Manual key reconstruction
 

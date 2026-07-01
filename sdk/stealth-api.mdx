@@ -395,7 +395,9 @@ const { chain, tx } = await client.sweep({
 });
 ```
 
-For a stealth address holding a token but no gas, use `buildGaslessTokenSweep` and a relayer
+For a stealth address holding a token but no gas, use `buildGaslessTokenSweep` and submit
+the result to a relayer node with `postGaslessSweep` from `@opaquecash/relayer-client`; the
+relayer fronts the gas and is reimbursed `fee` in-token on both chains
 (see [Gasless token sweep](/guides/scan-and-sweep#gasless-token-sweep)).
 
 ---
