@@ -1659,7 +1659,7 @@ const feeHistory = await client.getFeeHistory({
 
 > **getFilterChanges**: \<`filterType`, `abi`, `eventName`, `strict`, `fromBlock`, `toBlock`\>(`args`) => `Promise`\<`GetFilterChangesReturnType`\<`filterType`, `abi`, `eventName`, `strict`, `fromBlock`, `toBlock`\>\>
 
-Returns a list of logs or hashes based on a [Filter](https://viem.sh/docs/glossary/terms#filter) since the last time it was called.
+Returns a list of logs or hashes based on a [Filter](/docs/glossary/terms#filter) since the last time it was called.
 
 - Docs: https://viem.sh/docs/actions/public/getFilterChanges
 - JSON-RPC Methods: [`eth_getFilterChanges`](https://ethereum.org/en/developers/docs/apis/json-rpc/#eth_getfilterchanges)

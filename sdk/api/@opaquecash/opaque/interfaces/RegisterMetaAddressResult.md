@@ -1,6 +1,6 @@
 # Interface: RegisterMetaAddressResult
 
-Defined in: [packages/opaque/src/client.ts:557](https://github.com/opaquecash/sdk/blob/d653e273eb390dbec38241c20772af6021a1f8d8/packages/opaque/src/client.ts#L557)
+Defined in: [packages/opaque/src/client.ts:671](https://github.com/opaquecash/sdk/blob/07b81594b33091d87157623bffc2d7ba1ab07e5d/packages/opaque/src/client.ts#L671)
 
 Result of [OpaqueClient.registerMetaAddress](/sdk/api/@opaquecash/opaque/classes/OpaqueClient.md#registermetaaddress).
 
@@ -10,7 +10,7 @@ Result of [OpaqueClient.registerMetaAddress](/sdk/api/@opaquecash/opaque/classes
 
 > **chain**: [`OpaqueScanChain`](/sdk/api/@opaquecash/opaque/type-aliases/OpaqueScanChain.md)
 
-Defined in: [packages/opaque/src/client.ts:559](https://github.com/opaquecash/sdk/blob/d653e273eb390dbec38241c20772af6021a1f8d8/packages/opaque/src/client.ts#L559)
+Defined in: [packages/opaque/src/client.ts:673](https://github.com/opaquecash/sdk/blob/07b81594b33091d87157623bffc2d7ba1ab07e5d/packages/opaque/src/client.ts#L673)
 
 Chain the meta-address was registered on.
 
@@ -20,7 +20,7 @@ Chain the meta-address was registered on.
 
 > **metaAddressHex**: `` `0x${string}` ``
 
-Defined in: [packages/opaque/src/client.ts:563](https://github.com/opaquecash/sdk/blob/d653e273eb390dbec38241c20772af6021a1f8d8/packages/opaque/src/client.ts#L563)
+Defined in: [packages/opaque/src/client.ts:677](https://github.com/opaquecash/sdk/blob/07b81594b33091d87157623bffc2d7ba1ab07e5d/packages/opaque/src/client.ts#L677)
 
 The 66-byte meta-address that was registered.
 
@@ -30,6 +30,6 @@ The 66-byte meta-address that was registered.
 
 > **txHash**: `string`
 
-Defined in: [packages/opaque/src/client.ts:561](https://github.com/opaquecash/sdk/blob/d653e273eb390dbec38241c20772af6021a1f8d8/packages/opaque/src/client.ts#L561)
+Defined in: [packages/opaque/src/client.ts:675](https://github.com/opaquecash/sdk/blob/07b81594b33091d87157623bffc2d7ba1ab07e5d/packages/opaque/src/client.ts#L675)
 
 EVM `0x` tx hash or Solana base58 signature.

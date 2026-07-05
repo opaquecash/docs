@@ -7,7 +7,7 @@ description: OpaqueClient methods for meta-addresses, recipient resolution, stea
 
 ### `getMetaAddressHex()`
 
-Returns the 66-byte stealth meta-address derived from the wallet signature.
+Returns the 98-byte stealth meta-address (V||S||S_ed) derived from the wallet signature.
 
 ```ts
 const meta = client.getMetaAddressHex();
@@ -17,7 +17,7 @@ const meta = client.getMetaAddressHex();
 
 ### `resolveRecipient(input)`
 
-Resolve ANY supported recipient identity to a validated 66-byte meta-address. This is
+Resolve ANY supported recipient identity to a validated meta-address. This is
 the one entry point for "who am I paying": it accepts the same inputs you can pass to
 `sendStealthPayment({ recipient })`.
 
@@ -28,7 +28,7 @@ const r = await client.resolveRecipient("alice.opq.eth");
 
 | Input | Resolution path | `source` |
 | --- | --- | --- |
-| 66-byte meta-address (optionally `st:opq:`-prefixed) | Validated and passed through | `"meta-address"` |
+| meta-address, 66- or 98-byte (optionally `st:opq:`-prefixed) | Validated and passed through | `"meta-address"` |
 | `0x...` 20-byte EVM address | ERC-6538 `StealthMetaAddressRegistry` | `"evm-registry"` |
 | Solana base58 pubkey | `stealth-registry` PDA (needs `solana` config) | `"solana-registry"` |
 | `ipfs://CID` or bare CID | DID document fetched via gateways (configure `ipfs`) | `"ipfs-did"` |

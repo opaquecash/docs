@@ -6,7 +6,7 @@ description: End-to-end issuer flow, from attesting to a stealth identity to ann
 ## Prerequisites
 
 - Funded issuer wallet authorized on the target schema (authority or delegate)
-- Recipient meta-address (66-byte hex) for the full announce path
+- Recipient meta-address hex for the full announce path
 - `ethereumWalletClient` or `solanaWallet` configured
 
 ## Issue to a meta-address
@@ -16,7 +16,7 @@ When the recipient is a meta-address, `issueAttestation` resolves stealth materi
 ```ts
 const { txHash, uid, stealthAddressHash } = await client.issueAttestation("ethereum", {
   schemaId,
-  recipient: recipientMetaAddressHex,   // 66-byte hex
+  recipient: recipientMetaAddressHex,   // meta-address hex
   fieldValues: {
     passed: "true",
     jurisdiction: "US",

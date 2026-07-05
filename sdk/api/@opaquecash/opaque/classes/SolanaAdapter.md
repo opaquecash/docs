@@ -1,6 +1,6 @@
 # Class: SolanaAdapter
 
-Defined in: packages/stealth-chain-solana/dist/adapter.d.ts:24
+Defined in: packages/stealth-chain-solana/dist/adapter.d.ts:25
 
 Abstracts chain-specific announcement retrieval and registry reads so the universal
 scan loop is written once. The universal scanner iterates a set of adapters, calls
@@ -17,7 +17,7 @@ recovery on the returned [Announcement](/sdk/api/@opaquecash/opaque/interfaces/A
 
 > **new SolanaAdapter**(`config?`): `SolanaAdapter`
 
-Defined in: packages/stealth-chain-solana/dist/adapter.d.ts:30
+Defined in: packages/stealth-chain-solana/dist/adapter.d.ts:31
 
 #### Parameters
 
@@ -35,7 +35,7 @@ Defined in: packages/stealth-chain-solana/dist/adapter.d.ts:30
 
 > `readonly` **chainId**: `1` = `1`
 
-Defined in: packages/stealth-chain-solana/dist/adapter.d.ts:25
+Defined in: packages/stealth-chain-solana/dist/adapter.d.ts:26
 
 Wormhole chain id this adapter serves (Ethereum = 2, Solana = 1).
 
@@ -49,7 +49,7 @@ Wormhole chain id this adapter serves (Ethereum = 2, Solana = 1).
 
 > `readonly` **connection**: `Connection`
 
-Defined in: packages/stealth-chain-solana/dist/adapter.d.ts:27
+Defined in: packages/stealth-chain-solana/dist/adapter.d.ts:28
 
 ***
 
@@ -57,7 +57,7 @@ Defined in: packages/stealth-chain-solana/dist/adapter.d.ts:27
 
 > `readonly` **deployment**: [`SolanaDeployment`](/sdk/api/@opaquecash/opaque/interfaces/SolanaDeployment.md)
 
-Defined in: packages/stealth-chain-solana/dist/adapter.d.ts:28
+Defined in: packages/stealth-chain-solana/dist/adapter.d.ts:29
 
 ***
 
@@ -65,7 +65,7 @@ Defined in: packages/stealth-chain-solana/dist/adapter.d.ts:28
 
 > `readonly` **name**: `"solana"` = `"solana"`
 
-Defined in: packages/stealth-chain-solana/dist/adapter.d.ts:26
+Defined in: packages/stealth-chain-solana/dist/adapter.d.ts:27
 
 Human-readable adapter name, e.g. `"ethereum"` or `"solana"`.
 
@@ -79,7 +79,7 @@ Human-readable adapter name, e.g. `"ethereum"` or `"solana"`.
 
 > **buildAnnounceInstruction**(`params`): `TransactionInstruction`
 
-Defined in: packages/stealth-chain-solana/dist/adapter.d.ts:38
+Defined in: packages/stealth-chain-solana/dist/adapter.d.ts:39
 
 Build an `announce` instruction (the `caller` signs and pays).
 
@@ -117,7 +117,7 @@ Build an `announce` instruction (the `caller` signs and pays).
 
 > **buildAnnounceWithRelay**(`params`): `AnnounceWithRelayBuild`
 
-Defined in: packages/stealth-chain-solana/dist/adapter.d.ts:50
+Defined in: packages/stealth-chain-solana/dist/adapter.d.ts:51
 
 Build a cross-chain `announce_with_relay` instruction (emits locally AND relays over Wormhole)
 plus the fresh message keypair that must co-sign the transaction. Resolves the announcer and
@@ -165,7 +165,7 @@ Wormhole core program ids from this adapter's deployment.
 
 > **buildRegisterKeysInstruction**(`registrant`, `stealthMetaAddress`, `schemeId?`): `TransactionInstruction`
 
-Defined in: packages/stealth-chain-solana/dist/adapter.d.ts:36
+Defined in: packages/stealth-chain-solana/dist/adapter.d.ts:37
 
 Build a `register_keys` instruction for `registrant`'s 66-byte meta-address.
 
@@ -193,7 +193,7 @@ Build a `register_keys` instruction for `registrant`'s 66-byte meta-address.
 
 > **fetchAnnouncements**(`opts?`): `Promise`\<[`Announcement`](/sdk/api/@opaquecash/opaque/interfaces/Announcement.md)[]\>
 
-Defined in: packages/stealth-chain-solana/dist/adapter.d.ts:31
+Defined in: packages/stealth-chain-solana/dist/adapter.d.ts:32
 
 Fetch announcements in chain-neutral form (order is adapter-defined).
 
@@ -217,7 +217,7 @@ Fetch announcements in chain-neutral form (order is adapter-defined).
 
 > **fetchWormholeMessageFee**(): `Promise`\<`bigint`\>
 
-Defined in: packages/stealth-chain-solana/dist/adapter.d.ts:60
+Defined in: packages/stealth-chain-solana/dist/adapter.d.ts:61
 
 Current Wormhole message fee (lamports) for `announce_with_relay`; `0n` on devnet.
 
@@ -231,7 +231,7 @@ Current Wormhole message fee (lamports) for `announce_with_relay`; `0n` on devne
 
 > **isRegistered**(`identity`): `Promise`\<`boolean`\>
 
-Defined in: packages/stealth-chain-solana/dist/adapter.d.ts:33
+Defined in: packages/stealth-chain-solana/dist/adapter.d.ts:34
 
 Whether `identity` has a stealth meta-address registered.
 
@@ -255,7 +255,7 @@ Whether `identity` has a stealth meta-address registered.
 
 > **resolveMetaAddress**(`identity`): `Promise`\<`` `0x${string}` `` \| `null`\>
 
-Defined in: packages/stealth-chain-solana/dist/adapter.d.ts:32
+Defined in: packages/stealth-chain-solana/dist/adapter.d.ts:33
 
 Resolve an identity to its 66-byte stealth meta-address as `0x`-hex, or `null` when
 unregistered. Identity is an EVM address (Ethereum) or a base58 pubkey (Solana).
@@ -280,11 +280,11 @@ unregistered. Identity is an EVM address (Ethereum) or a base58 pubkey (Solana).
 
 > **sweepStealthSol**(`params`): `Promise`\<\{ `feeLamports`: `bigint`; `signature`: `string`; `sweepLamports`: `bigint`; \}\>
 
-Defined in: packages/stealth-chain-solana/dist/adapter.d.ts:66
+Defined in: packages/stealth-chain-solana/dist/adapter.d.ts:67
 
-Sweep the full SOL balance of a one-time stealth account to `destination`. The stealth
-keypair signs and pays its own fee; pass the reconstructed 32-byte secp256k1 stealth
-private key (or the derived keypair).
+Sweep the full SOL balance of a one-time stealth account to `destination`. The stealth account
+signs and pays its own fee; pass its StealthSolanaSigner (from `stealthSolanaSigner`
+over the reconstructed one-time spend scalar).
 
 #### Parameters
 
@@ -294,13 +294,9 @@ private key (or the derived keypair).
 
 `string` \| `PublicKey`
 
-###### stealthKeypair?
+###### signer
 
-`Keypair`
-
-###### stealthPrivKey?
-
-`Uint8Array`
+`StealthSolanaSigner`
 
 #### Returns
 
@@ -312,7 +308,7 @@ private key (or the derived keypair).
 
 > **watchAnnouncements**(`handlers`): () => `void`
 
-Defined in: packages/stealth-chain-solana/dist/adapter.d.ts:34
+Defined in: packages/stealth-chain-solana/dist/adapter.d.ts:35
 
 Optional live subscription to new announcements; returns an unsubscribe function.
 

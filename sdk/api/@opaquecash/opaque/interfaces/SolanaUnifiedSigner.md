@@ -1,6 +1,6 @@
 # Interface: SolanaUnifiedSigner
 
-Defined in: [packages/opaque/src/signer.ts:25](https://github.com/opaquecash/sdk/blob/d653e273eb390dbec38241c20772af6021a1f8d8/packages/opaque/src/signer.ts#L25)
+Defined in: [packages/opaque/src/signer.ts:25](https://github.com/opaquecash/sdk/blob/07b81594b33091d87157623bffc2d7ba1ab07e5d/packages/opaque/src/signer.ts#L25)
 
 A Solana wallet in unified shape (wallet-adapter compatible).
 
@@ -10,7 +10,7 @@ A Solana wallet in unified shape (wallet-adapter compatible).
 
 > **chain**: `"solana"`
 
-Defined in: [packages/opaque/src/signer.ts:26](https://github.com/opaquecash/sdk/blob/d653e273eb390dbec38241c20772af6021a1f8d8/packages/opaque/src/signer.ts#L26)
+Defined in: [packages/opaque/src/signer.ts:26](https://github.com/opaquecash/sdk/blob/07b81594b33091d87157623bffc2d7ba1ab07e5d/packages/opaque/src/signer.ts#L26)
 
 ***
 
@@ -18,7 +18,7 @@ Defined in: [packages/opaque/src/signer.ts:26](https://github.com/opaquecash/sdk
 
 > **publicKey**: `string` \| `PublicKey`
 
-Defined in: [packages/opaque/src/signer.ts:27](https://github.com/opaquecash/sdk/blob/d653e273eb390dbec38241c20772af6021a1f8d8/packages/opaque/src/signer.ts#L27)
+Defined in: [packages/opaque/src/signer.ts:27](https://github.com/opaquecash/sdk/blob/07b81594b33091d87157623bffc2d7ba1ab07e5d/packages/opaque/src/signer.ts#L27)
 
 ***
 
@@ -26,7 +26,7 @@ Defined in: [packages/opaque/src/signer.ts:27](https://github.com/opaquecash/sdk
 
 > `optional` **signMessage?**: (`message`) => `Promise`\<`Uint8Array`\>
 
-Defined in: [packages/opaque/src/signer.ts:29](https://github.com/opaquecash/sdk/blob/d653e273eb390dbec38241c20772af6021a1f8d8/packages/opaque/src/signer.ts#L29)
+Defined in: [packages/opaque/src/signer.ts:29](https://github.com/opaquecash/sdk/blob/07b81594b33091d87157623bffc2d7ba1ab07e5d/packages/opaque/src/signer.ts#L29)
 
 wallet-adapter `signMessage`; required only when this wallet derives the keys.
 
@@ -46,7 +46,7 @@ wallet-adapter `signMessage`; required only when this wallet derives the keys.
 
 > `optional` **signTransaction?**: (`transaction`) => `Promise`\<`Transaction`\>
 
-Defined in: [packages/opaque/src/signer.ts:31](https://github.com/opaquecash/sdk/blob/d653e273eb390dbec38241c20772af6021a1f8d8/packages/opaque/src/signer.ts#L31)
+Defined in: [packages/opaque/src/signer.ts:31](https://github.com/opaquecash/sdk/blob/07b81594b33091d87157623bffc2d7ba1ab07e5d/packages/opaque/src/signer.ts#L31)
 
 wallet-adapter `signTransaction`; required for Solana writes.
 

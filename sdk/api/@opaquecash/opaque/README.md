@@ -222,6 +222,7 @@ filter indexer announcements, aggregate balances, reconstruct one-time spend key
 - [parseMetaAddressValue](/sdk/api/@opaquecash/opaque/functions/parseMetaAddressValue.md)
 - [parseStealthMetaAddress](/sdk/api/@opaquecash/opaque/functions/parseStealthMetaAddress.md)
 - [randomNonce](/sdk/api/@opaquecash/opaque/functions/randomNonce.md)
+- [recipientStealthPoint](/sdk/api/@opaquecash/opaque/functions/recipientStealthPoint.md)
 - [recomputeStealthSendFromEphemeralPrivateKey](/sdk/api/@opaquecash/opaque/functions/recomputeStealthSendFromEphemeralPrivateKey.md)
 - [requestSetupSignature](/sdk/api/@opaquecash/opaque/functions/requestSetupSignature.md)
 - [requireChainDeployment](/sdk/api/@opaquecash/opaque/functions/requireChainDeployment.md)
@@ -233,3 +234,4 @@ filter indexer announcements, aggregate balances, reconstruct one-time spend key
 - [stealthMetaAddressToHex](/sdk/api/@opaquecash/opaque/functions/stealthMetaAddressToHex.md)
 - [uabPayloadToMetadata](/sdk/api/@opaquecash/opaque/functions/uabPayloadToMetadata.md)
 - [uabStealthAddressEvm](/sdk/api/@opaquecash/opaque/functions/uabStealthAddressEvm.md)
+- [viewOnlyMetaAddress](/sdk/api/@opaquecash/opaque/functions/viewOnlyMetaAddress.md)

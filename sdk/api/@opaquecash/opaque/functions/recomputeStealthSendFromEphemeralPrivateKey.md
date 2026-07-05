@@ -2,7 +2,7 @@
 
 > **recomputeStealthSendFromEphemeralPrivateKey**(`recipientMetaAddressHex`, `ephemeralPrivateKey`): `object`
 
-Defined in: [packages/opaque/src/crypto/dksap.ts:181](https://github.com/opaquecash/sdk/blob/d653e273eb390dbec38241c20772af6021a1f8d8/packages/opaque/src/crypto/dksap.ts#L181)
+Defined in: [packages/opaque/src/crypto/dksap.ts:302](https://github.com/opaquecash/sdk/blob/07b81594b33091d87157623bffc2d7ba1ab07e5d/packages/opaque/src/crypto/dksap.ts#L302)
 
 ## Parameters
 
@@ -29,6 +29,10 @@ Defined in: [packages/opaque/src/crypto/dksap.ts:181](https://github.com/opaquec
 ### metadata
 
 > **metadata**: `Uint8Array`
+
+### solanaStealthPubKey?
+
+> `optional` **solanaStealthPubKey?**: `Uint8Array`
 
 ### stealthAddress
 

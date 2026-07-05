@@ -2,7 +2,7 @@
 
 > **computeStealthAddressAndViewTag**(`recipientMetaAddressHex`): `object`
 
-Defined in: [packages/opaque/src/crypto/dksap.ts:136](https://github.com/opaquecash/sdk/blob/d653e273eb390dbec38241c20772af6021a1f8d8/packages/opaque/src/crypto/dksap.ts#L136)
+Defined in: [packages/opaque/src/crypto/dksap.ts:251](https://github.com/opaquecash/sdk/blob/07b81594b33091d87157623bffc2d7ba1ab07e5d/packages/opaque/src/crypto/dksap.ts#L251)
 
 ## Parameters
 
@@ -24,6 +24,12 @@ Defined in: [packages/opaque/src/crypto/dksap.ts:136](https://github.com/opaquec
 
 > **metadata**: `Uint8Array`
 
+### solanaStealthPubKey?
+
+> `optional` **solanaStealthPubKey?**: `Uint8Array`
+
+32-byte ed25519 Solana stealth address point; present when the meta-address carries `S_ed`.
+
 ### stealthAddress
 
 > **stealthAddress**: `` `0x${string}` ``
@@ -32,7 +38,7 @@ Defined in: [packages/opaque/src/crypto/dksap.ts:136](https://github.com/opaquec
 
 > **stealthPubKeyUncompressed**: `Uint8Array`
 
-Uncompressed (65-byte) stealth public-key point; used to derive the Solana destination.
+Uncompressed (65-byte) secp256k1 stealth public-key point (Ethereum).
 
 ### viewTag
 

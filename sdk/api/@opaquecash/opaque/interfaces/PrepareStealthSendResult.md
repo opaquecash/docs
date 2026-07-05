@@ -1,6 +1,6 @@
 # Interface: PrepareStealthSendResult
 
-Defined in: [packages/opaque/src/client.ts:501](https://github.com/opaquecash/sdk/blob/d653e273eb390dbec38241c20772af6021a1f8d8/packages/opaque/src/client.ts#L501)
+Defined in: [packages/opaque/src/client.ts:611](https://github.com/opaquecash/sdk/blob/07b81594b33091d87157623bffc2d7ba1ab07e5d/packages/opaque/src/client.ts#L611)
 
 Result of preparing a stealth send (ephemeral material + announce fields).
 
@@ -10,7 +10,7 @@ Result of preparing a stealth send (ephemeral material + announce fields).
 
 > **ephemeralPrivateKey**: `Uint8Array`
 
-Defined in: [packages/opaque/src/client.ts:508](https://github.com/opaquecash/sdk/blob/d653e273eb390dbec38241c20772af6021a1f8d8/packages/opaque/src/client.ts#L508)
+Defined in: [packages/opaque/src/client.ts:618](https://github.com/opaquecash/sdk/blob/07b81594b33091d87157623bffc2d7ba1ab07e5d/packages/opaque/src/client.ts#L618)
 
 32-byte ephemeral private key — store securely if you need ghost / later announce.
 
@@ -20,7 +20,7 @@ Defined in: [packages/opaque/src/client.ts:508](https://github.com/opaquecash/sd
 
 > **ephemeralPublicKey**: `Uint8Array`
 
-Defined in: [packages/opaque/src/client.ts:506](https://github.com/opaquecash/sdk/blob/d653e273eb390dbec38241c20772af6021a1f8d8/packages/opaque/src/client.ts#L506)
+Defined in: [packages/opaque/src/client.ts:616](https://github.com/opaquecash/sdk/blob/07b81594b33091d87157623bffc2d7ba1ab07e5d/packages/opaque/src/client.ts#L616)
 
 33-byte compressed ephemeral public key.
 
@@ -30,7 +30,7 @@ Defined in: [packages/opaque/src/client.ts:506](https://github.com/opaquecash/sd
 
 > **metadata**: `Uint8Array`
 
-Defined in: [packages/opaque/src/client.ts:510](https://github.com/opaquecash/sdk/blob/d653e273eb390dbec38241c20772af6021a1f8d8/packages/opaque/src/client.ts#L510)
+Defined in: [packages/opaque/src/client.ts:620](https://github.com/opaquecash/sdk/blob/07b81594b33091d87157623bffc2d7ba1ab07e5d/packages/opaque/src/client.ts#L620)
 
 Metadata bytes for `announce` (view tag byte; extend with WASM for PSR).
 
@@ -40,7 +40,18 @@ Metadata bytes for `announce` (view tag byte; extend with WASM for PSR).
 
 > **schemeId**: `bigint`
 
-Defined in: [packages/opaque/src/client.ts:502](https://github.com/opaquecash/sdk/blob/d653e273eb390dbec38241c20772af6021a1f8d8/packages/opaque/src/client.ts#L502)
+Defined in: [packages/opaque/src/client.ts:612](https://github.com/opaquecash/sdk/blob/07b81594b33091d87157623bffc2d7ba1ab07e5d/packages/opaque/src/client.ts#L612)
+
+***
+
+### solanaStealthPubKey?
+
+> `optional` **solanaStealthPubKey?**: `Uint8Array`
+
+Defined in: [packages/opaque/src/client.ts:629](https://github.com/opaquecash/sdk/blob/07b81594b33091d87157623bffc2d7ba1ab07e5d/packages/opaque/src/client.ts#L629)
+
+32-byte ed25519 Solana stealth address point. Needed to derive the Solana destination
+(`deriveStealthSolanaAddress`); present only when the recipient meta-address carries `S_ed`.
 
 ***
 
@@ -48,7 +59,7 @@ Defined in: [packages/opaque/src/client.ts:502](https://github.com/opaquecash/sd
 
 > **stealthAddress**: `` `0x${string}` ``
 
-Defined in: [packages/opaque/src/client.ts:503](https://github.com/opaquecash/sdk/blob/d653e273eb390dbec38241c20772af6021a1f8d8/packages/opaque/src/client.ts#L503)
+Defined in: [packages/opaque/src/client.ts:613](https://github.com/opaquecash/sdk/blob/07b81594b33091d87157623bffc2d7ba1ab07e5d/packages/opaque/src/client.ts#L613)
 
 ***
 
@@ -56,10 +67,9 @@ Defined in: [packages/opaque/src/client.ts:503](https://github.com/opaquecash/sd
 
 > **stealthPubKey**: `Uint8Array`
 
-Defined in: [packages/opaque/src/client.ts:515](https://github.com/opaquecash/sdk/blob/d653e273eb390dbec38241c20772af6021a1f8d8/packages/opaque/src/client.ts#L515)
+Defined in: [packages/opaque/src/client.ts:624](https://github.com/opaquecash/sdk/blob/07b81594b33091d87157623bffc2d7ba1ab07e5d/packages/opaque/src/client.ts#L624)
 
-Uncompressed (65-byte) stealth public-key point. Needed to derive the Solana destination
-account (`deriveStealthSolanaAddress`); not required for the EVM `announce`.
+Uncompressed (65-byte) secp256k1 stealth public-key point (Ethereum); not required for `announce`.
 
 ***
 
@@ -67,4 +77,4 @@ account (`deriveStealthSolanaAddress`); not required for the EVM `announce`.
 
 > **viewTag**: `number`
 
-Defined in: [packages/opaque/src/client.ts:504](https://github.com/opaquecash/sdk/blob/d653e273eb390dbec38241c20772af6021a1f8d8/packages/opaque/src/client.ts#L504)
+Defined in: [packages/opaque/src/client.ts:614](https://github.com/opaquecash/sdk/blob/07b81594b33091d87157623bffc2d7ba1ab07e5d/packages/opaque/src/client.ts#L614)

@@ -1,6 +1,6 @@
 # Interface: EvmUnifiedSigner
 
-Defined in: [packages/opaque/src/signer.ts:14](https://github.com/opaquecash/sdk/blob/d653e273eb390dbec38241c20772af6021a1f8d8/packages/opaque/src/signer.ts#L14)
+Defined in: [packages/opaque/src/signer.ts:14](https://github.com/opaquecash/sdk/blob/07b81594b33091d87157623bffc2d7ba1ab07e5d/packages/opaque/src/signer.ts#L14)
 
 An Ethereum wallet in unified shape: EIP-1193 provider or a pre-built viem WalletClient.
 
@@ -10,7 +10,7 @@ An Ethereum wallet in unified shape: EIP-1193 provider or a pre-built viem Walle
 
 > **address**: `` `0x${string}` ``
 
-Defined in: [packages/opaque/src/signer.ts:17](https://github.com/opaquecash/sdk/blob/d653e273eb390dbec38241c20772af6021a1f8d8/packages/opaque/src/signer.ts#L17)
+Defined in: [packages/opaque/src/signer.ts:17](https://github.com/opaquecash/sdk/blob/07b81594b33091d87157623bffc2d7ba1ab07e5d/packages/opaque/src/signer.ts#L17)
 
 Account that signs the setup message and transactions.
 
@@ -20,7 +20,7 @@ Account that signs the setup message and transactions.
 
 > **chain**: `"ethereum"`
 
-Defined in: [packages/opaque/src/signer.ts:15](https://github.com/opaquecash/sdk/blob/d653e273eb390dbec38241c20772af6021a1f8d8/packages/opaque/src/signer.ts#L15)
+Defined in: [packages/opaque/src/signer.ts:15](https://github.com/opaquecash/sdk/blob/07b81594b33091d87157623bffc2d7ba1ab07e5d/packages/opaque/src/signer.ts#L15)
 
 ***
 
@@ -28,7 +28,7 @@ Defined in: [packages/opaque/src/signer.ts:15](https://github.com/opaquecash/sdk
 
 > `optional` **provider?**: `object`
 
-Defined in: [packages/opaque/src/signer.ts:19](https://github.com/opaquecash/sdk/blob/d653e273eb390dbec38241c20772af6021a1f8d8/packages/opaque/src/signer.ts#L19)
+Defined in: [packages/opaque/src/signer.ts:19](https://github.com/opaquecash/sdk/blob/07b81594b33091d87157623bffc2d7ba1ab07e5d/packages/opaque/src/signer.ts#L19)
 
 EIP-1193 provider (`window.ethereum`, a connector bridge, …).
 
@@ -90,7 +90,7 @@ EIP-1193 provider (`window.ethereum`, a connector bridge, …).
 
 > `optional` **walletClient?**: `object`
 
-Defined in: [packages/opaque/src/signer.ts:21](https://github.com/opaquecash/sdk/blob/d653e273eb390dbec38241c20772af6021a1f8d8/packages/opaque/src/signer.ts#L21)
+Defined in: [packages/opaque/src/signer.ts:21](https://github.com/opaquecash/sdk/blob/07b81594b33091d87157623bffc2d7ba1ab07e5d/packages/opaque/src/signer.ts#L21)
 
 Alternative to `provider`: a viem WalletClient (e.g. wagmi's, or `privateKeyToAccount`).
 
@@ -1364,8 +1364,9 @@ Signs typed data and calculates an Ethereum-specific signature in [EIP-191 forma
 \[`key`: `` `bytes30[${string}]` ``\]: `undefined`;
 \[`key`: `` `bytes31[${string}]` ``\]: `undefined`;
 \[`key`: `` `int[${string}]` ``\]: `undefined`;
-\[`key`: `` `int64[${string}]` ``\]: `undefined`;
+\[`key`: `` `int96[${string}]` ``\]: `undefined`;
 \[`key`: `` `int32[${string}]` ``\]: `undefined`;
+\[`key`: `` `int64[${string}]` ``\]: `undefined`;
 \[`key`: `` `int16[${string}]` ``\]: `undefined`;
 \[`key`: `` `int8[${string}]` ``\]: `undefined`;
 \[`key`: `` `int24[${string}]` ``\]: `undefined`;
@@ -1375,7 +1376,6 @@ Signs typed data and calculates an Ethereum-specific signature in [EIP-191 forma
 \[`key`: `` `int72[${string}]` ``\]: `undefined`;
 \[`key`: `` `int80[${string}]` ``\]: `undefined`;
 \[`key`: `` `int88[${string}]` ``\]: `undefined`;
-\[`key`: `` `int96[${string}]` ``\]: `undefined`;
 \[`key`: `` `int104[${string}]` ``\]: `undefined`;
 \[`key`: `` `int112[${string}]` ``\]: `undefined`;
 \[`key`: `` `int120[${string}]` ``\]: `undefined`;
@@ -1397,8 +1397,9 @@ Signs typed data and calculates an Ethereum-specific signature in [EIP-191 forma
 \[`key`: `` `int248[${string}]` ``\]: `undefined`;
 \[`key`: `` `int256[${string}]` ``\]: `undefined`;
 \[`key`: `` `uint[${string}]` ``\]: `undefined`;
-\[`key`: `` `uint64[${string}]` ``\]: `undefined`;
+\[`key`: `` `uint96[${string}]` ``\]: `undefined`;
 \[`key`: `` `uint32[${string}]` ``\]: `undefined`;
+\[`key`: `` `uint64[${string}]` ``\]: `undefined`;
 \[`key`: `` `uint16[${string}]` ``\]: `undefined`;
 \[`key`: `` `uint8[${string}]` ``\]: `undefined`;
 \[`key`: `` `uint24[${string}]` ``\]: `undefined`;
@@ -1408,7 +1409,6 @@ Signs typed data and calculates an Ethereum-specific signature in [EIP-191 forma
 \[`key`: `` `uint72[${string}]` ``\]: `undefined`;
 \[`key`: `` `uint80[${string}]` ``\]: `undefined`;
 \[`key`: `` `uint88[${string}]` ``\]: `undefined`;
-\[`key`: `` `uint96[${string}]` ``\]: `undefined`;
 \[`key`: `` `uint104[${string}]` ``\]: `undefined`;
 \[`key`: `` `uint112[${string}]` ``\]: `undefined`;
 \[`key`: `` `uint120[${string}]` ``\]: `undefined`;

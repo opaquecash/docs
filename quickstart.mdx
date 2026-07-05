@@ -56,7 +56,7 @@ If you prefer to manage the signature yourself, sign `SETUP_MESSAGE` manually an
 
 ```ts
 const metaAddress = client.getMetaAddressHex();
-// Share this 66-byte hex so senders and issuers can pay or attest to you.
+// Share this 98-byte hex so senders and issuers can pay or attest to you.
 ```
 
 Register on-chain so others can resolve your normal address:
@@ -85,7 +85,7 @@ const result = await client.sendStealthPayment({
 });
 ```
 
-The `recipient` can be an EVM address, a 66-byte meta-address, a Solana pubkey, an
+The `recipient` can be an EVM address, a meta-address, a Solana pubkey, an
 `ipfs://` DID document, or a `*.eth` name with a `com.opaque.meta` record. To resolve
 without sending (for example to show a confirmation screen):
 

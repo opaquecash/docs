@@ -1,6 +1,6 @@
 # Interface: IndexerAnnouncement
 
-Defined in: [packages/opaque/src/types/indexer.ts:9](https://github.com/opaquecash/sdk/blob/d653e273eb390dbec38241c20772af6021a1f8d8/packages/opaque/src/types/indexer.ts#L9)
+Defined in: [packages/opaque/src/types/indexer.ts:9](https://github.com/opaquecash/sdk/blob/07b81594b33091d87157623bffc2d7ba1ab07e5d/packages/opaque/src/types/indexer.ts#L9)
 
 Announcement row shape from a typical Graph subgraph (field names preserved).
 
@@ -13,7 +13,7 @@ as commonly returned by indexers despite the name.
 
 > `optional` **\_\_typename?**: `string`
 
-Defined in: [packages/opaque/src/types/indexer.ts:10](https://github.com/opaquecash/sdk/blob/d653e273eb390dbec38241c20772af6021a1f8d8/packages/opaque/src/types/indexer.ts#L10)
+Defined in: [packages/opaque/src/types/indexer.ts:10](https://github.com/opaquecash/sdk/blob/07b81594b33091d87157623bffc2d7ba1ab07e5d/packages/opaque/src/types/indexer.ts#L10)
 
 ***
 
@@ -21,7 +21,7 @@ Defined in: [packages/opaque/src/types/indexer.ts:10](https://github.com/opaquec
 
 > **blockNumber**: `string`
 
-Defined in: [packages/opaque/src/types/indexer.ts:12](https://github.com/opaquecash/sdk/blob/d653e273eb390dbec38241c20772af6021a1f8d8/packages/opaque/src/types/indexer.ts#L12)
+Defined in: [packages/opaque/src/types/indexer.ts:12](https://github.com/opaquecash/sdk/blob/07b81594b33091d87157623bffc2d7ba1ab07e5d/packages/opaque/src/types/indexer.ts#L12)
 
 ***
 
@@ -29,7 +29,7 @@ Defined in: [packages/opaque/src/types/indexer.ts:12](https://github.com/opaquec
 
 > **etherealPublicKey**: `` `0x${string}` ``
 
-Defined in: [packages/opaque/src/types/indexer.ts:13](https://github.com/opaquecash/sdk/blob/d653e273eb390dbec38241c20772af6021a1f8d8/packages/opaque/src/types/indexer.ts#L13)
+Defined in: [packages/opaque/src/types/indexer.ts:13](https://github.com/opaquecash/sdk/blob/07b81594b33091d87157623bffc2d7ba1ab07e5d/packages/opaque/src/types/indexer.ts#L13)
 
 ***
 
@@ -37,7 +37,7 @@ Defined in: [packages/opaque/src/types/indexer.ts:13](https://github.com/opaquec
 
 > `optional` **id?**: `string`
 
-Defined in: [packages/opaque/src/types/indexer.ts:11](https://github.com/opaquecash/sdk/blob/d653e273eb390dbec38241c20772af6021a1f8d8/packages/opaque/src/types/indexer.ts#L11)
+Defined in: [packages/opaque/src/types/indexer.ts:11](https://github.com/opaquecash/sdk/blob/07b81594b33091d87157623bffc2d7ba1ab07e5d/packages/opaque/src/types/indexer.ts#L11)
 
 ***
 
@@ -45,7 +45,7 @@ Defined in: [packages/opaque/src/types/indexer.ts:11](https://github.com/opaquec
 
 > **logIndex**: `number`
 
-Defined in: [packages/opaque/src/types/indexer.ts:14](https://github.com/opaquecash/sdk/blob/d653e273eb390dbec38241c20772af6021a1f8d8/packages/opaque/src/types/indexer.ts#L14)
+Defined in: [packages/opaque/src/types/indexer.ts:14](https://github.com/opaquecash/sdk/blob/07b81594b33091d87157623bffc2d7ba1ab07e5d/packages/opaque/src/types/indexer.ts#L14)
 
 ***
 
@@ -53,7 +53,7 @@ Defined in: [packages/opaque/src/types/indexer.ts:14](https://github.com/opaquec
 
 > **metadata**: `` `0x${string}` ``
 
-Defined in: [packages/opaque/src/types/indexer.ts:15](https://github.com/opaquecash/sdk/blob/d653e273eb390dbec38241c20772af6021a1f8d8/packages/opaque/src/types/indexer.ts#L15)
+Defined in: [packages/opaque/src/types/indexer.ts:15](https://github.com/opaquecash/sdk/blob/07b81594b33091d87157623bffc2d7ba1ab07e5d/packages/opaque/src/types/indexer.ts#L15)
 
 ***
 
@@ -61,7 +61,7 @@ Defined in: [packages/opaque/src/types/indexer.ts:15](https://github.com/opaquec
 
 > **stealthAddress**: `` `0x${string}` ``
 
-Defined in: [packages/opaque/src/types/indexer.ts:16](https://github.com/opaquecash/sdk/blob/d653e273eb390dbec38241c20772af6021a1f8d8/packages/opaque/src/types/indexer.ts#L16)
+Defined in: [packages/opaque/src/types/indexer.ts:16](https://github.com/opaquecash/sdk/blob/07b81594b33091d87157623bffc2d7ba1ab07e5d/packages/opaque/src/types/indexer.ts#L16)
 
 ***
 
@@ -69,7 +69,7 @@ Defined in: [packages/opaque/src/types/indexer.ts:16](https://github.com/opaquec
 
 > **transactionHash**: `` `0x${string}` ``
 
-Defined in: [packages/opaque/src/types/indexer.ts:17](https://github.com/opaquecash/sdk/blob/d653e273eb390dbec38241c20772af6021a1f8d8/packages/opaque/src/types/indexer.ts#L17)
+Defined in: [packages/opaque/src/types/indexer.ts:17](https://github.com/opaquecash/sdk/blob/07b81594b33091d87157623bffc2d7ba1ab07e5d/packages/opaque/src/types/indexer.ts#L17)
 
 ***
 
@@ -77,4 +77,4 @@ Defined in: [packages/opaque/src/types/indexer.ts:17](https://github.com/opaquec
 
 > **viewTag**: `number`
 
-Defined in: [packages/opaque/src/types/indexer.ts:18](https://github.com/opaquecash/sdk/blob/d653e273eb390dbec38241c20772af6021a1f8d8/packages/opaque/src/types/indexer.ts#L18)
+Defined in: [packages/opaque/src/types/indexer.ts:18](https://github.com/opaquecash/sdk/blob/07b81594b33091d87157623bffc2d7ba1ab07e5d/packages/opaque/src/types/indexer.ts#L18)

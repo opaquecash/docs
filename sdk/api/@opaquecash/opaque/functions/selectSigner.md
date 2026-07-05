@@ -2,7 +2,7 @@
 
 > **selectSigner**\<`C`\>(`wallets`, `chain`): `Extract`\<[`EvmUnifiedSigner`](/sdk/api/@opaquecash/opaque/interfaces/EvmUnifiedSigner.md), \{ `chain`: `C`; \}\> \| `Extract`\<[`SolanaUnifiedSigner`](/sdk/api/@opaquecash/opaque/interfaces/SolanaUnifiedSigner.md), \{ `chain`: `C`; \}\> \| `undefined`
 
-Defined in: [packages/opaque/src/signer.ts:78](https://github.com/opaquecash/sdk/blob/d653e273eb390dbec38241c20772af6021a1f8d8/packages/opaque/src/signer.ts#L78)
+Defined in: [packages/opaque/src/signer.ts:78](https://github.com/opaquecash/sdk/blob/07b81594b33091d87157623bffc2d7ba1ab07e5d/packages/opaque/src/signer.ts#L78)
 
 Pick the first signer for a chain out of a one-or-many `wallets` argument.
 

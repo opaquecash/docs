@@ -1,6 +1,6 @@
 # Interface: OwnedStealthOutput
 
-Defined in: [packages/opaque/src/types/indexer.ts:24](https://github.com/opaquecash/sdk/blob/d653e273eb390dbec38241c20772af6021a1f8d8/packages/opaque/src/types/indexer.ts#L24)
+Defined in: [packages/opaque/src/types/indexer.ts:24](https://github.com/opaquecash/sdk/blob/07b81594b33091d87157623bffc2d7ba1ab07e5d/packages/opaque/src/types/indexer.ts#L24)
 
 One output the recipient owns (from WASM `scan_attestations` + normalized context).
 
@@ -14,7 +14,7 @@ One output the recipient owns (from WASM `scan_attestations` + normalized contex
 
 > `optional` **attestationId?**: `number`
 
-Defined in: [packages/opaque/src/types/indexer.ts:32](https://github.com/opaquecash/sdk/blob/d653e273eb390dbec38241c20772af6021a1f8d8/packages/opaque/src/types/indexer.ts#L32)
+Defined in: [packages/opaque/src/types/indexer.ts:32](https://github.com/opaquecash/sdk/blob/07b81594b33091d87157623bffc2d7ba1ab07e5d/packages/opaque/src/types/indexer.ts#L32)
 
 Present when announcement carried PSR attestation metadata.
 
@@ -24,7 +24,7 @@ Present when announcement carried PSR attestation metadata.
 
 > **blockNumber**: `number`
 
-Defined in: [packages/opaque/src/types/indexer.ts:27](https://github.com/opaquecash/sdk/blob/d653e273eb390dbec38241c20772af6021a1f8d8/packages/opaque/src/types/indexer.ts#L27)
+Defined in: [packages/opaque/src/types/indexer.ts:27](https://github.com/opaquecash/sdk/blob/07b81594b33091d87157623bffc2d7ba1ab07e5d/packages/opaque/src/types/indexer.ts#L27)
 
 ***
 
@@ -32,7 +32,7 @@ Defined in: [packages/opaque/src/types/indexer.ts:27](https://github.com/opaquec
 
 > **ephemeralPublicKey**: `` `0x${string}` ``
 
-Defined in: [packages/opaque/src/types/indexer.ts:30](https://github.com/opaquecash/sdk/blob/d653e273eb390dbec38241c20772af6021a1f8d8/packages/opaque/src/types/indexer.ts#L30)
+Defined in: [packages/opaque/src/types/indexer.ts:30](https://github.com/opaquecash/sdk/blob/07b81594b33091d87157623bffc2d7ba1ab07e5d/packages/opaque/src/types/indexer.ts#L30)
 
 ***
 
@@ -40,7 +40,7 @@ Defined in: [packages/opaque/src/types/indexer.ts:30](https://github.com/opaquec
 
 > **logIndex**: `number`
 
-Defined in: [packages/opaque/src/types/indexer.ts:28](https://github.com/opaquecash/sdk/blob/d653e273eb390dbec38241c20772af6021a1f8d8/packages/opaque/src/types/indexer.ts#L28)
+Defined in: [packages/opaque/src/types/indexer.ts:28](https://github.com/opaquecash/sdk/blob/07b81594b33091d87157623bffc2d7ba1ab07e5d/packages/opaque/src/types/indexer.ts#L28)
 
 ***
 
@@ -48,7 +48,7 @@ Defined in: [packages/opaque/src/types/indexer.ts:28](https://github.com/opaquec
 
 > **stealthAddress**: `` `0x${string}` ``
 
-Defined in: [packages/opaque/src/types/indexer.ts:25](https://github.com/opaquecash/sdk/blob/d653e273eb390dbec38241c20772af6021a1f8d8/packages/opaque/src/types/indexer.ts#L25)
+Defined in: [packages/opaque/src/types/indexer.ts:25](https://github.com/opaquecash/sdk/blob/07b81594b33091d87157623bffc2d7ba1ab07e5d/packages/opaque/src/types/indexer.ts#L25)
 
 ***
 
@@ -56,7 +56,7 @@ Defined in: [packages/opaque/src/types/indexer.ts:25](https://github.com/opaquec
 
 > **transactionHash**: `` `0x${string}` ``
 
-Defined in: [packages/opaque/src/types/indexer.ts:26](https://github.com/opaquecash/sdk/blob/d653e273eb390dbec38241c20772af6021a1f8d8/packages/opaque/src/types/indexer.ts#L26)
+Defined in: [packages/opaque/src/types/indexer.ts:26](https://github.com/opaquecash/sdk/blob/07b81594b33091d87157623bffc2d7ba1ab07e5d/packages/opaque/src/types/indexer.ts#L26)
 
 ***
 
@@ -64,4 +64,4 @@ Defined in: [packages/opaque/src/types/indexer.ts:26](https://github.com/opaquec
 
 > **viewTag**: `number`
 
-Defined in: [packages/opaque/src/types/indexer.ts:29](https://github.com/opaquecash/sdk/blob/d653e273eb390dbec38241c20772af6021a1f8d8/packages/opaque/src/types/indexer.ts#L29)
+Defined in: [packages/opaque/src/types/indexer.ts:29](https://github.com/opaquecash/sdk/blob/07b81594b33091d87157623bffc2d7ba1ab07e5d/packages/opaque/src/types/indexer.ts#L29)

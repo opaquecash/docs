@@ -1,6 +1,6 @@
 # Class: OpaqueClient
 
-Defined in: [packages/opaque/src/client.ts:592](https://github.com/opaquecash/sdk/blob/d653e273eb390dbec38241c20772af6021a1f8d8/packages/opaque/src/client.ts#L592)
+Defined in: [packages/opaque/src/client.ts:706](https://github.com/opaquecash/sdk/blob/07b81594b33091d87157623bffc2d7ba1ab07e5d/packages/opaque/src/client.ts#L706)
 
 ## Properties
 
@@ -8,7 +8,7 @@ Defined in: [packages/opaque/src/client.ts:592](https://github.com/opaquecash/sd
 
 > `static` **buildReputationActionScope**: (`params`) => `string` = `buildActionScope`
 
-Defined in: [packages/opaque/src/client.ts:2613](https://github.com/opaquecash/sdk/blob/d653e273eb390dbec38241c20772af6021a1f8d8/packages/opaque/src/client.ts#L2613)
+Defined in: [packages/opaque/src/client.ts:3182](https://github.com/opaquecash/sdk/blob/07b81594b33091d87157623bffc2d7ba1ab07e5d/packages/opaque/src/client.ts#L3182)
 
 Deterministic scope string for reputation actions (`chainId:module:actionId`).
 Same as [buildActionScope](/sdk/api/@opaquecash/opaque/functions/buildActionScope.md) in `@opaquecash/psr-core`.
@@ -57,7 +57,7 @@ const scope = buildActionScope({
 
 > `static` **reputationExternalNullifierFromScope**: (`scope`) => `bigint` = `externalNullifierFromScope`
 
-Defined in: [packages/opaque/src/client.ts:2619](https://github.com/opaquecash/sdk/blob/d653e273eb390dbec38241c20772af6021a1f8d8/packages/opaque/src/client.ts#L2619)
+Defined in: [packages/opaque/src/client.ts:3188](https://github.com/opaquecash/sdk/blob/07b81594b33091d87157623bffc2d7ba1ab07e5d/packages/opaque/src/client.ts#L3188)
 
 Map a scope string to the circuit `externalNullifier` scalar (keccak, uint256).
 Same as [externalNullifierFromScope](/sdk/api/@opaquecash/opaque/functions/externalNullifierFromScope.md) in `@opaquecash/psr-core`.
@@ -78,13 +78,29 @@ Output of [buildActionScope](/sdk/api/@opaquecash/opaque/functions/buildActionSc
 
 `bigint`
 
+## Accessors
+
+### isViewOnly
+
+#### Get Signature
+
+> **get** **isViewOnly**(): `boolean`
+
+Defined in: [packages/opaque/src/client.ts:851](https://github.com/opaquecash/sdk/blob/07b81594b33091d87157623bffc2d7ba1ab07e5d/packages/opaque/src/client.ts#L851)
+
+True for a [createViewOnly](/sdk/api/@opaquecash/opaque/classes/OpaqueClient.md#createviewonly) client: scanning works, spending/sweeping throws.
+
+##### Returns
+
+`boolean`
+
 ## Methods
 
 ### addSchemaDelegate()
 
 > **addSchemaDelegate**(`chain`, `schemaId`, `delegate`): `Promise`\<[`PsrTxResult`](/sdk/api/@opaquecash/opaque/interfaces/PsrTxResult.md)\>
 
-Defined in: [packages/opaque/src/client.ts:2116](https://github.com/opaquecash/sdk/blob/d653e273eb390dbec38241c20772af6021a1f8d8/packages/opaque/src/client.ts#L2116)
+Defined in: [packages/opaque/src/client.ts:2683](https://github.com/opaquecash/sdk/blob/07b81594b33091d87157623bffc2d7ba1ab07e5d/packages/opaque/src/client.ts#L2683)
 
 Authority-only: authorize `delegate` to issue under `schemaId`.
 
@@ -112,7 +128,7 @@ Authority-only: authorize `delegate` to issue under `schemaId`.
 
 > **announcementsJsonForReputationWitness**(`rows`): `string`
 
-Defined in: [packages/opaque/src/client.ts:2450](https://github.com/opaquecash/sdk/blob/d653e273eb390dbec38241c20772af6021a1f8d8/packages/opaque/src/client.ts#L2450)
+Defined in: [packages/opaque/src/client.ts:3019](https://github.com/opaquecash/sdk/blob/07b81594b33091d87157623bffc2d7ba1ab07e5d/packages/opaque/src/client.ts#L3019)
 
 JSON array string in the Rust scanner's announcement format (general scanner interop;
 no longer consumed by [generateReputationProof](/sdk/api/@opaquecash/opaque/classes/OpaqueClient.md#generatereputationproof), which builds V2 witnesses directly).
@@ -133,7 +149,7 @@ no longer consumed by [generateReputationProof](/sdk/api/@opaquecash/opaque/clas
 
 > **buildAnnounceTransactionRequest**(`send`): [`AnnounceTransactionRequest`](/sdk/api/@opaquecash/opaque/interfaces/AnnounceTransactionRequest.md)
 
-Defined in: [packages/opaque/src/client.ts:1418](https://github.com/opaquecash/sdk/blob/d653e273eb390dbec38241c20772af6021a1f8d8/packages/opaque/src/client.ts#L1418)
+Defined in: [packages/opaque/src/client.ts:1660](https://github.com/opaquecash/sdk/blob/07b81594b33091d87157623bffc2d7ba1ab07e5d/packages/opaque/src/client.ts#L1660)
 
 Build calldata for `announce` so the developer can prompt the user to broadcast.
 
@@ -153,7 +169,7 @@ Build calldata for `announce` so the developer can prompt the user to broadcast.
 
 > **buildAnnounceTransactionRequestForGhost**(`ephemeralPrivateKey`): [`AnnounceTransactionRequest`](/sdk/api/@opaquecash/opaque/interfaces/AnnounceTransactionRequest.md)
 
-Defined in: [packages/opaque/src/client.ts:1397](https://github.com/opaquecash/sdk/blob/d653e273eb390dbec38241c20772af6021a1f8d8/packages/opaque/src/client.ts#L1397)
+Defined in: [packages/opaque/src/client.ts:1638](https://github.com/opaquecash/sdk/blob/07b81594b33091d87157623bffc2d7ba1ab07e5d/packages/opaque/src/client.ts#L1638)
 
 Build `announce` calldata after you only have the stored 32-byte ephemeral secret from
 [prepareGhostReceive](/sdk/api/@opaquecash/opaque/classes/OpaqueClient.md#prepareghostreceive) (or any prior [prepareStealthSend](/sdk/api/@opaquecash/opaque/classes/OpaqueClient.md#preparestealthsend) to your meta-address).
@@ -176,7 +192,7 @@ Recomputes stealth address and pubkey material deterministically. If you still h
 
 > **buildAnnounceWithRelay**(`chain`, `send`, `opts?`): `Promise`\<[`AnnounceWithRelayResult`](/sdk/api/@opaquecash/opaque/type-aliases/AnnounceWithRelayResult.md)\>
 
-Defined in: [packages/opaque/src/client.ts:1496](https://github.com/opaquecash/sdk/blob/d653e273eb390dbec38241c20772af6021a1f8d8/packages/opaque/src/client.ts#L1496)
+Defined in: [packages/opaque/src/client.ts:1738](https://github.com/opaquecash/sdk/blob/07b81594b33091d87157623bffc2d7ba1ab07e5d/packages/opaque/src/client.ts#L1738)
 
 Build a CROSS-CHAIN announce for either chain, dispatching on `chain`. Emits the local
 announcement AND relays the 96-byte payload over Wormhole. Ethereum returns a `{to,data,value}`
@@ -221,7 +237,7 @@ EVM honours `consistencyLevel`; Solana honours `batchId` (Wormhole nonce) and `w
 
 > **buildAnnounceWithRelayRequest**(`send`, `opts?`): `Promise`\<[`AnnounceWithRelayRequest`](/sdk/api/@opaquecash/opaque/interfaces/AnnounceWithRelayRequest.md) & `object`\>
 
-Defined in: [packages/opaque/src/client.ts:1469](https://github.com/opaquecash/sdk/blob/d653e273eb390dbec38241c20772af6021a1f8d8/packages/opaque/src/client.ts#L1469)
+Defined in: [packages/opaque/src/client.ts:1711](https://github.com/opaquecash/sdk/blob/07b81594b33091d87157623bffc2d7ba1ab07e5d/packages/opaque/src/client.ts#L1711)
 
 Build a `{to,data,value}` request for a CROSS-CHAIN announce (`announceWithRelay`): it emits the
 local announcement AND publishes the 96-byte payload through Wormhole. `value` is the Wormhole
@@ -249,7 +265,7 @@ message fee. Pass the same [PrepareStealthSendResult](/sdk/api/@opaquecash/opaqu
 
 > **buildAssignReputationTransaction**(`recipientMetaAddressHex`, `attestationId`): [`AnnounceTransactionRequest`](/sdk/api/@opaquecash/opaque/interfaces/AnnounceTransactionRequest.md)
 
-Defined in: [packages/opaque/src/client.ts:1990](https://github.com/opaquecash/sdk/blob/d653e273eb390dbec38241c20772af6021a1f8d8/packages/opaque/src/client.ts#L1990)
+Defined in: [packages/opaque/src/client.ts:2557](https://github.com/opaquecash/sdk/blob/07b81594b33091d87157623bffc2d7ba1ab07e5d/packages/opaque/src/client.ts#L2557)
 
 Legacy V1 issuer flow: calldata for `StealthAddressAnnouncer.announce` with PSR metadata
 (no asset transfer).
@@ -274,7 +290,7 @@ Legacy V1 issuer flow: calldata for `StealthAddressAnnouncer.announce` with PSR 
 
 > **buildDummyAnnouncementTransactions**(`n`): [`AnnounceTransactionRequest`](/sdk/api/@opaquecash/opaque/interfaces/AnnounceTransactionRequest.md)[]
 
-Defined in: [packages/opaque/src/client.ts:1375](https://github.com/opaquecash/sdk/blob/d653e273eb390dbec38241c20772af6021a1f8d8/packages/opaque/src/client.ts#L1375)
+Defined in: [packages/opaque/src/client.ts:1616](https://github.com/opaquecash/sdk/blob/07b81594b33091d87157623bffc2d7ba1ab07e5d/packages/opaque/src/client.ts#L1616)
 
 Convenience over [generateDummyAnnouncements](/sdk/api/@opaquecash/opaque/classes/OpaqueClient.md#generatedummyannouncements): `n` ready-to-submit `announce`
 calldata requests for this chain's announcer. Broadcast them from any account —
@@ -292,11 +308,102 @@ announcements carry no value and any caller may announce.
 
 ***
 
+### buildGaslessTokenSweep()
+
+> **buildGaslessTokenSweep**(`params`): `Promise`\<`GaslessSweep`\>
+
+Defined in: [packages/opaque/src/client.ts:2074](https://github.com/opaquecash/sdk/blob/07b81594b33091d87157623bffc2d7ba1ab07e5d/packages/opaque/src/client.ts#L2074)
+
+Build a relayer-submittable gasless token sweep (spec/relayer-market.md, fee-in-token). The
+reconstructed stealth key authorizes the move offline (no native gas needed); a relayer submits
+it, pays the gas, and takes `fee` in the token. Ethereum returns `sweepWithPermit` calldata for
+the `StealthTokenSweep` forwarder; Solana returns a transaction partially signed by the stealth
+key that the relayer co-signs as fee payer. EVM chain reads (balance, token name, permit and
+forwarder nonces) are auto-resolved unless overridden.
+
+#### Parameters
+
+##### params
+
+###### chain
+
+[`OpaqueScanChain`](/sdk/api/@opaquecash/opaque/type-aliases/OpaqueScanChain.md)
+
+###### closeAccount?
+
+`boolean`
+
+Solana: also close the emptied token account and return its rent to the fee payer.
+
+###### deadline
+
+`bigint`
+
+Unix-seconds authorization deadline.
+
+###### destination
+
+`string`
+
+Recipient: an address (Ethereum) or token-account owner (Solana).
+
+###### fee
+
+`bigint`
+
+Relayer fee, taken from the swept amount in the token's smallest unit.
+
+###### feePayer?
+
+`string`
+
+Solana relayer fee payer (base58); required for the Solana path.
+
+###### forwarder?
+
+`` `0x${string}` ``
+
+EVM forwarder override; defaults to the configured / deployed `stealthTokenSweep`.
+
+###### output
+
+`Pick`\<[`OwnedStealthOutput`](/sdk/api/@opaquecash/opaque/interfaces/OwnedStealthOutput.md), `"ephemeralPublicKey"`\>
+
+###### token
+
+`string`
+
+ERC-20 address (Ethereum) or SPL mint (Solana base58).
+
+###### tokenName?
+
+`string`
+
+EVM token EIP-712 domain name; defaults to the on-chain `name()`.
+
+###### tokenVersion?
+
+`string`
+
+EVM token EIP-712 domain version; defaults to the ERC-5267 `eip712Domain()` read, then `"1"`.
+
+###### value?
+
+`bigint`
+
+EVM amount to sweep; defaults to the full token balance.
+
+#### Returns
+
+`Promise`\<`GaslessSweep`\>
+
+***
+
 ### buildRegisterMetaAddressTransaction()
 
 > **buildRegisterMetaAddressTransaction**(): [`RegisterMetaAddressTransactionRequest`](/sdk/api/@opaquecash/opaque/interfaces/RegisterMetaAddressTransactionRequest.md)
 
-Defined in: [packages/opaque/src/client.ts:964](https://github.com/opaquecash/sdk/blob/d653e273eb390dbec38241c20772af6021a1f8d8/packages/opaque/src/client.ts#L964)
+Defined in: [packages/opaque/src/client.ts:1152](https://github.com/opaquecash/sdk/blob/07b81594b33091d87157623bffc2d7ba1ab07e5d/packages/opaque/src/client.ts#L1152)
 
 Encode `registerKeys` for the user's meta-address (they submit with `ethereumAddress`).
 
@@ -310,7 +417,7 @@ Encode `registerKeys` for the user's meta-address (they submit with `ethereumAdd
 
 > **claimOpaqueName**(`label`): `Promise`\<\{ `name`: `string`; `signature`: `string`; \}\>
 
-Defined in: [packages/opaque/src/client.ts:1058](https://github.com/opaquecash/sdk/blob/d653e273eb390dbec38241c20772af6021a1f8d8/packages/opaque/src/client.ts#L1058)
+Defined in: [packages/opaque/src/client.ts:1246](https://github.com/opaquecash/sdk/blob/07b81594b33091d87157623bffc2d7ba1ab07e5d/packages/opaque/src/client.ts#L1246)
 
 Claim `label.parent` from Solana (spec/ONS.md §4.2). Creates a PROVISIONAL
 claim and publishes it to the canonical registry via Wormhole; it becomes
@@ -334,7 +441,7 @@ loses to any concurrent direct Ethereum registration. Track with
 
 > **createSchema**(`chain`, `params`): `Promise`\<[`CreateSchemaResult`](/sdk/api/@opaquecash/opaque/interfaces/CreateSchemaResult.md)\>
 
-Defined in: [packages/opaque/src/client.ts:2012](https://github.com/opaquecash/sdk/blob/d653e273eb390dbec38241c20772af6021a1f8d8/packages/opaque/src/client.ts#L2012)
+Defined in: [packages/opaque/src/client.ts:2579](https://github.com/opaquecash/sdk/blob/07b81594b33091d87157623bffc2d7ba1ab07e5d/packages/opaque/src/client.ts#L2579)
 
 Register a new schema (attestation class + issuance rules). Returns the tx id and derived
 `schemaId`. `fieldDefinitions` accepts an ABI string or [FieldDef](/sdk/api/@opaquecash/opaque/interfaces/FieldDef.md)s.
@@ -359,7 +466,7 @@ Register a new schema (attestation class + issuance rules). Returns the tx id an
 
 > **deprecateSchema**(`chain`, `schemaId`): `Promise`\<[`PsrTxResult`](/sdk/api/@opaquecash/opaque/interfaces/PsrTxResult.md)\>
 
-Defined in: [packages/opaque/src/client.ts:2095](https://github.com/opaquecash/sdk/blob/d653e273eb390dbec38241c20772af6021a1f8d8/packages/opaque/src/client.ts#L2095)
+Defined in: [packages/opaque/src/client.ts:2662](https://github.com/opaquecash/sdk/blob/07b81594b33091d87157623bffc2d7ba1ab07e5d/packages/opaque/src/client.ts#L2662)
 
 Authority-only, irreversible: deprecate a schema (blocks new attestations).
 
@@ -383,7 +490,7 @@ Authority-only, irreversible: deprecate a schema (blocks new attestations).
 
 > **discoverTraits**(`rows`): `Promise`\<[`DiscoveredTrait`](/sdk/api/@opaquecash/opaque/interfaces/DiscoveredTrait.md)[]\>
 
-Defined in: [packages/opaque/src/client.ts:1899](https://github.com/opaquecash/sdk/blob/d653e273eb390dbec38241c20772af6021a1f8d8/packages/opaque/src/client.ts#L1899)
+Defined in: [packages/opaque/src/client.ts:2466](https://github.com/opaquecash/sdk/blob/07b81594b33091d87157623bffc2d7ba1ab07e5d/packages/opaque/src/client.ts#L2466)
 
 Legacy PSR V1: map owned `0xA7` attestation markers to a [DiscoveredTrait](/sdk/api/@opaquecash/opaque/interfaces/DiscoveredTrait.md) list.
 Use [discoverTraitsV2](/sdk/api/@opaquecash/opaque/classes/OpaqueClient.md#discovertraitsv2) for schema-bound V2 attestations created by [issueAttestation](/sdk/api/@opaquecash/opaque/classes/OpaqueClient.md#issueattestation).
@@ -404,7 +511,7 @@ Use [discoverTraitsV2](/sdk/api/@opaquecash/opaque/classes/OpaqueClient.md#disco
 
 > **discoverTraitsV2**(`rows`, `options`): `Promise`\<[`DiscoveredTrait`](/sdk/api/@opaquecash/opaque/interfaces/DiscoveredTrait.md)[]\>
 
-Defined in: [packages/opaque/src/client.ts:1921](https://github.com/opaquecash/sdk/blob/d653e273eb390dbec38241c20772af6021a1f8d8/packages/opaque/src/client.ts#L1921)
+Defined in: [packages/opaque/src/client.ts:2488](https://github.com/opaquecash/sdk/blob/07b81594b33091d87157623bffc2d7ba1ab07e5d/packages/opaque/src/client.ts#L2488)
 
 PSR V2: map owned schema-bound attestation announcements to [DiscoveredTrait](/sdk/api/@opaquecash/opaque/interfaces/DiscoveredTrait.md).
 
@@ -432,7 +539,7 @@ registry snapshot before they are returned. Use this for attestations created by
 
 > **encodeReputationMetadata**(`viewTag`, `attestationId`): `Uint8Array`
 
-Defined in: [packages/opaque/src/client.ts:1964](https://github.com/opaquecash/sdk/blob/d653e273eb390dbec38241c20772af6021a1f8d8/packages/opaque/src/client.ts#L1964)
+Defined in: [packages/opaque/src/client.ts:2531](https://github.com/opaquecash/sdk/blob/07b81594b33091d87157623bffc2d7ba1ab07e5d/packages/opaque/src/client.ts#L2531)
 
 Legacy V1: encode `announce` metadata for a PSR attestation
 (view tag byte + `0xA7` + u64 `attestationId`).
@@ -458,7 +565,7 @@ Canonical encoding matches WASM/Rust; use with [prepareReputationAssignment](/sd
 
 > **fetchAnnouncementRows**(`chain`, `opts?`): `Promise`\<[`IndexerAnnouncement`](/sdk/api/@opaquecash/opaque/interfaces/IndexerAnnouncement.md)[]\>
 
-Defined in: [packages/opaque/src/client.ts:1694](https://github.com/opaquecash/sdk/blob/d653e273eb390dbec38241c20772af6021a1f8d8/packages/opaque/src/client.ts#L1694)
+Defined in: [packages/opaque/src/client.ts:1960](https://github.com/opaquecash/sdk/blob/07b81594b33091d87157623bffc2d7ba1ab07e5d/packages/opaque/src/client.ts#L1960)
 
 Fetch ALL native announcements on `chain` as indexer-shaped rows — unfiltered, with their
 full on-chain `metadata`. This is the raw input for the metadata-aware scanners:
@@ -506,7 +613,7 @@ Upper-bound EVM block; omit for the chain tip.
 
 > **fetchCrossChainAnnouncements**(`opts?`): `Promise`\<[`UabIndexerAnnouncement`](/sdk/api/@opaquecash/opaque/interfaces/UabIndexerAnnouncement.md)[]\>
 
-Defined in: [packages/opaque/src/client.ts:1536](https://github.com/opaquecash/sdk/blob/d653e273eb390dbec38241c20772af6021a1f8d8/packages/opaque/src/client.ts#L1536)
+Defined in: [packages/opaque/src/client.ts:1778](https://github.com/opaquecash/sdk/blob/07b81594b33091d87157623bffc2d7ba1ab07e5d/packages/opaque/src/client.ts#L1778)
 
 Read inbound CROSS-CHAIN announcements (from the UABReceiver) as indexer-shaped rows, ready to
 pass into [filterOwnedAnnouncements](/sdk/api/@opaquecash/opaque/classes/OpaqueClient.md#filterownedannouncements) alongside native rows.
@@ -533,7 +640,7 @@ pass into [filterOwnedAnnouncements](/sdk/api/@opaquecash/opaque/classes/OpaqueC
 
 > **fetchLatestValidReputationRoot**(): `Promise`\<`` `0x${string}` ``\>
 
-Defined in: [packages/opaque/src/client.ts:2503](https://github.com/opaquecash/sdk/blob/d653e273eb390dbec38241c20772af6021a1f8d8/packages/opaque/src/client.ts#L2503)
+Defined in: [packages/opaque/src/client.ts:3072](https://github.com/opaquecash/sdk/blob/07b81594b33091d87157623bffc2d7ba1ab07e5d/packages/opaque/src/client.ts#L3072)
 
 Latest non-expired Merkle root from `OpaqueReputationVerifier.rootHistory`.
 
@@ -547,7 +654,7 @@ Latest non-expired Merkle root from `OpaqueReputationVerifier.rootHistory`.
 
 > **fetchReputationRootHistory**(): `Promise`\<`object`[]\>
 
-Defined in: [packages/opaque/src/client.ts:2520](https://github.com/opaquecash/sdk/blob/d653e273eb390dbec38241c20772af6021a1f8d8/packages/opaque/src/client.ts#L2520)
+Defined in: [packages/opaque/src/client.ts:3089](https://github.com/opaquecash/sdk/blob/07b81594b33091d87157623bffc2d7ba1ab07e5d/packages/opaque/src/client.ts#L3089)
 
 Full root history with per-entry validity (newest index last).
 
@@ -561,7 +668,7 @@ Full root history with per-entry validity (newest index last).
 
 > **filterOwnedAnnouncements**(`rows`): `Promise`\<[`OwnedStealthOutput`](/sdk/api/@opaquecash/opaque/interfaces/OwnedStealthOutput.md)[]\>
 
-Defined in: [packages/opaque/src/client.ts:1559](https://github.com/opaquecash/sdk/blob/d653e273eb390dbec38241c20772af6021a1f8d8/packages/opaque/src/client.ts#L1559)
+Defined in: [packages/opaque/src/client.ts:1801](https://github.com/opaquecash/sdk/blob/07b81594b33091d87157623bffc2d7ba1ab07e5d/packages/opaque/src/client.ts#L1801)
 
 Filter indexer announcements down to outputs owned by this user (WASM scan).
 
@@ -581,7 +688,7 @@ Filter indexer announcements down to outputs owned by this user (WASM scan).
 
 > **generateDummyAnnouncements**(`n`): [`DummyAnnouncement`](/sdk/api/@opaquecash/opaque/type-aliases/DummyAnnouncement.md)[]
 
-Defined in: [packages/opaque/src/client.ts:1360](https://github.com/opaquecash/sdk/blob/d653e273eb390dbec38241c20772af6021a1f8d8/packages/opaque/src/client.ts#L1360)
+Defined in: [packages/opaque/src/client.ts:1601](https://github.com/opaquecash/sdk/blob/07b81594b33091d87157623bffc2d7ba1ab07e5d/packages/opaque/src/client.ts#L1601)
 
 Anonymity-set utility (guide §17): mint `n` decoy announcements. Each one is a fully
 valid DKSAP announcement to a freshly generated THROWAWAY meta-address whose private
@@ -606,7 +713,7 @@ interleaved with real sends to grow every recipient's anonymity set.
 
 > **generateReputationProof**(`params`): `Promise`\<[`ProofData`](/sdk/api/@opaquecash/opaque/interfaces/ProofData.md)\>
 
-Defined in: [packages/opaque/src/client.ts:2479](https://github.com/opaquecash/sdk/blob/d653e273eb390dbec38241c20772af6021a1f8d8/packages/opaque/src/client.ts#L2479)
+Defined in: [packages/opaque/src/client.ts:3048](https://github.com/opaquecash/sdk/blob/07b81594b33091d87157623bffc2d7ba1ab07e5d/packages/opaque/src/client.ts#L3048)
 
 V2 Groth16 proof bundle for the reputation verifiers (requires `snarkjs`).
 When `artifacts` is omitted, the V2 wasm/zkey are loaded from the default hosted paths on
@@ -663,7 +770,7 @@ Public signals: `[merkle_root, attestation_id, external_nullifier, nullifier_has
 
 > **getBalancesForOutputs**(`outputs`): `Promise`\<[`OutputBalance`](/sdk/api/@opaquecash/opaque/interfaces/OutputBalance.md)[]\>
 
-Defined in: [packages/opaque/src/client.ts:1863](https://github.com/opaquecash/sdk/blob/d653e273eb390dbec38241c20772af6021a1f8d8/packages/opaque/src/client.ts#L1863)
+Defined in: [packages/opaque/src/client.ts:2364](https://github.com/opaquecash/sdk/blob/07b81594b33091d87157623bffc2d7ba1ab07e5d/packages/opaque/src/client.ts#L2364)
 
 Native balance per owned stealth output across chains. Ethereum reads the stealth address
 directly; Solana reconstructs the one-time key (WASM), derives the Solana stealth account, and
@@ -686,7 +793,7 @@ sums for the EVM tracked-token set live in [getBalancesFromAnnouncements](/sdk/a
 
 > **getBalancesFromAnnouncements**(`rows`): `Promise`\<[`TokenBalanceSummary`](/sdk/api/@opaquecash/opaque/interfaces/TokenBalanceSummary.md)[]\>
 
-Defined in: [packages/opaque/src/client.ts:1820](https://github.com/opaquecash/sdk/blob/d653e273eb390dbec38241c20772af6021a1f8d8/packages/opaque/src/client.ts#L1820)
+Defined in: [packages/opaque/src/client.ts:2321](https://github.com/opaquecash/sdk/blob/07b81594b33091d87157623bffc2d7ba1ab07e5d/packages/opaque/src/client.ts#L2321)
 
 Owned outputs + balances summed per tracked token (uses `rpcUrl` from config).
 
@@ -706,7 +813,7 @@ Owned outputs + balances summed per tracked token (uses `rpcUrl` from config).
 
 > **getChainId**(): `number`
 
-Defined in: [packages/opaque/src/client.ts:729](https://github.com/opaquecash/sdk/blob/d653e273eb390dbec38241c20772af6021a1f8d8/packages/opaque/src/client.ts#L729)
+Defined in: [packages/opaque/src/client.ts:917](https://github.com/opaquecash/sdk/blob/07b81594b33091d87157623bffc2d7ba1ab07e5d/packages/opaque/src/client.ts#L917)
 
 Chain id from configuration.
 
@@ -720,7 +827,7 @@ Chain id from configuration.
 
 > **getContracts**(): `object`
 
-Defined in: [packages/opaque/src/client.ts:744](https://github.com/opaquecash/sdk/blob/d653e273eb390dbec38241c20772af6021a1f8d8/packages/opaque/src/client.ts#L744)
+Defined in: [packages/opaque/src/client.ts:932](https://github.com/opaquecash/sdk/blob/07b81594b33091d87157623bffc2d7ba1ab07e5d/packages/opaque/src/client.ts#L932)
 
 Resolved contract addresses for the active chain.
 
@@ -746,7 +853,7 @@ Resolved contract addresses for the active chain.
 
 > **getEthereumAddress**(): `` `0x${string}` ``
 
-Defined in: [packages/opaque/src/client.ts:734](https://github.com/opaquecash/sdk/blob/d653e273eb390dbec38241c20772af6021a1f8d8/packages/opaque/src/client.ts#L734)
+Defined in: [packages/opaque/src/client.ts:922](https://github.com/opaquecash/sdk/blob/07b81594b33091d87157623bffc2d7ba1ab07e5d/packages/opaque/src/client.ts#L922)
 
 Connected Ethereum address (from config).
 
@@ -760,7 +867,7 @@ Connected Ethereum address (from config).
 
 > **getMetaAddressHex**(): `` `0x${string}` ``
 
-Defined in: [packages/opaque/src/client.ts:739](https://github.com/opaquecash/sdk/blob/d653e273eb390dbec38241c20772af6021a1f8d8/packages/opaque/src/client.ts#L739)
+Defined in: [packages/opaque/src/client.ts:927](https://github.com/opaquecash/sdk/blob/07b81594b33091d87157623bffc2d7ba1ab07e5d/packages/opaque/src/client.ts#L927)
 
 66-byte meta-address hex for registry / sharing.
 
@@ -774,7 +881,7 @@ Defined in: [packages/opaque/src/client.ts:739](https://github.com/opaquecash/sd
 
 > **getMyIssuedAttestations**(`chain`): `Promise`\<[`AttestationV2`](/sdk/api/@opaquecash/opaque/interfaces/AttestationV2.md)[]\>
 
-Defined in: [packages/opaque/src/client.ts:2160](https://github.com/opaquecash/sdk/blob/d653e273eb390dbec38241c20772af6021a1f8d8/packages/opaque/src/client.ts#L2160)
+Defined in: [packages/opaque/src/client.ts:2727](https://github.com/opaquecash/sdk/blob/07b81594b33091d87157623bffc2d7ba1ab07e5d/packages/opaque/src/client.ts#L2727)
 
 Attestations issued by this client's wallet.
 
@@ -794,7 +901,7 @@ Attestations issued by this client's wallet.
 
 > **getMySchemas**(`chain`): `Promise`\<[`SchemaV2`](/sdk/api/@opaquecash/opaque/interfaces/SchemaV2.md)[]\>
 
-Defined in: [packages/opaque/src/client.ts:2050](https://github.com/opaquecash/sdk/blob/d653e273eb390dbec38241c20772af6021a1f8d8/packages/opaque/src/client.ts#L2050)
+Defined in: [packages/opaque/src/client.ts:2617](https://github.com/opaquecash/sdk/blob/07b81594b33091d87157623bffc2d7ba1ab07e5d/packages/opaque/src/client.ts#L2617)
 
 Schemas where this client's wallet is the authority OR an authorized delegate.
 
@@ -814,7 +921,7 @@ Schemas where this client's wallet is the authority OR an authorized delegate.
 
 > **getOpaqueNameStatus**(`name`): `Promise`\<`OnsClaimStatus`\>
 
-Defined in: [packages/opaque/src/client.ts:1088](https://github.com/opaquecash/sdk/blob/d653e273eb390dbec38241c20772af6021a1f8d8/packages/opaque/src/client.ts#L1088)
+Defined in: [packages/opaque/src/client.ts:1276](https://github.com/opaquecash/sdk/blob/07b81594b33091d87157623bffc2d7ba1ab07e5d/packages/opaque/src/client.ts#L1276)
 
 Reconciliation state of an ONS name's Solana-originated claim
 (`none`/`pending`/`confirmed`/`lost`/`expired`; spec/ONS.md §6), plus the
@@ -836,7 +943,7 @@ mirror record when one exists. Two Solana account reads.
 
 > **getReputationTraitsFromAnnouncements**(`rows`): `Promise`\<[`DiscoveredTrait`](/sdk/api/@opaquecash/opaque/interfaces/DiscoveredTrait.md)[]\>
 
-Defined in: [packages/opaque/src/client.ts:1953](https://github.com/opaquecash/sdk/blob/d653e273eb390dbec38241c20772af6021a1f8d8/packages/opaque/src/client.ts#L1953)
+Defined in: [packages/opaque/src/client.ts:2520](https://github.com/opaquecash/sdk/blob/07b81594b33091d87157623bffc2d7ba1ab07e5d/packages/opaque/src/client.ts#L2520)
 
 Legacy PSR V1: same as [discoverTraits](/sdk/api/@opaquecash/opaque/classes/OpaqueClient.md#discovertraits), an alias for older reputation call sites.
 
@@ -856,7 +963,7 @@ Legacy PSR V1: same as [discoverTraits](/sdk/api/@opaquecash/opaque/classes/Opaq
 
 > **getStealthSignerPrivateKey**(`output`): `Uint8Array`
 
-Defined in: [packages/opaque/src/client.ts:1782](https://github.com/opaquecash/sdk/blob/d653e273eb390dbec38241c20772af6021a1f8d8/packages/opaque/src/client.ts#L1782)
+Defined in: [packages/opaque/src/client.ts:2231](https://github.com/opaquecash/sdk/blob/07b81594b33091d87157623bffc2d7ba1ab07e5d/packages/opaque/src/client.ts#L2231)
 
 Reconstruct the 32-byte secp256k1 private key that controls `output`’s one-time stealth address.
 Uses the same WASM path as the on-chain scanner (`reconstruct_signing_key_wasm`).
@@ -881,7 +988,7 @@ the result beyond what your threat model allows.
 
 > **getStealthSignerPrivateKeyForReputationTrait**(`trait`): `Uint8Array`
 
-Defined in: [packages/opaque/src/client.ts:2457](https://github.com/opaquecash/sdk/blob/d653e273eb390dbec38241c20772af6021a1f8d8/packages/opaque/src/client.ts#L2457)
+Defined in: [packages/opaque/src/client.ts:3026](https://github.com/opaquecash/sdk/blob/07b81594b33091d87157623bffc2d7ba1ab07e5d/packages/opaque/src/client.ts#L3026)
 
 One-time stealth signing key for a [DiscoveredTrait](/sdk/api/@opaquecash/opaque/interfaces/DiscoveredTrait.md) (requires `ephemeralPubkey` from the scan).
 
@@ -901,7 +1008,7 @@ One-time stealth signing key for a [DiscoveredTrait](/sdk/api/@opaquecash/opaque
 
 > **getStealthSignerPrivateKeyFromEphemeralPrivateKey**(`ephemeralPrivateKey`): `Uint8Array`
 
-Defined in: [packages/opaque/src/client.ts:1804](https://github.com/opaquecash/sdk/blob/d653e273eb390dbec38241c20772af6021a1f8d8/packages/opaque/src/client.ts#L1804)
+Defined in: [packages/opaque/src/client.ts:2305](https://github.com/opaquecash/sdk/blob/07b81594b33091d87157623bffc2d7ba1ab07e5d/packages/opaque/src/client.ts#L2305)
 
 Same as [getStealthSignerPrivateKey](/sdk/api/@opaquecash/opaque/classes/OpaqueClient.md#getstealthsignerprivatekey) when you only have the 32-byte ephemeral **private**
 key from [prepareGhostReceive](/sdk/api/@opaquecash/opaque/classes/OpaqueClient.md#prepareghostreceive) / [prepareStealthSend](/sdk/api/@opaquecash/opaque/classes/OpaqueClient.md#preparestealthsend) (e.g. ghost storage) instead
@@ -919,11 +1026,68 @@ of an indexer row with `ephemeralPublicKey`.
 
 ***
 
+### getStealthSolanaSigner()
+
+> **getStealthSolanaSigner**(`output`): `StealthSolanaSigner`
+
+Defined in: [packages/opaque/src/client.ts:2278](https://github.com/opaquecash/sdk/blob/07b81594b33091d87157623bffc2d7ba1ab07e5d/packages/opaque/src/client.ts#L2278)
+
+Build the StealthSolanaSigner that controls `output`'s one-time Solana stealth account,
+from the reconstructed ed25519 spend scalar `a = (s_ed + h_ed) mod L`. Requires the Solana spend
+seed (throws for a view-only client). Used by [sweep](/sdk/api/@opaquecash/opaque/classes/OpaqueClient.md#sweep) and the gasless sweep path.
+
+#### Parameters
+
+##### output
+
+`Pick`\<[`OwnedStealthOutput`](/sdk/api/@opaquecash/opaque/interfaces/OwnedStealthOutput.md), `"ephemeralPublicKey"`\>
+
+#### Returns
+
+`StealthSolanaSigner`
+
+***
+
+### getTokenBalancesForOutputs()
+
+> **getTokenBalancesForOutputs**(`outputs`, `tokens?`): `Promise`\<`OutputTokenBalance`[]\>
+
+Defined in: [packages/opaque/src/client.ts:2407](https://github.com/opaquecash/sdk/blob/07b81594b33091d87157623bffc2d7ba1ab07e5d/packages/opaque/src/client.ts#L2407)
+
+Per-token balance for each owned stealth output, across chains. Ethereum reads ERC-20
+`balanceOf` at the stealth address; Solana reconstructs the one-time key (WASM), derives the
+stealth account, and reads its associated token account. Zero balances are omitted.
+
+`tokens.ethereum` defaults to the configured tracked ERC-20s ([OpaqueClientConfig.trackedTokens](/sdk/api/@opaquecash/opaque/interfaces/OpaqueClientConfig.md#trackedtokens)
+minus the native sentinel); `tokens.solana` (SPL mints, base58) has no default and must be passed.
+
+#### Parameters
+
+##### outputs
+
+[`UnifiedOwnedOutput`](/sdk/api/@opaquecash/opaque/interfaces/UnifiedOwnedOutput.md)[]
+
+##### tokens?
+
+###### ethereum?
+
+`` `0x${string}` ``[]
+
+###### solana?
+
+`string`[]
+
+#### Returns
+
+`Promise`\<`OutputTokenBalance`[]\>
+
+***
+
 ### isMetaAddressRegistered()
 
 > **isMetaAddressRegistered**(`chain`): `Promise`\<`boolean`\>
 
-Defined in: [packages/opaque/src/client.ts:1017](https://github.com/opaquecash/sdk/blob/d653e273eb390dbec38241c20772af6021a1f8d8/packages/opaque/src/client.ts#L1017)
+Defined in: [packages/opaque/src/client.ts:1205](https://github.com/opaquecash/sdk/blob/07b81594b33091d87157623bffc2d7ba1ab07e5d/packages/opaque/src/client.ts#L1205)
 
 Whether THIS wallet's meta-address is already registered on `chain` (Ethereum reads its
 configured `ethereumAddress`; Solana reads the `solanaWallet` pubkey).
@@ -944,7 +1108,7 @@ configured `ethereumAddress`; Solana reads the `solanaWallet` pubkey).
 
 > **isReputationRootValid**(`root`): `Promise`\<`boolean`\>
 
-Defined in: [packages/opaque/src/client.ts:2511](https://github.com/opaquecash/sdk/blob/d653e273eb390dbec38241c20772af6021a1f8d8/packages/opaque/src/client.ts#L2511)
+Defined in: [packages/opaque/src/client.ts:3080](https://github.com/opaquecash/sdk/blob/07b81594b33091d87157623bffc2d7ba1ab07e5d/packages/opaque/src/client.ts#L3080)
 
 Whether the verifier currently accepts this root (exists and not past expiry).
 
@@ -964,7 +1128,7 @@ Whether the verifier currently accepts this root (exists and not past expiry).
 
 > **issueAttestation**(`chain`, `params`): `Promise`\<[`IssueAttestationResult`](/sdk/api/@opaquecash/opaque/interfaces/IssueAttestationResult.md)\>
 
-Defined in: [packages/opaque/src/client.ts:2184](https://github.com/opaquecash/sdk/blob/d653e273eb390dbec38241c20772af6021a1f8d8/packages/opaque/src/client.ts#L2184)
+Defined in: [packages/opaque/src/client.ts:2751](https://github.com/opaquecash/sdk/blob/07b81594b33091d87157623bffc2d7ba1ab07e5d/packages/opaque/src/client.ts#L2751)
 
 Issue a schema-bound attestation against a stealth identity. Resolves the recipient to a
 `stealth_address_hash`, encodes the field values per the schema, submits `attest`, and
@@ -992,7 +1156,7 @@ authorized issuer first.
 
 > **prepareGhostReceive**(): [`PrepareStealthSendResult`](/sdk/api/@opaquecash/opaque/interfaces/PrepareStealthSendResult.md)
 
-Defined in: [packages/opaque/src/client.ts:1387](https://github.com/opaquecash/sdk/blob/d653e273eb390dbec38241c20772af6021a1f8d8/packages/opaque/src/client.ts#L1387)
+Defined in: [packages/opaque/src/client.ts:1628](https://github.com/opaquecash/sdk/blob/07b81594b33091d87157623bffc2d7ba1ab07e5d/packages/opaque/src/client.ts#L1628)
 
 Manual “ghost” receive: derive a one-time stealth address for **this** wallet’s meta-address
 without any on-chain announcement yet. Cryptographically this is [prepareStealthSend](/sdk/api/@opaquecash/opaque/classes/OpaqueClient.md#preparestealthsend)
@@ -1009,7 +1173,7 @@ full prep) securely to sweep funds or to announce later.
 
 > **prepareReputationAssignment**(`recipientMetaAddressHex`, `attestationId`): [`PrepareStealthSendResult`](/sdk/api/@opaquecash/opaque/interfaces/PrepareStealthSendResult.md)
 
-Defined in: [packages/opaque/src/client.ts:1977](https://github.com/opaquecash/sdk/blob/d653e273eb390dbec38241c20772af6021a1f8d8/packages/opaque/src/client.ts#L1977)
+Defined in: [packages/opaque/src/client.ts:2544](https://github.com/opaquecash/sdk/blob/07b81594b33091d87157623bffc2d7ba1ab07e5d/packages/opaque/src/client.ts#L2544)
 
 Legacy V1 issuer flow: derive one-time stealth material for the recipient and embed
 `attestationId` in metadata.
@@ -1034,7 +1198,7 @@ Legacy V1 issuer flow: derive one-time stealth material for the recipient and em
 
 > **prepareStealthSend**(`recipientMetaAddressHex`): [`PrepareStealthSendResult`](/sdk/api/@opaquecash/opaque/interfaces/PrepareStealthSendResult.md)
 
-Defined in: [packages/opaque/src/client.ts:1162](https://github.com/opaquecash/sdk/blob/d653e273eb390dbec38241c20772af6021a1f8d8/packages/opaque/src/client.ts#L1162)
+Defined in: [packages/opaque/src/client.ts:1350](https://github.com/opaquecash/sdk/blob/07b81594b33091d87157623bffc2d7ba1ab07e5d/packages/opaque/src/client.ts#L1350)
 
 Derive a one-time stealth address for sending to a recipient meta-address.
 
@@ -1054,7 +1218,7 @@ Derive a one-time stealth address for sending to a recipient meta-address.
 
 > **reconcileOpaqueName**(`name`): `Promise`\<`string`\>
 
-Defined in: [packages/opaque/src/client.ts:1102](https://github.com/opaquecash/sdk/blob/d653e273eb390dbec38241c20772af6021a1f8d8/packages/opaque/src/client.ts#L1102)
+Defined in: [packages/opaque/src/client.ts:1290](https://github.com/opaquecash/sdk/blob/07b81594b33091d87157623bffc2d7ba1ab07e5d/packages/opaque/src/client.ts#L1290)
 
 Close a finished provisional claim (confirmed / lost / expired) and refund its
 rent to the claimer. Permissionless; submits with the configured Solana wallet.
@@ -1075,7 +1239,7 @@ rent to the claimer. Permissionless; submits with the configured Solana wallet.
 
 > **registerMetaAddress**(`chain`): `Promise`\<[`RegisterMetaAddressResult`](/sdk/api/@opaquecash/opaque/interfaces/RegisterMetaAddressResult.md)\>
 
-Defined in: [packages/opaque/src/client.ts:986](https://github.com/opaquecash/sdk/blob/d653e273eb390dbec38241c20772af6021a1f8d8/packages/opaque/src/client.ts#L986)
+Defined in: [packages/opaque/src/client.ts:1174](https://github.com/opaquecash/sdk/blob/07b81594b33091d87157623bffc2d7ba1ab07e5d/packages/opaque/src/client.ts#L1174)
 
 Register THIS wallet's 66-byte meta-address on-chain so others can resolve it, dispatching on
 `chain`. Submits the transaction with the configured signer (`ethereumWalletClient` /
@@ -1099,7 +1263,7 @@ calldata-only request you submit yourself, see [buildRegisterMetaAddressTransact
 
 > **registerOpaqueName**(`label`): `Promise`\<`` `0x${string}` ``\>
 
-Defined in: [packages/opaque/src/client.ts:1037](https://github.com/opaquecash/sdk/blob/d653e273eb390dbec38241c20772af6021a1f8d8/packages/opaque/src/client.ts#L1037)
+Defined in: [packages/opaque/src/client.ts:1225](https://github.com/opaquecash/sdk/blob/07b81594b33091d87157623bffc2d7ba1ab07e5d/packages/opaque/src/client.ts#L1225)
 
 Register `label.parent` for THIS wallet's meta-address on the canonical
 OpaqueNameRegistry (Ethereum; spec/ONS.md §4.1). Immediately authoritative;
@@ -1122,7 +1286,7 @@ Ethereum signer and returns the tx hash.
 
 > **removeSchemaDelegate**(`chain`, `schemaId`, `delegate`): `Promise`\<[`PsrTxResult`](/sdk/api/@opaquecash/opaque/interfaces/PsrTxResult.md)\>
 
-Defined in: [packages/opaque/src/client.ts:2138](https://github.com/opaquecash/sdk/blob/d653e273eb390dbec38241c20772af6021a1f8d8/packages/opaque/src/client.ts#L2138)
+Defined in: [packages/opaque/src/client.ts:2705](https://github.com/opaquecash/sdk/blob/07b81594b33091d87157623bffc2d7ba1ab07e5d/packages/opaque/src/client.ts#L2705)
 
 Authority-only: revoke a delegate's issuance rights under `schemaId`.
 
@@ -1150,7 +1314,7 @@ Authority-only: revoke a delegate's issuance rights under `schemaId`.
 
 > **resolveOpaqueMetaAddress**(`name`): `Promise`\<`` `0x${string}` ``\>
 
-Defined in: [packages/opaque/src/client.ts:871](https://github.com/opaquecash/sdk/blob/d653e273eb390dbec38241c20772af6021a1f8d8/packages/opaque/src/client.ts#L871)
+Defined in: [packages/opaque/src/client.ts:1059](https://github.com/opaquecash/sdk/blob/07b81594b33091d87157623bffc2d7ba1ab07e5d/packages/opaque/src/client.ts#L1059)
 
 Resolve an Opaque Name Service name (`alice.opq.eth`; `alice.opqtest.eth` on
 testnet) to its meta-address (spec/ONS.md §7). Tries the Solana mirror PDA first
@@ -1175,7 +1339,7 @@ record by Wormhole latency (eventually consistent, canonical-chain-wins).
 
 > **resolveRecipient**(`input`): `Promise`\<[`ResolvedRecipient`](/sdk/api/@opaquecash/opaque/interfaces/ResolvedRecipient.md)\>
 
-Defined in: [packages/opaque/src/client.ts:805](https://github.com/opaquecash/sdk/blob/d653e273eb390dbec38241c20772af6021a1f8d8/packages/opaque/src/client.ts#L805)
+Defined in: [packages/opaque/src/client.ts:993](https://github.com/opaquecash/sdk/blob/07b81594b33091d87157623bffc2d7ba1ab07e5d/packages/opaque/src/client.ts#L993)
 
 Resolve ANY supported recipient identity to its 66-byte meta-address (CSAP §2.9):
 
@@ -1208,7 +1372,7 @@ path-specific message when the identity is unregistered, unset, or malformed.
 
 > **resolveRecipientMetaAddress**(`recipientAddress`): `Promise`\<[`ResolveRecipientMetaResult`](/sdk/api/@opaquecash/opaque/interfaces/ResolveRecipientMetaResult.md)\>
 
-Defined in: [packages/opaque/src/client.ts:765](https://github.com/opaquecash/sdk/blob/d653e273eb390dbec38241c20772af6021a1f8d8/packages/opaque/src/client.ts#L765)
+Defined in: [packages/opaque/src/client.ts:953](https://github.com/opaquecash/sdk/blob/07b81594b33091d87157623bffc2d7ba1ab07e5d/packages/opaque/src/client.ts#L953)
 
 Look up a recipient’s stealth meta-address on `StealthMetaAddressRegistry` using this client’s
 `rpcUrl` and configured registry (scheme id [EIP5564\_SCHEME\_SECP256K1](/sdk/api/@opaquecash/opaque/variables/EIP5564_SCHEME_SECP256K1.md)).
@@ -1234,7 +1398,7 @@ Normal Ethereum address of the intended recipient.
 
 > **scan**(`opts`): `Promise`\<[`UnifiedOwnedOutput`](/sdk/api/@opaquecash/opaque/interfaces/UnifiedOwnedOutput.md)[]\>
 
-Defined in: [packages/opaque/src/client.ts:1622](https://github.com/opaquecash/sdk/blob/d653e273eb390dbec38241c20772af6021a1f8d8/packages/opaque/src/client.ts#L1622)
+Defined in: [packages/opaque/src/client.ts:1864](https://github.com/opaquecash/sdk/blob/07b81594b33091d87157623bffc2d7ba1ab07e5d/packages/opaque/src/client.ts#L1864)
 
 Scan one or more chains for stealth outputs owned by this wallet and return a single,
 merged inbox. Each chain's native announcements are fetched through its [ChainAdapter](/sdk/api/@opaquecash/opaque/interfaces/ChainAdapter.md)
@@ -1291,7 +1455,7 @@ Upper-bound EVM block; omit for the chain tip.
 
 > **scanCrossChain**(`opts?`): `Promise`\<[`OwnedStealthOutput`](/sdk/api/@opaquecash/opaque/interfaces/OwnedStealthOutput.md)[]\>
 
-Defined in: [packages/opaque/src/client.ts:1549](https://github.com/opaquecash/sdk/blob/d653e273eb390dbec38241c20772af6021a1f8d8/packages/opaque/src/client.ts#L1549)
+Defined in: [packages/opaque/src/client.ts:1791](https://github.com/opaquecash/sdk/blob/07b81594b33091d87157623bffc2d7ba1ab07e5d/packages/opaque/src/client.ts#L1791)
 
 Discover stealth outputs owned by this user that arrived via the cross-chain UAB.
 
@@ -1317,14 +1481,16 @@ Discover stealth outputs owned by this user that arrived via the cross-chain UAB
 
 > **sendStealthPayment**(`params`): `Promise`\<[`SendStealthPaymentResult`](/sdk/api/@opaquecash/opaque/interfaces/SendStealthPaymentResult.md)\>
 
-Defined in: [packages/opaque/src/client.ts:1184](https://github.com/opaquecash/sdk/blob/d653e273eb390dbec38241c20772af6021a1f8d8/packages/opaque/src/client.ts#L1184)
+Defined in: [packages/opaque/src/client.ts:1375](https://github.com/opaquecash/sdk/blob/07b81594b33091d87157623bffc2d7ba1ab07e5d/packages/opaque/src/client.ts#L1375)
 
 High-level send: resolve the recipient, derive a one-time stealth destination, transfer the
 native asset, and publish the discovery announcement — in one call, dispatching on `chain`.
 
 Solana bundles the transfer and `announce` (or `announce_with_relay` when `relay` is set) into a
 single transaction and returns its signature. Ethereum submits the value transfer first, then
-the announce, returning both tx hashes. Token (SPL/ERC-20) sends are not yet supported.
+the announce, returning both tx hashes. Set `token` to send an SPL mint / ERC-20 instead of the
+native asset (the announcement is unchanged); `gasDrop` optionally tops the stealth address up
+with native gas so the recipient can move the token without a relayer.
 Requires the chain's signer (`solanaWallet` / `ethereumWalletClient` or `ethereumProvider`).
 
 #### Parameters
@@ -1343,7 +1509,7 @@ Requires the chain's signer (`solanaWallet` / `ethereumWalletClient` or `ethereu
 
 > **simulateReputationVerification**\<`TTransport`, `TChain`, `TAccount`\>(`wallet`, `args`): `Promise`\<`void`\>
 
-Defined in: [packages/opaque/src/client.ts:2539](https://github.com/opaquecash/sdk/blob/d653e273eb390dbec38241c20772af6021a1f8d8/packages/opaque/src/client.ts#L2539)
+Defined in: [packages/opaque/src/client.ts:3108](https://github.com/opaquecash/sdk/blob/07b81594b33091d87157623bffc2d7ba1ab07e5d/packages/opaque/src/client.ts#L3108)
 
 Simulate `verifyReputation` for gas / revert checks.
 
@@ -2434,7 +2600,7 @@ const receipt = await client.writeContractSync({
 
 > **submitReputationVerification**(`chain`, `args`): `Promise`\<[`PsrTxResult`](/sdk/api/@opaquecash/opaque/interfaces/PsrTxResult.md)\>
 
-Defined in: [packages/opaque/src/client.ts:2561](https://github.com/opaquecash/sdk/blob/d653e273eb390dbec38241c20772af6021a1f8d8/packages/opaque/src/client.ts#L2561)
+Defined in: [packages/opaque/src/client.ts:3130](https://github.com/opaquecash/sdk/blob/07b81594b33091d87157623bffc2d7ba1ab07e5d/packages/opaque/src/client.ts#L3130)
 
 Broadcast a reputation proof to the verifier, dispatching on `chain` (consumes the nullifier on
 success). Uses the configured signer for each chain — `ethereumWalletClient` / `ethereumProvider`
@@ -2461,11 +2627,13 @@ for Ethereum, `solanaWallet` for Solana. The same [VerifyReputationArgs](/sdk/ap
 
 > **sweep**(`params`): `Promise`\<\{ `chain`: [`OpaqueScanChain`](/sdk/api/@opaquecash/opaque/type-aliases/OpaqueScanChain.md); `tx`: `string`; \}\>
 
-Defined in: [packages/opaque/src/client.ts:1750](https://github.com/opaquecash/sdk/blob/d653e273eb390dbec38241c20772af6021a1f8d8/packages/opaque/src/client.ts#L1750)
+Defined in: [packages/opaque/src/client.ts:2018](https://github.com/opaquecash/sdk/blob/07b81594b33091d87157623bffc2d7ba1ab07e5d/packages/opaque/src/client.ts#L2018)
 
-Sweep the full native balance of an owned stealth output to `destination`, signed by the
-reconstructed one-time key (the on-chain `from` is the stealth address itself). Works for
-Ethereum (ETH) and Solana (SOL); `"solana"` requires [OpaqueClientConfig.solana](/sdk/api/@opaquecash/opaque/interfaces/OpaqueClientConfig.md#solana).
+Sweep an owned stealth output to `destination`, signed by the reconstructed one-time key (the
+on-chain `from` is the stealth address itself). Sweeps the full native balance, or the full
+balance of `token` (ERC-20 address / SPL mint) when set. Works for Ethereum and Solana;
+`"solana"` requires [OpaqueClientConfig.solana](/sdk/api/@opaquecash/opaque/interfaces/OpaqueClientConfig.md#solana). An ERC-20 sweep needs the stealth address
+to hold native gas (see `gasDrop` on [sendStealthPayment](/sdk/api/@opaquecash/opaque/classes/OpaqueClient.md#sendstealthpayment), or a relayer-sponsored sweep).
 
 #### Parameters
 
@@ -2475,6 +2643,12 @@ Ethereum (ETH) and Solana (SOL); `"solana"` requires [OpaqueClientConfig.solana]
 
 [`OpaqueScanChain`](/sdk/api/@opaquecash/opaque/type-aliases/OpaqueScanChain.md)
 
+###### closeAccount?
+
+`boolean`
+
+Solana only: also close the emptied token account and reclaim its rent.
+
 ###### destination
 
 `string`
@@ -2482,6 +2656,12 @@ Ethereum (ETH) and Solana (SOL); `"solana"` requires [OpaqueClientConfig.solana]
 ###### output
 
 `Pick`\<[`OwnedStealthOutput`](/sdk/api/@opaquecash/opaque/interfaces/OwnedStealthOutput.md), `"ephemeralPublicKey"`\>
+
+###### token?
+
+`string`
+
+ERC-20 address / SPL mint to sweep; omit for the native asset.
 
 #### Returns
 
@@ -2493,7 +2673,7 @@ Ethereum (ETH) and Solana (SOL); `"solana"` requires [OpaqueClientConfig.solana]
 
 > **verifyReputationProofView**(`args`): `Promise`\<`boolean`\>
 
-Defined in: [packages/opaque/src/client.ts:2530](https://github.com/opaquecash/sdk/blob/d653e273eb390dbec38241c20772af6021a1f8d8/packages/opaque/src/client.ts#L2530)
+Defined in: [packages/opaque/src/client.ts:3099](https://github.com/opaquecash/sdk/blob/07b81594b33091d87157623bffc2d7ba1ab07e5d/packages/opaque/src/client.ts#L3099)
 
 On-chain view helper: verify proof without spending nullifier.
 
@@ -2513,7 +2693,7 @@ On-chain view helper: verify proof without spending nullifier.
 
 > `static` **chainDeployment**(`chainId`): [`OpaqueChainDeployment`](/sdk/api/@opaquecash/opaque/interfaces/OpaqueChainDeployment.md) \| `undefined`
 
-Defined in: [packages/opaque/src/client.ts:2631](https://github.com/opaquecash/sdk/blob/d653e273eb390dbec38241c20772af6021a1f8d8/packages/opaque/src/client.ts#L2631)
+Defined in: [packages/opaque/src/client.ts:3200](https://github.com/opaquecash/sdk/blob/07b81594b33091d87157623bffc2d7ba1ab07e5d/packages/opaque/src/client.ts#L3200)
 
 Read bundled deployment metadata (contracts, default tokens) for a chain.
 
@@ -2533,7 +2713,7 @@ Read bundled deployment metadata (contracts, default tokens) for a chain.
 
 > `static` **create**(`config`): `Promise`\<`OpaqueClient`\>
 
-Defined in: [packages/opaque/src/client.ts:651](https://github.com/opaquecash/sdk/blob/d653e273eb390dbec38241c20772af6021a1f8d8/packages/opaque/src/client.ts#L651)
+Defined in: [packages/opaque/src/client.ts:774](https://github.com/opaquecash/sdk/blob/07b81594b33091d87157623bffc2d7ba1ab07e5d/packages/opaque/src/client.ts#L774)
 
 Construct a client: loads WASM, derives keys from `walletSignature`, wires RPC + addresses.
 
@@ -2549,11 +2729,53 @@ Construct a client: loads WASM, derives keys from `walletSignature`, wires RPC +
 
 ***
 
+### createViewOnly()
+
+> `static` **createViewOnly**(`config`, `keys`): `Promise`\<`OpaqueClient`\>
+
+Defined in: [packages/opaque/src/client.ts:811](https://github.com/opaquecash/sdk/blob/07b81594b33091d87157623bffc2d7ba1ab07e5d/packages/opaque/src/client.ts#L811)
+
+Construct a view-only client (CSAP §2.8 watch-only delegation) from the viewing PRIVATE key and
+the spending PUBLIC key. It can [scan](/sdk/api/@opaquecash/opaque/classes/OpaqueClient.md#scan), [filterOwnedAnnouncements](/sdk/api/@opaquecash/opaque/classes/OpaqueClient.md#filterownedannouncements), and read
+balances, but cannot spend: [sweep](/sdk/api/@opaquecash/opaque/classes/OpaqueClient.md#sweep), [getStealthSignerPrivateKey](/sdk/api/@opaquecash/opaque/classes/OpaqueClient.md#getstealthsignerprivatekey), and reputation
+key reconstruction throw. This is the safe shape for a server-side scanner — a compromised
+server can read the inbox but can never move funds. Never give a server the spending key.
+
+`config` omits `walletSignature` since no keys are derived here. Pass keys as `0x` hex or bytes.
+
+#### Parameters
+
+##### config
+
+`Omit`\<[`OpaqueClientConfig`](/sdk/api/@opaquecash/opaque/interfaces/OpaqueClientConfig.md), `"walletSignature"`\>
+
+##### keys
+
+###### solanaSpendPublicKey?
+
+`` `0x${string}` `` \| `Uint8Array`
+
+ed25519 Solana spend PUBLIC key `S_ed` (32 bytes); required to scan/read Solana balances.
+
+###### spendPublicKey
+
+`` `0x${string}` `` \| `Uint8Array`
+
+###### viewingKey
+
+`` `0x${string}` `` \| `Uint8Array`
+
+#### Returns
+
+`Promise`\<`OpaqueClient`\>
+
+***
+
 ### fromWallet()
 
 > `static` **fromWallet**(`params`): `Promise`\<`OpaqueClient`\>
 
-Defined in: [packages/opaque/src/client.ts:685](https://github.com/opaquecash/sdk/blob/d653e273eb390dbec38241c20772af6021a1f8d8/packages/opaque/src/client.ts#L685)
+Defined in: [packages/opaque/src/client.ts:873](https://github.com/opaquecash/sdk/blob/07b81594b33091d87157623bffc2d7ba1ab07e5d/packages/opaque/src/client.ts#L873)
 
 Construct a client from wallet(s) in the [UnifiedSigner](/sdk/api/@opaquecash/opaque/type-aliases/UnifiedSigner.md) shape — the
 one-adapter entry point for integrators (Phase 2.5). Pass at most one wallet per
@@ -2578,7 +2800,7 @@ wired as that chain's write signer (`ethereumProvider`/`ethereumWalletClient`,
 
 > `static` **supportedChainIds**(): `number`[]
 
-Defined in: [packages/opaque/src/client.ts:2624](https://github.com/opaquecash/sdk/blob/d653e273eb390dbec38241c20772af6021a1f8d8/packages/opaque/src/client.ts#L2624)
+Defined in: [packages/opaque/src/client.ts:3193](https://github.com/opaquecash/sdk/blob/07b81594b33091d87157623bffc2d7ba1ab07e5d/packages/opaque/src/client.ts#L3193)
 
 Chain IDs that ship with bundled contract addresses in this SDK version.
 

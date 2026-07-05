@@ -2,7 +2,7 @@
 
 > **parseStealthMetaAddress**(`metaHex`): `object`
 
-Defined in: [packages/opaque/src/crypto/dksap.ts:67](https://github.com/opaquecash/sdk/blob/d653e273eb390dbec38241c20772af6021a1f8d8/packages/opaque/src/crypto/dksap.ts#L67)
+Defined in: [packages/opaque/src/crypto/dksap.ts:116](https://github.com/opaquecash/sdk/blob/07b81594b33091d87157623bffc2d7ba1ab07e5d/packages/opaque/src/crypto/dksap.ts#L116)
 
 ## Parameters
 
@@ -12,7 +12,11 @@ Defined in: [packages/opaque/src/crypto/dksap.ts:67](https://github.com/opaqueca
 
 ## Returns
 
-`object`
+### solanaSpendPubKey?
+
+> `optional` **solanaSpendPubKey?**: `Uint8Array`
+
+ed25519 Solana spend public key `S_ed`; present only for a 98-byte meta-address.
 
 ### spendPubKey
 

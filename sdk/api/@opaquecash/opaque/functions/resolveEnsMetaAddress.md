@@ -2,7 +2,7 @@
 
 > **resolveEnsMetaAddress**(`name`, `transports`): `Promise`\<`` `0x${string}` ``\>
 
-Defined in: [packages/opaque/src/resolve.ts:263](https://github.com/opaquecash/sdk/blob/d653e273eb390dbec38241c20772af6021a1f8d8/packages/opaque/src/resolve.ts#L263)
+Defined in: [packages/opaque/src/resolve.ts:264](https://github.com/opaquecash/sdk/blob/07b81594b33091d87157623bffc2d7ba1ab07e5d/packages/opaque/src/resolve.ts#L264)
 
 Read the `com.opaque.meta` text record for an ENS name through the injected reader
 and validate it. Throws when the record is unset or invalid. The on-chain registry

@@ -6,7 +6,7 @@ description: End-to-end flow to pay someone privately on Ethereum or Solana.
 ## Prerequisites
 
 - Sender wallet funded with native asset (ETH or SOL)
-- Recipient registered on the target chain (or pass their 66-byte meta-address directly)
+- Recipient registered on the target chain (or pass their meta-address directly)
 - `ethereumWalletClient` / `ethereumProvider` (EVM) or `solanaWallet` (Solana)
 
 ## High-level: one method
@@ -162,7 +162,7 @@ await client.sendStealthPayment({
 
 | `recipient` value | Behavior |
 | --- | --- |
-| 66-byte meta-address (`0x` + 132 hex, `st:opq:` prefix accepted) | Validated and used directly |
+| meta-address, 66- or 98-byte (`0x` + 132/196 hex, `st:opq:` prefix accepted) | Validated and used directly |
 | Ethereum `0x` address | Registry lookup on Ethereum |
 | Solana base58 pubkey | Registry lookup on Solana |
 | `ipfs://CID` | DID document fetch (configure `ipfs` on the client) |

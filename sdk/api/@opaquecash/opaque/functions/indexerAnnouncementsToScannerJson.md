@@ -2,7 +2,7 @@
 
 > **indexerAnnouncementsToScannerJson**(`rows`): `string`
 
-Defined in: [packages/opaque/src/indexer/normalize.ts:58](https://github.com/opaquecash/sdk/blob/d653e273eb390dbec38241c20772af6021a1f8d8/packages/opaque/src/indexer/normalize.ts#L58)
+Defined in: [packages/opaque/src/indexer/normalize.ts:58](https://github.com/opaquecash/sdk/blob/07b81594b33091d87157623bffc2d7ba1ab07e5d/packages/opaque/src/indexer/normalize.ts#L58)
 
 Batch-normalize indexer rows for WASM or playground inspection.
 

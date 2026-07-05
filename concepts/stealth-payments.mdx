@@ -18,7 +18,7 @@ These keys are **chain-neutral**: the same wallet has one meta-address on Ethere
 
 ## Meta-address
 
-A 66-byte value (viewing pubkey ‖ spending pubkey) registered on `StealthMetaAddressRegistry`. Share it so senders can derive one-time destinations without linking payments to your public identity.
+A 98-byte value (viewing pubkey ‖ secp256k1 spending pubkey ‖ ed25519 Solana spend pubkey) registered on `StealthMetaAddressRegistry`. Share it so senders can derive one-time destinations without linking payments to your public identity. (Legacy 66-byte `V‖S` values still work for Ethereum.)
 
 ```ts
 const meta = client.getMetaAddressHex();

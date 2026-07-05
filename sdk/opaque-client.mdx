@@ -156,7 +156,7 @@ const signature = await requestSetupSignature(eth);  // personal_sign over SETUP
 ```ts
 client.getChainId()           // number
 client.getEthereumAddress()   // Address
-client.getMetaAddressHex()    // Hex, the 66-byte meta-address
+client.getMetaAddressHex()    // Hex, the 98-byte meta-address (V||S||S_ed)
 client.getContracts()         // { stealthMetaAddressRegistry, stealthAddressAnnouncer, opaqueReputationVerifier? }
 ```
 

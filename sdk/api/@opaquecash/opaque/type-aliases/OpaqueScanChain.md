@@ -2,6 +2,6 @@
 
 > **OpaqueScanChain** = `"ethereum"` \| `"solana"`
 
-Defined in: [packages/opaque/src/client.ts:395](https://github.com/opaquecash/sdk/blob/d653e273eb390dbec38241c20772af6021a1f8d8/packages/opaque/src/client.ts#L395)
+Defined in: [packages/opaque/src/client.ts:449](https://github.com/opaquecash/sdk/blob/07b81594b33091d87157623bffc2d7ba1ab07e5d/packages/opaque/src/client.ts#L449)
 
 Chains the unified [OpaqueClient.scan](/sdk/api/@opaquecash/opaque/classes/OpaqueClient.md#scan) can read.
