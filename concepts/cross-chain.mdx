@@ -58,3 +58,11 @@ Off-chain VAA delivery is handled by [`opaquecash/relayer`](https://github.com/o
 | Ethereum | 2 |
 
 Exported as `WORMHOLE_CHAIN_SOLANA` and `WORMHOLE_CHAIN_ETHEREUM` from `@opaquecash/opaque`.
+
+## Starknet
+
+Wormhole has no Starknet support, so Starknet participates in the unified inbox
+as a **native scan chain** rather than over the UAB relay: add `"starknet"` to
+`scan({ chains })` and its announcements merge alongside Ethereum and Solana. See
+[Starknet](/concepts/starknet). Trust-minimised registry/ONS mirroring to
+Starknet (native L1→L2 messaging) is on the roadmap.

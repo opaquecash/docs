@@ -118,3 +118,28 @@ import {
 VAAs must be delivered to `UABReceiver` on the destination chain. Use [`opaquecash/relayer`](https://github.com/opaquecash/relayer) for off-chain delivery.
 
 See [Cross-chain announcements](/concepts/cross-chain).
+
+---
+
+## Starknet
+
+Starknet is a native scan chain (not a UAB/Wormhole path). Enable it with the
+`starknet` client option, then include it in `scan`:
+
+```ts
+const client = await OpaqueClient.create({ /* … */, starknet: {} });
+
+const inbox = await client.scan({ chains: ["ethereum", "solana", "starknet"] });
+```
+
+### `buildStarknetStealthSend({ recipient, amount, token? })`
+
+Returns the counterfactual stealth account and the unsigned `transfer` +
+`announce` calls to broadcast in one multicall from a Starknet wallet.
+
+### `buildStarknetSweep({ output, destination, amount, token? })`
+
+Returns the reconstructed signer key, the `deploy_account` parameters, and the
+transfer-out call for the recipient to broadcast (Eth signer).
+
+Full flow and caveats: [Starknet](/concepts/starknet).

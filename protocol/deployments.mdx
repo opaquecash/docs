@@ -11,6 +11,7 @@ from their canonical deployment records:
 | --- | --- | --- |
 | `ethereum/infra/deployments/*.json` + hardhat artifacts | `npm run generate` in `ethereum/infra` | EVM addresses + contract ABIs |
 | `solana/Anchor.toml` program tables | `npm run generate` in `solana` | Program ids + Wormhole core per cluster |
+| `starknet/deployments/*.json` | `node scripts/generate-deployments.mjs` in `starknet` | Starknet addresses + class hashes per network |
 
 A redeploy is therefore a regenerate + rebuild, never a code change. Higher SDK
 packages (`@opaquecash/opaque`, `uab`, `stealth-chain-solana`, `psr-chain`) and the
@@ -93,6 +94,28 @@ import { getSolanaDeployment } from "@opaquecash/opaque";
 
 const d = getSolanaDeployment("devnet");
 console.log(d.schemaRegistry, d.attestationEngineV2);
+```
+
+## Starknet Sepolia (chain id `0x534e`)
+
+Testnet preview — see [Starknet](/concepts/starknet).
+
+| Contract | Address |
+| --- | --- |
+| StealthAnnouncer | `0x003b8258e84e6feec93239b442e6a91f532fda35fed67de4093b1d97150d2aa2` |
+| StealthMetaAddressRegistry | `0x047ff90c491384ecf8dba8b32b1eea7947f850ea92ddc196edcb0f508acff874` |
+| OpaqueReputationVerifierV2 | `0x017a56e5a3963214781320bb1e007b6b72b97041ab8087261253e80233083eb6` |
+| Groth16VerifierBN254 | `0x01f339dfc3a1509bc3ccd1c7ea1a19c07bc0f89ad7378b505b3edc5f5b13b02e` |
+| StealthAccount (class hash) | `0x04794bab07198e0585d2d7951dbc5860fba47fea2a15d227ca3237b7b9e484ed` |
+
+The `StealthAccount` class hash is a consensus-critical constant: every Starknet
+stealth address is a counterfactual deployment of this exact class.
+
+```ts
+import { getStarknetDeployment } from "@opaquecash/deployments";
+
+const sn = getStarknetDeployment("sepolia");
+console.log(sn.stealthAnnouncer, sn.reputationVerifier, sn.stealthAccountClassHash);
 ```
 
 ## Supported chain IDs

@@ -1,0 +1,116 @@
+---
+title: Starknet
+description: Stealth payments and Programmable Stealth Reputation on Starknet (testnet preview).
+---
+
+<Note>
+Starknet support is live on **Starknet Sepolia** (testnet). Native scanning,
+stealth sends, sweeps, and PSR proof verification work end to end today; the
+cross-chain UAB relay, ONS mirroring, and reference-app UI for Starknet are
+still in progress. See the [integration design](https://github.com/opaquecash/spec/blob/main/starknet-integration.md).
+</Note>
+
+Opaque runs on Starknet as a third chain alongside Ethereum and Solana. The
+viewing and spending keys are chain-neutral, so **one wallet's inbox spans all
+three chains** — you scan Starknet with the same keys you use for the others.
+
+## How custody works
+
+A Starknet stealth address is the **counterfactual account address** of a pinned
+`StealthAccount` class (OpenZeppelin's audited `EthAccountComponent`) whose sole
+signer is the one-time secp256k1 key `P_stealth`. The sender computes this
+address from the recipient's meta-address and the announcement — no interaction —
+and only the recipient can reconstruct the matching private key to spend.
+
+The account does not need to be deployed to receive funds: an ERC-20 balance is
+state in the token contract, so tokens wait at the counterfactual address until
+the recipient deploys the account and sweeps.
+
+The Opaque-assigned chain id for Starknet is `0x534e` ("SN"); it is distinct
+from the Wormhole ids used for Ethereum (2) and Solana (1).
+
+## Scan
+
+```ts
+import { OpaqueClient } from "@opaquecash/opaque";
+
+const client = await OpaqueClient.create({
+  chainId: 11155111,
+  rpcUrl: "https://ethereum-sepolia.publicnode.com",
+  walletSignature,     // chain-neutral key derivation
+  ethereumAddress,
+  starknet: {},         // defaults to the bundled Sepolia deployment
+});
+
+// Unified, cross-chain inbox — one call, all three chains.
+const inbox = await client.scan({ chains: ["ethereum", "solana", "starknet"] });
+// Each output is tagged { chain: "starknet", chainId: 0x534e, source: "native" }
+```
+
+Scanning is wallet-free (viewing key only). Read balances with
+`getBalancesForOutputs`, which reads STRK via `balance_of` and works for
+undeployed accounts:
+
+```ts
+const balances = await client.getBalancesForOutputs(inbox);
+```
+
+## Send
+
+`buildStarknetStealthSend` returns the unsigned calls to broadcast from a
+Starknet wallet: an ERC-20 `transfer` to the stealth address, then the
+`announce`. Signing and broadcasting stay with the app's Starknet wallet (as on
+Solana), so no Starknet signer is needed in the client config.
+
+```ts
+const send = await client.buildStarknetStealthSend({
+  recipient,                       // meta-address, registry address, or name
+  amount: 1_000_000_000_000_000n,  // 0.001 STRK (defaults to STRK)
+});
+
+// Broadcast send.calls (transfer + announce) as one multicall with your wallet
+// (e.g. starknet.js Account.execute, get/argent/braavos).
+```
+
+## Sweep
+
+The recipient reconstructs the one-time key that owns the stealth account and
+receives the `deploy_account` parameters plus the transfer-out call.
+Broadcasting uses an Eth signer (secp256k1); the account funds its own deploy
+fee from its balance.
+
+```ts
+import { Account, EthSigner, RpcProvider } from "starknet"; // v10+ for RPC 0.10
+
+const s = client.buildStarknetSweep({ output, destination, amount });
+
+const provider = new RpcProvider({ nodeUrl });
+const account = new Account({
+  provider,
+  address: s.address,
+  signer: new EthSigner("0x" + Buffer.from(s.signerPrivateKey).toString("hex")),
+});
+
+await account.deployAccount({
+  classHash: s.classHash,
+  constructorCalldata: s.constructorCalldata.map(String),
+  addressSalt: "0x" + s.salt.toString(16),
+  contractAddress: s.address,
+});                              // paid from the stealth account's own balance
+await account.execute(s.transferCall);
+```
+
+<Warning>
+Because the account funds its own `deploy_account` fee (the secp256k1
+validation is L2-gas-heavy), the balance must exceed that fee — a dust payment
+cannot be swept without a paymaster/relayer. This account-abstraction friction
+is inherent to Starknet's contract-account model.
+</Warning>
+
+## Programmable Stealth Reputation
+
+The full PSR stack runs on Starknet: a Garaga-generated Groth16-BN254 verifier
+and the `OpaqueReputationVerifierV2` wrapper (admin roots, nullifier set,
+schema-liveness binding) are deployed on Sepolia, verifying proofs from the same
+trusted setup as Ethereum and Solana. See [Deployments](/protocol/deployments)
+for addresses and [PSR](/concepts/psr) for the model.

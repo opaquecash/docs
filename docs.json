@@ -73,7 +73,8 @@
             "pages": [
               "concepts/stealth-payments",
               "concepts/psr",
-              "concepts/cross-chain"
+              "concepts/cross-chain",
+              "concepts/starknet"
             ]
           },
           {
