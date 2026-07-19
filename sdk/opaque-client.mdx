@@ -24,8 +24,9 @@ const client = await OpaqueClient.fromWallet({
   wasmModuleSpecifier: "/pkg/cryptography.js",
 });
 
-// Both chains at once (Solana wallet-adapter + viem WalletClient)
-const dual = await OpaqueClient.fromWallet({
+// All three chains at once (Solana wallet-adapter + viem WalletClient;
+// Starknet scan + build methods enabled via the `starknet` option)
+const client = await OpaqueClient.fromWallet({
   wallets: [
     { chain: "ethereum", address: userAddress, walletClient },
     { chain: "solana", publicKey, signMessage, signTransaction },
@@ -33,6 +34,7 @@ const dual = await OpaqueClient.fromWallet({
   chainId: 11155111,
   rpcUrl,
   solana: { cluster: "devnet" },
+  starknet: {},
 });
 ```
 
@@ -87,6 +89,7 @@ viewer.isViewOnly; // true
 | `trackedTokens` | `TrackedToken[]` | No | Extra ERC-20s for balance aggregation |
 | `contracts` | `Partial<{...}>` | No | Override registry, announcer, verifier, UAB addresses |
 | `solana` | `SolanaAdapterConfig` | No** | **Required when scanning/sending on Solana |
+| `starknet` | `StarknetAdapterOptions` | No | Required for Starknet scan + build methods (Sepolia, testnet preview); enable with `starknet: {}` |
 | `ethereumProvider` | `EIP1193Provider` | No*** | ***For EVM writes if no `ethereumWalletClient` |
 | `ethereumWalletClient` | `WalletClient` | No*** | Precedence over provider for EVM writes |
 | `solanaWallet` | `{ publicKey, signTransaction }` | No**** | ****Required for Solana writes |
@@ -169,6 +172,16 @@ client.getContracts()         // { stealthMetaAddressRegistry, stealthAddressAnn
 | Scan / sweep | `scan`, `sweep`, `filterOwnedAnnouncements`, balances | no | `solana` | yes |
 | PSR admin | `createSchema`, `issueAttestation`, ... | yes (EVM) | yes (Solana) | no |
 | Reputation | `discoverTraitsV2`, `discoverTraits` (legacy V1), `generateReputationProof`, `submitReputationVerification` | yes (submit EVM) | yes (submit Solana) | yes |
+
+<Note>
+  **Starknet (Sepolia, testnet preview).** The chain-neutral keys and single meta-address
+  span Ethereum, Solana, and Starknet, and `scan({ chains: ["ethereum", "solana", "starknet"] })`
+  covers all three once the `starknet` option is set. Starknet sends and sweeps do **not** go
+  through `sendStealthPayment`/`sweep` (those accept only `"ethereum"`/`"solana"`): use
+  `buildStarknetStealthSend({ recipient, amount })` and
+  `buildStarknetSweep({ output, destination, amount })`, which return unsigned calls for the
+  app's Starknet wallet to broadcast. See [Starknet](/concepts/starknet) for the full flow and caveats.
+</Note>
 
 ## Error: WASM not configured
 

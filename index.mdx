@@ -13,7 +13,7 @@ Opaque is a cross-chain privacy stack for unlinkable payments and zero-knowledge
     Full API for the unified client: stealth, PSR, reputation, and UAB.
   </Card>
   <Card title="Create a schema" icon="layer-group" href="/guides/create-schema">
-    Register a PSR schema and issue attestations on Ethereum, Solana, or Starknet.
+    Register a PSR schema and issue attestations on Ethereum or Solana.
   </Card>
   <Card title="Scan and sweep" icon="inbox" href="/guides/scan-and-sweep">
     Discover owned stealth outputs across chains and move funds to a fresh address.
@@ -35,6 +35,7 @@ flowchart LR
   App["Your app"] --> Client["OpaqueClient"]
   Client --> EVM["Ethereum\nRegistry · Announcer · PSR"]
   Client --> SOL["Solana\nRegistry · Announcer · PSR"]
+  Client --> STARK["Starknet\nRegistry · Announcer · PSR verify"]
   Client --> WASM["cryptography.wasm\nscan · sweep · prove"]
   Client --> UAB["UAB / Wormhole\ncross-chain inbox"]
 ```
@@ -45,6 +46,11 @@ flowchart LR
 | --- | --- | --- |
 | Ethereum Sepolia | `11155111` | Stealth, PSR V2, UAB, reputation verifier |
 | Solana devnet | `devnet` | Stealth, PSR V2, reputation verifier |
+| Starknet Sepolia | `0x534e` (SN) | Stealth, PSR verify/gate, reputation verifier (testnet preview) |
+
+<Note>
+  Starknet Sepolia is the newest chain and ships at testnet-preview maturity. It participates as a native stealth + scan chain with on-chain PSR proof verification and gating (`PsrGate`) — schema issuance and Wormhole (UAB) relay stay on Ethereum and Solana. See [Starknet](/concepts/starknet) for the full flow and caveats.
+</Note>
 
 Contract addresses ship inside the SDK (see [Deployments](/protocol/deployments)). Override any address via `OpaqueClient.create({ contracts: { ... } })`.
 

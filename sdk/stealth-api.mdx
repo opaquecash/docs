@@ -209,6 +209,33 @@ const result = await client.sendStealthPayment({
 Solana bundles transfer + announce in one transaction (unless `delayAnnouncement` is
 set, which forces two). Ethereum submits the transfer first, then the announce.
 
+<Note>
+  `sendStealthPayment` accepts only `"ethereum"` and `"solana"` and throws for
+  `"starknet"` (as does `registerMetaAddress`). On Starknet, send via
+  `buildStarknetStealthSend` below; meta-address registration goes through the
+  `@opaquecash/stealth-chain-starknet` adapter (SNIP-12 on-behalf) — see
+  [Starknet](/concepts/starknet).
+</Note>
+
+---
+
+### `buildStarknetStealthSend(params)`
+
+Starknet send + announce (Starknet Sepolia, testnet-preview). Builds the unsigned
+transfer and announce calls; the app's connected Starknet wallet broadcasts them (the
+one meta-address and wallet already span all three chains).
+
+```ts
+const starknetSend = await client.buildStarknetStealthSend({
+  recipient,   // anything resolveRecipient accepts
+  amount,      // STRK amount
+});
+// Unsigned transfer + announce calls for the connected Starknet account to broadcast.
+```
+
+Requires the `starknet: {}` client option and `@opaquecash/stealth-chain-starknet`. See
+[Starknet](/concepts/starknet) for the full flow and caveats.
+
 ---
 
 ### `prepareGhostReceive()`
@@ -340,11 +367,11 @@ const owned = await client.filterOwnedAnnouncements(indexerRows);
 
 ### `scan(opts)`
 
-Unified multichain inbox.
+Unified multichain inbox across all three supported chains.
 
 ```ts
 const inbox = await client.scan({
-  chains: ["ethereum", "solana"],
+  chains: ["ethereum", "solana", "starknet"],
   fromBlock: 5_000_000n,
   toBlock: undefined,
   solanaLimit: 1000,
@@ -352,6 +379,13 @@ const inbox = await client.scan({
 });
 // UnifiedOwnedOutput[], tagged with chain, chainId, source
 ```
+
+<Note>
+  Include `"starknet"` (Starknet Sepolia, testnet-preview) only when the client was
+  created with the `starknet: {}` option. Starknet participates as a native scan chain,
+  not a Wormhole/UAB relay endpoint, so `includeCrossChain` adds no Starknet rows. See
+  [Starknet](/concepts/starknet).
+</Note>
 
 ---
 
@@ -397,8 +431,29 @@ const { chain, tx } = await client.sweep({
 
 For a stealth address holding a token but no gas, use `buildGaslessTokenSweep` and submit
 the result to a relayer node with `postGaslessSweep` from `@opaquecash/relayer-client`; the
-relayer fronts the gas and is reimbursed `fee` in-token on both chains
-(see [Gasless token sweep](/guides/scan-and-sweep#gasless-token-sweep)).
+relayer fronts the gas and is reimbursed `fee` in-token on both Ethereum and Solana
+(see [Gasless token sweep](/guides/scan-and-sweep#gasless-token-sweep)). The gasless
+forwarder is EVM/Solana only; Starknet sweeps self-fund instead (below).
+
+---
+
+### `buildStarknetSweep(params)`
+
+Sweep a Starknet stealth output (Starknet Sepolia, testnet-preview). Returns the sweep
+call for the app to broadcast via `starknet.js` (`EthSigner`, v10+). There is no
+fee-in-token gasless forwarder on Starknet: the counterfactual stealth account
+self-funds its `deploy_account` fee.
+
+```ts
+const starknetSweep = client.buildStarknetSweep({
+  output,        // a Starknet UnifiedOwnedOutput
+  destination,   // fresh Starknet address
+  amount,
+});
+// Broadcast with the connected Starknet account (starknet.js EthSigner).
+```
+
+See [Starknet](/concepts/starknet).
 
 ---
 

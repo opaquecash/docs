@@ -15,6 +15,10 @@ description: Privacy-preserving attestations bound to stealth identities and Gro
 
 Schemas and attestations return chain-neutral `SchemaV2` / `AttestationV2` shapes from both Ethereum and Solana.
 
+<Note>
+  Schema registration and attestation **issuance** run on Ethereum and Solana only. Proof **verification and gating** extend further: the Groth16 verifier, `OpaqueReputationVerifierV2`, and the `PsrGate` credential-gated-entry contract are also deployed on Starknet, so proofs from the same trusted setup verify identically on all three chains (via `@opaquecash/psr-chain-starknet`). See [Starknet](/concepts/starknet) for the verification path and its testnet-preview caveats.
+</Note>
+
 ## Issuer flow
 
 ```mermaid

@@ -9,7 +9,7 @@ This guide takes you from zero to a working integration: install the SDK, create
 
 - Node.js **20.17+**
 - An Ethereum wallet (Sepolia testnet ETH for writes)
-- Optional: Solana wallet on devnet for multichain flows
+- Optional: a Solana (devnet) or Starknet (Sepolia) wallet for multichain flows
 - For scan/sweep/prove: host or load the [cryptography WASM](/sdk/installation#wasm-module) module
 
 ## 1. Install
@@ -116,6 +116,14 @@ if (inbox.length > 0) {
   });
 }
 ```
+
+<Note>
+  `scan` and `getBalancesForOutputs` span every chain the client is configured for. To
+  include **Starknet** (Sepolia, testnet preview), pass `starknet: {}` to `fromWallet`,
+  then scan with `chains: ["ethereum", "solana", "starknet"]`. Sending and sweeping on
+  Starknet use the dedicated `buildStarknetStealthSend` and `buildStarknetSweep`
+  builders — see [Starknet](/concepts/starknet).
+</Note>
 
 Building a React app? `@opaquecash/react` packages the read side as hooks; see
 [React hooks](/sdk/react).

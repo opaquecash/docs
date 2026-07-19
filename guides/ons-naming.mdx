@@ -15,6 +15,11 @@ On testnet the parent name in force is **`opqtest.eth`** (Sepolia); production `
 is deferred until mainnet. The parent name, registry address, and mirror program ship in
 `@opaquecash/deployments` (see [Deployments](/protocol/deployments)).
 
+<Note>
+ONS names resolve on Ethereum and Solana today. A Starknet mirror (an L1-to-L2 mirror
+alongside the Solana one) is on the roadmap and not yet live.
+</Note>
+
 <Warning>
 **Consistency model: eventually consistent, canonical-chain-wins.** There is no atomic
 cross-chain claim. Ethereum registrations are immediately authoritative; the Solana

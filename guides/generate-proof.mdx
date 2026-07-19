@@ -123,6 +123,15 @@ await client.submitReputationVerification("solana", {
 });
 ```
 
+<Note>
+  The same Groth16 proof — from the same trusted setup — verifies on Ethereum, Solana, and
+  Starknet. On Starknet (Sepolia, testnet preview) PSR is **verification and gating only**: the
+  `OpaqueReputationVerifierV2` Groth16 verifier plus the `PsrGate` credential-gated-entry contract,
+  via `@opaquecash/psr-chain-starknet` (`getStarknetDeployment("sepolia")`). Schema registration and
+  attestation issuance stay on Ethereum and Solana. See [Starknet](/concepts/starknet) for the full
+  flow and caveats.
+</Note>
+
 ## Full flow diagram
 
 ```mermaid

@@ -15,6 +15,7 @@ Peer dependencies you typically also need:
 | --- | --- |
 | `viem` | Ethereum reads/writes, wallet clients |
 | `@solana/web3.js` | Solana reads/writes (re-exported transitively) |
+| `starknet` | Starknet reads/writes; wallet broadcast via `EthSigner` (starknet.js v10+) |
 | `@opaquecash/react` | React apps: provider + hooks over the client ([React hooks](/sdk/react)) |
 | `@opaquecash/deployments` | Raw generated addresses/ABIs/program ids ([Deployments](/protocol/deployments)) |
 
@@ -64,11 +65,15 @@ Calling `scan`, `sweep`, or `generateReputationProof` without WASM throws a clea
 
 ## Signer matrix
 
-| Operation | Ethereum | Solana |
-| --- | --- | --- |
-| Reads (`getMySchemas`, `scan`, balances) | `rpcUrl` | `solana: { connection \| rpcUrl \| cluster }` |
-| Writes (`registerMetaAddress`, `sendStealthPayment`, PSR) | `ethereumProvider` or `ethereumWalletClient` | `solanaWallet: { publicKey, signTransaction }` |
-| Scan / sweep / prove | `wasmModuleSpecifier` | `wasmModuleSpecifier` + `solana` config |
+| Operation | Ethereum | Solana | Starknet |
+| --- | --- | --- | --- |
+| Reads (`getMySchemas`, `scan`, balances) | `rpcUrl` | `solana: { connection \| rpcUrl \| cluster }` | `starknet: {}` |
+| Writes (`registerMetaAddress`, `sendStealthPayment`, PSR) | `ethereumProvider` or `ethereumWalletClient` | `solanaWallet: { publicKey, signTransaction }` | `build*` methods → app wallet |
+| Scan / sweep / prove | `wasmModuleSpecifier` | `wasmModuleSpecifier` + `solana` config | `wasmModuleSpecifier` + `starknet: {}` |
+
+<Note>
+  **Starknet writes don't go through the generic facade.** `sendStealthPayment` and `registerMetaAddress` accept only `ethereum` and `solana`. On Starknet, `buildStarknetStealthSend`, `buildStarknetSweep`, and SNIP-12 on-behalf registration (via [`@opaquecash/stealth-chain-starknet`](/concepts/starknet)) return **unsigned** calls your app's Starknet wallet broadcasts — sweeps go out through a starknet.js `EthSigner` (v10+) and the stealth account self-funds its deploy fee. PSR schema/attestation **issuance** stays on Ethereum and Solana; Starknet does proof **verification and gating** only. Addresses come from `getStarknetDeployment("sepolia")` (packages [`@opaquecash/stealth-chain-starknet`](/concepts/starknet) and [`@opaquecash/psr-chain-starknet`](/concepts/starknet)). Starknet is at **testnet-preview** maturity — see the [Starknet flow](/concepts/starknet).
+</Note>
 
 ## Backend issuer (Ethereum)
 

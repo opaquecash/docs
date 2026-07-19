@@ -5,7 +5,7 @@ description: "@opaquecash/react: OpaqueProvider, useOpaqueClient, useScan, and u
 
 `@opaquecash/react` wraps the SDK client in idiomatic React hooks. It has a single
 peer dependency (`react >= 18`) and works with any wallet stack (wagmi, RainbowKit,
-Solana wallet-adapter, or your own).
+Solana wallet-adapter, starknet.js, or your own).
 
 ## Install
 
@@ -35,6 +35,7 @@ function App({ children }) {
         rpcUrl,
         wasmModuleSpecifier: "/pkg/cryptography.js",
         solana: { cluster: "devnet" },
+        starknet: {},   // enable Starknet (Sepolia) scanning + call builders
       }),
     );
   }
@@ -75,7 +76,7 @@ import { useScan } from "@opaquecash/react";
 
 function Inbox() {
   const { outputs, loading, error, refresh } = useScan({
-    chains: ["ethereum", "solana"],   // default: both
+    chains: ["ethereum", "solana", "starknet"],  // starknet needs the client's `starknet` option
     pollInterval: 30_000,             // optional ms; omit for scan-once
     // fromBlock, toBlock, solanaLimit, includeCrossChain, paused
   });
@@ -96,7 +97,7 @@ function Inbox() {
 
 | Option | Default | Description |
 | --- | --- | --- |
-| `chains` | `["ethereum", "solana"]` | Chains to scan |
+| `chains` | `["ethereum", "solana"]` | Chains to scan; add `"starknet"` when the client's `starknet` option is set |
 | `pollInterval` | scan once | Re-scan interval in ms |
 | `paused` | `false` | Skip scanning while true (e.g. tab hidden) |
 | `fromBlock` / `toBlock` / `solanaLimit` / `includeCrossChain` | adapter defaults | Same as `client.scan` |
@@ -118,8 +119,9 @@ function Balances() {
 
   return (
     <div>
-      <p>Ethereum total: {formatEther(totals.ethereum)} ETH</p>
-      <p>Solana total: {Number(totals.solana) / 1e9} SOL</p>
+      <p>Ethereum total: {formatEther(totals.ethereum ?? 0n)} ETH</p>
+      <p>Solana total: {Number(totals.solana ?? 0n) / 1e9} SOL</p>
+      <p>Starknet total: {formatEther(totals.starknet ?? 0n)} STRK</p>
       {balances.map((b) => (
         <div key={b.address}>{b.address}: {b.nativeRaw.toString()}</div>
       ))}
@@ -129,8 +131,9 @@ function Balances() {
 }
 ```
 
-Returns `{ balances, totals: { ethereum, solana }, loading, error }` with amounts in
-base units (wei / lamports).
+Returns `{ balances, totals, loading, error }`. `totals` is a partial per-chain record
+(`{ ethereum?, solana?, starknet? }`) — a key is present only for chains that returned a
+balance — with amounts in base units (wei / lamports / fri).
 
 ## Writes
 
@@ -145,3 +148,10 @@ async function onSend() {
   refresh();  // from useScan
 }
 ```
+
+<Note>
+  `sendStealthPayment` and `registerMetaAddress` accept `"ethereum"` and `"solana"`
+  only. On Starknet the client returns unsigned calls for your Starknet wallet to
+  broadcast — `client.buildStarknetStealthSend(...)` and `client.buildStarknetSweep(...)`.
+  See [Starknet](/concepts/starknet) for the full flow.
+</Note>

@@ -147,6 +147,11 @@ import type { ChainAdapter, Announcement, SolanaCluster } from "@opaquecash/opaq
 
 Use adapters directly only when bypassing `OpaqueClient.scan`. Most apps should use `client.scan`.
 
+Starknet (testnet preview) ships its adapter and call builders in
+`@opaquecash/stealth-chain-starknet`, PSR proof-verification/gating helpers in
+`@opaquecash/psr-chain-starknet`, and resolves deployments via
+`getStarknetDeployment("sepolia")`. See [Starknet](/concepts/starknet).
+
 ---
 
 ## Solana PSR (namespaced)
@@ -182,7 +187,7 @@ Default Groth16 wasm/zkey URLs point to opaque.cash `/circuits/...`.
 | `UnifiedSigner` | One wallet shape for `fromWallet` / `requestSetupSignature` |
 | `ResolvedRecipient` | `resolveRecipient` result with `source` tag |
 | `DummyAnnouncement` | Decoy announcement from `generateDummyAnnouncements` |
-| `OpaqueScanChain` | `"ethereum" \| "solana"` |
+| `OpaqueScanChain` | `"ethereum" \| "solana" \| "starknet"` |
 | `PsrChain` | Same as `OpaqueScanChain` |
 | `UnifiedOwnedOutput` | Scan result with chain + source tags |
 | `OwnedStealthOutput` | Owned stealth output from WASM filter |

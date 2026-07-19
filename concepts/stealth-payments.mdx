@@ -14,11 +14,13 @@ When a user signs `SETUP_MESSAGE`, the SDK derives:
 | **Viewing key** | Prefilter announcements (view tags) and scan owned outputs |
 | **Spending key** | Reconstruct one-time private keys to sweep funds |
 
-These keys are **chain-neutral**: the same wallet has one meta-address on Ethereum and Solana.
+These keys are **chain-neutral**: the same wallet has one meta-address across Ethereum, Solana, and Starknet.
 
 ## Meta-address
 
 A 98-byte value (viewing pubkey ‖ secp256k1 spending pubkey ‖ ed25519 Solana spend pubkey) registered on `StealthMetaAddressRegistry`. Share it so senders can derive one-time destinations without linking payments to your public identity. (Legacy 66-byte `V‖S` values still work for Ethereum.)
+
+The same meta-address serves all three chains — only custody differs: an EVM address on Ethereum, an ed25519 account on Solana, and a counterfactual OpenZeppelin `EthAccount` (signed by the one-time secp256k1 stealth key `P_stealth`) on Starknet.
 
 ```ts
 const meta = client.getMetaAddressHex();
@@ -41,6 +43,13 @@ Or use `sendStealthPayment` for a single high-level call. To weaken timing analy
 delay the announcement or interleave decoy announcements; see
 [Anonymity utilities](/sdk/stealth-api#anonymity-utilities).
 
+<Note>
+Starknet send and sweep go through dedicated builders — `buildStarknetStealthSend`
+and `buildStarknetSweep` — that return unsigned calls for the app's Starknet wallet to
+broadcast; the generic `sendStealthPayment` facade covers Ethereum and Solana only. See
+[Starknet](/concepts/starknet) for the full flow.
+</Note>
+
 ## Receive flow
 
 1. Indexer or adapter fetches `Announce` events
@@ -49,7 +58,7 @@ delay the announcement or interleave decoy announcements; see
 4. Sweep to a fresh address (`sweep`)
 
 ```ts
-const owned = await client.scan({ chains: ["ethereum", "solana"] });
+const owned = await client.scan({ chains: ["ethereum", "solana", "starknet"] });
 await client.sweep({ output: owned[0], chain: owned[0].chain, destination });
 ```
 

@@ -15,6 +15,7 @@ const client = await OpaqueClient.create({
   ethereumAddress: address,
   wasmModuleSpecifier: "/pkg/cryptography.js",
   solana: { cluster: "devnet" },
+  starknet: {},                 // enable Starknet (Sepolia) scan + balances
 });
 ```
 
@@ -22,7 +23,7 @@ const client = await OpaqueClient.create({
 
 ```ts
 const inbox = await client.scan({
-  chains: ["ethereum", "solana"],
+  chains: ["ethereum", "solana", "starknet"],
   fromBlock: 5_000_000n,
   toBlock: undefined,           // chain tip
   solanaLimit: 1000,            // max signatures on Solana
@@ -86,6 +87,23 @@ const { tx } = await client.sweep({
   destination: "0xFreshAddress..." /* or Solana base58 */,
 });
 ```
+
+### Sweep on Starknet
+
+Starknet sweeps don't go through `sweep`. Build the calls with `buildStarknetSweep` and let
+the app's Starknet wallet broadcast them — the counterfactual stealth account self-funds its
+`deploy_account` fee, so there's no gas drop or relayer step here.
+
+```ts
+const starknetSweep = client.buildStarknetSweep({
+  output: starknetOutput,
+  destination: "0xFreshStarknetAddress...",
+  amount: balance,              // STRK, raw
+});
+// The app broadcasts starknetSweep with starknet.js (EthSigner, v10+).
+```
+
+See [Starknet](/concepts/starknet) for the full flow and caveats.
 
 ### Sweep tokens
 

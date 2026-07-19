@@ -32,15 +32,23 @@ const viewer = await OpaqueClient.createViewOnly(
     ethereumAddress: userAddress,
     wasmModuleSpecifier: "/pkg/cryptography.js",
     solana: { cluster: "devnet" },
+    starknet: {},
   },
   { viewingKey, spendPublicKey },   // 0x hex or bytes
 );
 
 viewer.isViewOnly; // true
 
-const inbox = await viewer.scan({ chains: ["ethereum", "solana"], includeCrossChain: true });
+const inbox = await viewer.scan({ chains: ["ethereum", "solana", "starknet"], includeCrossChain: true });
 const tokenBalances = await viewer.getTokenBalancesForOutputs(inbox, { ethereum: ["0xUSDC..."] });
 ```
+
+<Note>
+  Starknet (Sepolia, testnet preview) scans natively alongside Ethereum and Solana — the same
+  view-only viewing key covers all three chains. `includeCrossChain` still only pulls
+  Wormhole-relayed announcements (Ethereum ↔ Solana); Starknet participates as a native scan
+  chain, not a relay endpoint. See [Starknet](/concepts/starknet) for the full flow.
+</Note>
 
 Spending is hard-disabled — `sweep`, `getStealthSignerPrivateKey`, and reputation key
 reconstruction throw, because the server has no spending key:

@@ -1,6 +1,6 @@
 ---
 title: Send a stealth payment
-description: End-to-end flow to pay someone privately on Ethereum or Solana.
+description: End-to-end flow to pay someone privately on Ethereum, Solana, or Starknet.
 ---
 
 ## Prerequisites
@@ -62,6 +62,26 @@ await client.sendStealthPayment({
   batchId: 42,         // optional Wormhole nonce
 });
 ```
+
+## Starknet sends
+
+Starknet is supported at **testnet-preview** maturity. `sendStealthPayment` handles
+Ethereum and Solana only — Starknet sends go through a dedicated builder that returns
+**unsigned** transfer + announce calls for the app's Starknet wallet to broadcast:
+
+```ts
+// buildStarknetStealthSend returns unsigned transfer + announce calls
+const starknetSend = await client.buildStarknetStealthSend({
+  recipient,                      // meta-address, or a Starknet registry lookup
+  amount: 1_000000000000000000n,  // 1 STRK (18 decimals)
+});
+
+// The app's Starknet wallet broadcasts them (starknet.js account.execute)
+await starknetAccount.execute(starknetSend.calls);
+```
+
+Enable Starknet with the `starknet: {}` client option. See [Starknet](/concepts/starknet)
+for the full send flow, custody model, and preview caveats.
 
 ## Low-level: prepare + submit yourself
 

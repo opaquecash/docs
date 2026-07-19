@@ -14,8 +14,8 @@ from their canonical deployment records:
 | `starknet/deployments/*.json` | `node scripts/generate-deployments.mjs` in `starknet` | Starknet addresses + class hashes per network |
 
 A redeploy is therefore a regenerate + rebuild, never a code change. Higher SDK
-packages (`@opaquecash/opaque`, `uab`, `stealth-chain-solana`, `psr-chain`) and the
-reference app all source their addresses from it.
+packages (`@opaquecash/opaque`, `uab`, `stealth-chain-solana`, `stealth-chain-starknet`,
+`psr-chain`, `psr-chain-starknet`) and the reference app all source their addresses from it.
 
 ## Reading addresses
 
@@ -124,6 +124,10 @@ console.log(sn.stealthAnnouncer, sn.reputationVerifier, sn.stealthAccountClassHa
 ```ts
 OpaqueClient.supportedChainIds();  // [11155111] in the current SDK version
 ```
+
+This enumerates EVM chain ids only. The non-EVM chains are read through their own
+getters — `getSolanaDeployment("devnet")` and `getStarknetDeployment("sepolia")` — and
+do not appear in this list.
 
 Mainnet addresses will land in the same registry when they deploy: the chain repos run
 `npm run generate` against the mainnet records, and every consumer picks them up on

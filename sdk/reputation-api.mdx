@@ -200,7 +200,42 @@ const { txHash } = await client.submitReputationVerification("ethereum", {
 });
 ```
 
-**Signers:** `ethereumWalletClient` (EVM) or `solanaWallet` (Solana).
+**Signers:** `ethereumWalletClient` (EVM) or `solanaWallet` (Solana). This facade covers
+Ethereum and Solana only; for Starknet, see [Verify on Starknet](#verify-on-starknet) below.
+
+---
+
+### Verify on Starknet
+
+`generateReputationProof` is chain-agnostic, and a bundle from the shared trusted setup
+verifies on Ethereum, Solana, and Starknet. Starknet verification does **not** go through
+`submitReputationVerification`; instead build an unsigned Starknet call with
+`@opaquecash/psr-chain-starknet` and let the app's Starknet wallet broadcast it.
+
+```ts
+import {
+  encodeFullProofWithHints,
+  buildVerifyReputationCall,
+} from "@opaquecash/psr-chain-starknet";
+
+// Garaga-encoded `full_proof_with_hints` calldata for the Starknet verifier.
+// `verificationKey` is the same V2 verification_key.json the on-chain verifier was built from.
+const fullProofWithHints = await encodeFullProofWithHints(proofData, verificationKey);
+
+// Unsigned call: `verify_reputation` (consumes the nullifier). Use
+// buildVerifyReputationViewCall for a read-only check that spends nothing.
+const call = buildVerifyReputationCall(fullProofWithHints);
+
+// The app's Starknet account (starknet.js) signs and broadcasts.
+const { transaction_hash } = await starknetAccount.execute(call);
+```
+
+<Note>
+Starknet is at testnet-preview maturity on Sepolia. The verifier stack
+(`OpaqueReputationVerifierV2` + Garaga Groth16 verifier, addresses in `STARKNET_SEPOLIA_PSR`)
+only **verifies and gates** proofs — schema registration and attestation issuance stay on
+Ethereum and Solana. See [Starknet](/concepts/starknet) for the full flow and caveats.
+</Note>
 
 ---
 

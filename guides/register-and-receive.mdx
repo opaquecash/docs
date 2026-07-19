@@ -23,6 +23,7 @@ const client = await OpaqueClient.create({
   wasmModuleSpecifier: "/pkg/cryptography.js",
   ethereumProvider: window.ethereum,
   solana: { cluster: "devnet" },  // optional, for Solana inbox
+  starknet: {},                   // optional, for Starknet inbox (Sepolia)
 });
 ```
 
@@ -49,6 +50,10 @@ if (!onSol) {
 }
 ```
 
+<Note>
+  Your meta-address is chain-neutral — the same keys receive on Ethereum, Solana, and Starknet. Starknet registration is done with the `@opaquecash/stealth-chain-starknet` call builders (SNIP-12 on-behalf registration) rather than the `registerMetaAddress` facade. See [Starknet](/concepts/starknet) for the full flow.
+</Note>
+
 Share `client.getMetaAddressHex()` with senders who already have your meta-address, or let them resolve via registry:
 
 ```ts
@@ -59,7 +64,7 @@ const { registered, metaAddressHex } = await client.resolveRecipientMetaAddress(
 
 ```ts
 const inbox = await client.scan({
-  chains: ["ethereum", "solana"],
+  chains: ["ethereum", "solana", "starknet"],
   fromBlock: 5_000_000n,       // optional EVM lower bound
   includeCrossChain: true,      // merge UAB announcements
 });
@@ -105,6 +110,10 @@ console.log("Swept:", tx);
 
 <Note>
   `sweep` reconstructs the one-time stealth private key in WASM and signs a transfer **from** the stealth address. Never log or persist reconstructed keys beyond your threat model.
+</Note>
+
+<Note>
+  `sweep` covers Ethereum and Solana. For Starknet outputs, use `client.buildStarknetSweep({ output, destination, amount })` — it returns calls the app broadcasts via `starknet.js`, and the counterfactual stealth account self-funds its deploy fee. See [Starknet](/concepts/starknet).
 </Note>
 
 ## Ghost receive (optional)
