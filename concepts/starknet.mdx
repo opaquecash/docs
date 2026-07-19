@@ -114,3 +114,20 @@ and the `OpaqueReputationVerifierV2` wrapper (admin roots, nullifier set,
 schema-liveness binding) are deployed on Sepolia, verifying proofs from the same
 trusted setup as Ethereum and Solana. See [Deployments](/protocol/deployments)
 for addresses and [PSR](/concepts/psr) for the model.
+
+### Credential-gated actions
+
+`PsrGate` is the reference consumer: an allowlist an actor may enter **only** by
+proving, in zero knowledge, a valid attestation under a required schema, with
+the proof's nullifier consumed once so the same credential cannot enter the same
+scope twice. It is the general form of "is this actor eligible?" — the gate a
+STRK20 anonymizer or DeFi action points at so only credentialed stealth
+identities transact, without revealing who they are.
+
+```cairo
+// Verifies the proof, requires attestation_id == required_schema, consumes the
+// nullifier, and records the entry. Panics on an invalid or replayed proof.
+gate.enter(full_proof_with_hints);
+gate.has_entered(scope);   // -> true for the entered external_nullifier
+```
+
